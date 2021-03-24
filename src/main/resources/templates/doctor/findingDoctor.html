@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Find Doctor</title>
+</head>
+<body>
+<p>This page will have three different search bars - each will have a separate function:
+finding by name, ID, speciality, (timing we'll see later)</p>
+<form th:object="{doctor}"
+method="post">
+<input type="text" name="id" th:value="${doctor.ID}">
+<button type="submit">search by id</button>
+</form>
+</body>
+</html>
