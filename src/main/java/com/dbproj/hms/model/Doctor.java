@@ -1,6 +1,6 @@
 package com.dbproj.hms.model;
 
-public class Doctor {
+public class Doctor extends Employee {
     public Doctor(Integer ID, Integer empID, Integer visitationFees,
                   String speciality, String docType) {
         this.ID = ID;
