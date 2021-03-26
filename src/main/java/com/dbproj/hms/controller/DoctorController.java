@@ -35,12 +35,6 @@ public class DoctorController {
 
     @PostMapping("/findDoctorByID")
     public String postID(Integer id) {
-        Doctor doctor;
-        try {
-            doctor = doctorRepository.findByID(id);
-        } catch (SQLException e) {
-            return "system/error";
-        }
         //System.out.println("found doctor:" + doctor.toString());
         return "redirect:/doc/" + id ;
     }
