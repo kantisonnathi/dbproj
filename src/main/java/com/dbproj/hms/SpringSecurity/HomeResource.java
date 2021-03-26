@@ -1,4 +1,4 @@
-package SpringSecurity;
+package com.dbproj.hms.SpringSecurity;
 
 import org.springframework.web.bind.annotation.GetMapping;
 
@@ -7,7 +7,7 @@ public class HomeResource {
     public String home(){
         return("<h1>Welcome</h1>");
     }
-    @GetMapping("/")
+    @GetMapping("/user")
     public String user(){
         return("<h1>welcome User</h1>");
     }
