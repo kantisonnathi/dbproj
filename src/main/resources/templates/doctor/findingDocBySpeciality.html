@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Query By Speciality</title>
+</head>
+<body>
+
+<p>Querying doctors based on their speciality</p>
+<form method="post">
+    <input type="text" name="speciality" th:value="${speciality}">
+    <button type="submit">Search Doctors</button>
+</form>
+
+</body>
+</html>

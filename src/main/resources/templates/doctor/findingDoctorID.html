@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Query Doctor by ID</title>
+</head>
+<body>
+<form method="post" action="/findDoctorByID">
+<input type="number" name="id" th:value="${id}">
+<button type="submit">search by id</button>
+</form>
+</body>
+</html>

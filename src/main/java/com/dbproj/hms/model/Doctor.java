@@ -1,9 +1,8 @@
 package com.dbproj.hms.model;
 
-public class Doctor {
+public class Doctor extends Employee {
     public Doctor(Integer ID, Integer empID, Integer visitationFees,
                   String speciality, String docType) {
-        //make attributes for all these and keep
         this.ID = ID;
         this.EmpID = empID;
         this.visitationFees = visitationFees;
