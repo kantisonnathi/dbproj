@@ -43,7 +43,7 @@ public class EmployeeRepository {
                     result.getString("phno"),
                     result.getString("email"),
                     result.getString("address"),
-                    result.getString("authorization").charAt(0));
+                    result.getString("authorization"));
         }
         return employee;
     }
