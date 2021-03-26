@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 @Controller
@@ -65,6 +64,28 @@ public class DoctorController {
         model.put("title","Querying By Name");
         return "doctor/listResults";
     }
+
+    @GetMapping("/findDoctorBySpeciality")
+    public String getSpeciality(ModelMap modelMap) {
+        String speciality = "";
+        modelMap.put("speciality",speciality);
+        return "doctor/findingDocBySpeciality";
+    }
+
+    @PostMapping("/findDoctorBySpeciality")
+    public String postSpeciality(String speciality, ModelMap modelMap) {
+        List<Doctor> doctors;
+        try {
+            doctors = doctorRepository.findBySpeciality(speciality);
+        } catch (SQLException e) {
+            return "system/error";
+        }
+        modelMap.put("doctors",doctors);
+        modelMap.put("title","Querying By Speciality");
+        return "doctor/listResults";
+    }
+
+
 
     @GetMapping("/doc/{docID}")
     public String getDocPage(@PathVariable("docID") Integer DocID, ModelMap model) {

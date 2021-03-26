@@ -61,5 +61,22 @@ public class DoctorRepository {
         return doctorList;
     }
 
+    public List<Doctor> findBySpeciality(String speciality) throws SQLException {
+        String sql = "select * from doctor where speciality=?";
+        PreparedStatement preparedStatement = connection.prepareStatement(sql);
+        preparedStatement.setString(1,speciality);
+        ResultSet result = preparedStatement.executeQuery();
+        List<Doctor> doctorList = new ArrayList<>();
+        while (result.next()) {
+            Doctor doctor = new Doctor(result.getInt("DocID"),
+                    result.getInt("empID"),
+                    result.getInt("visitation_fees"),
+                    result.getString("speciality"),
+                    result.getString("doc_type"));
+            doctorList.add(doctor);
+        }
+        return doctorList;
+    }
+
 
 }
