@@ -6,17 +6,13 @@ import com.dbproj.hms.repository.DoctorRepository;
 import com.dbproj.hms.repository.EmployeeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import javax.validation.Valid;
-
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.sql.SQLException;
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class DoctorController {
@@ -48,6 +44,26 @@ public class DoctorController {
         }
         //System.out.println("found doctor:" + doctor.toString());
         return "redirect:/doc/" + id ;
+    }
+
+    @GetMapping("/findDoctorByName")
+    public String getName(ModelMap model) {
+        String name = "";
+        model.put("name",name);
+        return "doctor/findingDocByName";
+    }
+
+    @PostMapping("/findDoctorByName")
+    public String postName(String name, ModelMap model) {
+        List<Doctor> doctors;
+        try {
+            doctors = doctorRepository.findByName(name);
+        } catch (SQLException e) {
+            return "system/error";
+        }
+        model.put("doctors",doctors);
+        model.put("title","Querying By Name");
+        return "doctor/listResults";
     }
 
     @GetMapping("/doc/{docID}")

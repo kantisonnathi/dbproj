@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Results</title>
+</head>
+<body>
+<p th:text="${title}"></p>
+<table>
+    <thead>
+        <tr>
+            <th>Doctor ID</th>
+        </tr>
+    </thead>
+    <tbody>
+    <tr th:each="doc : ${doctors}">
+        <td>
+            <a th:href="@{/doc/__${doc.ID}__}" th:text="${doc.ID}"></a>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>

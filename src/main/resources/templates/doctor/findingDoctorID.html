@@ -2,11 +2,9 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Find Doctor</title>
+    <title>Query Doctor by ID</title>
 </head>
 <body>
-<p>This page will have three different search bars - each will have a separate function:
-finding by name, ID, speciality, (timing we'll see later)</p>
 <form method="post" action="/findDoctorByID">
 <input type="number" name="id" th:value="${id}">
 <button type="submit">search by id</button>
