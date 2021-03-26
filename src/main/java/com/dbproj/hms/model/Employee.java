@@ -10,13 +10,13 @@ public class Employee {
     private String phoneNumber;
     private String email;
     private String address;
-    private Character authorization;
+    private String authorization;
 
     public Employee() {
 
     }
 
-    public Employee(Integer ID, String name, String username, String password, Character gender, Integer salary, String phoneNumber, String email, String address, Character authorization) {
+    public Employee(Integer ID, String name, String username, String password, Character gender, Integer salary, String phoneNumber, String email, String address, String authorization) {
         this.ID = ID;
         this.name = name;
         this.username = username;
@@ -101,11 +101,11 @@ public class Employee {
         this.address = address;
     }
 
-    public Character getAuthorization() {
+    public String getAuthorization() {
         return authorization;
     }
 
-    public void setAuthorization(Character authorization) {
+    public void setAuthorization(String authorization) {
         this.authorization = authorization;
     }
 }
