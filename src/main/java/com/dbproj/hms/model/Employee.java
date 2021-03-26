@@ -12,6 +12,23 @@ public class Employee {
     private String address;
     private Character authorization;
 
+    public Employee() {
+
+    }
+
+    public Employee(Integer ID, String name, String username, String password, Character gender, Integer salary, String phoneNumber, String email, String address, Character authorization) {
+        this.ID = ID;
+        this.name = name;
+        this.username = username;
+        this.password = password;
+        this.gender = gender;
+        this.salary = salary;
+        this.phoneNumber = phoneNumber;
+        this.email = email;
+        this.address = address;
+        this.authorization = authorization;
+    }
+
     public Integer getID() {
         return ID;
     }

@@ -1,7 +1,9 @@
 package com.dbproj.hms.controller;
 
 import com.dbproj.hms.model.Doctor;
+import com.dbproj.hms.model.Employee;
 import com.dbproj.hms.repository.DoctorRepository;
+import com.dbproj.hms.repository.EmployeeRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import javax.validation.Valid;
@@ -20,9 +22,11 @@ import java.util.Map;
 public class DoctorController {
 
     DoctorRepository doctorRepository;
+    EmployeeRepository employeeRepository;
 
     public DoctorController() throws SQLException, ClassNotFoundException {
         doctorRepository = new DoctorRepository();
+        employeeRepository = new EmployeeRepository();
     }
 
     @GetMapping("/findDoctorByID")
@@ -42,19 +46,22 @@ public class DoctorController {
         } catch (SQLException e) {
             return "system/error";
         }
-        System.out.println("found doctor:" + doctor.toString());
-        return "system/error" ;
+        //System.out.println("found doctor:" + doctor.toString());
+        return "redirect:/doc/" + id ;
     }
 
     @GetMapping("/doc/{docID}")
     public String getDocPage(@PathVariable("docID") Integer DocID, ModelMap model) {
         Doctor doctor;
+        Employee employee;
         try {
             doctor = doctorRepository.findByID(DocID);
+            employee = employeeRepository.findByID(doctor.getEmpID());
         } catch (SQLException e) {
             return "system/error";
         }
         model.put("doctor",doctor);
+        model.put("employee", employee);
         return "doctor/doctor";
     }
 
