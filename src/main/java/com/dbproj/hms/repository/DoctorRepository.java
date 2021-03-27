@@ -1,33 +1,42 @@
 package com.dbproj.hms.repository;
 
+import com.dbproj.hms.controller.DoctorController;
 import com.dbproj.hms.model.Doctor;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.PreparedStatementCallback;
+import org.springframework.jdbc.core.ResultSetExtractor;
 
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class DoctorRepository {
-    /*@Query("SELECT owner FROM Owner owner left join fetch owner.pets WHERE owner.id =:id")
-    @Transactional(readOnly = true)
-    Owner findById(@Param("id") Integer id);*/
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/dbproj";
+public class DoctorRepository extends Repository{
 
-
-    static final String USER = "root";
-    static final String PASS = "";
-
-    static Connection connection = null;
-    static Statement statement = null;
 
     public DoctorRepository() throws ClassNotFoundException, SQLException {
-        Class.forName(JDBC_DRIVER);
-        connection = DriverManager.getConnection(DB_URL, USER, PASS);
-        statement = connection.createStatement();
+        super();
     }
 
+    /* static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
+        static final String DB_URL = "jdbc:mysql://localhost/dbproj";
 
+
+        static final String USER = "root";
+        static final String PASS = "";
+
+        static Connection connection = null;
+        static Statement statement = null;
+
+        public DoctorRepository() throws ClassNotFoundException, SQLException {
+            Class.forName(JDBC_DRIVER);
+            connection = DriverManager.getConnection(DB_URL, USER, PASS);
+            statement = connection.createStatement();
+        }
+
+
+    */
     public Doctor findByID(Integer ID) throws SQLException {
         String sql = "select * from doctor where DocID=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
