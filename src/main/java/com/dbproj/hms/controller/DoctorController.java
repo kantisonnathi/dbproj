@@ -1,10 +1,11 @@
 package com.dbproj.hms.controller;
 
-import com.dbproj.hms.dao.DoctorDao;
+
 import com.dbproj.hms.model.Doctor;
 import com.dbproj.hms.model.Employee;
 import com.dbproj.hms.repository.DoctorRepository;
 import com.dbproj.hms.repository.EmployeeRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,14 +18,17 @@ import java.util.List;
 @Controller
 public class DoctorController {
 
+    @Autowired
     DoctorRepository doctorRepository;
+
+    @Autowired
     EmployeeRepository employeeRepository;
 
-    public DoctorController() throws SQLException, ClassNotFoundException {
+    /*public DoctorController() throws SQLException, ClassNotFoundException {
         doctorRepository = new DoctorRepository();
         employeeRepository = new EmployeeRepository();
     }
-
+*/
     @GetMapping("/findDoctorByID")
     public String getByID(ModelMap model) {
         //this is the get method;
@@ -47,7 +51,7 @@ public class DoctorController {
         return "doctor/findingDocByName";
     }
 
-    /*@PostMapping("/findDoctorByName")
+    @PostMapping("/findDoctorByName")
     public String postName(String name, ModelMap model) {
         List<Doctor> doctors;
         try {
@@ -58,7 +62,7 @@ public class DoctorController {
         model.put("doctors",doctors);
         model.put("title","Querying By Name");
         return "doctor/listResults";
-    }*/
+    }
 
     @GetMapping("/findDoctorBySpeciality")
     public String getSpeciality(ModelMap modelMap) {
@@ -67,7 +71,7 @@ public class DoctorController {
         return "doctor/findingDocBySpeciality";
     }
 
-   /* @PostMapping("/findDoctorBySpeciality")
+    @PostMapping("/findDoctorBySpeciality")
     public String postSpeciality(String speciality, ModelMap modelMap) {
         List<Doctor> doctors;
         try {
@@ -78,7 +82,7 @@ public class DoctorController {
         modelMap.put("doctors",doctors);
         modelMap.put("title","Querying By Speciality");
         return "doctor/listResults";
-    }*/
+    }
 
 
 
@@ -87,7 +91,7 @@ public class DoctorController {
         Doctor doctor;
         Employee employee;
         try {
-            doctor = doctorRepository.findByID(DocID);
+            doctor= doctorRepository.findByID(DocID);
             employee = employeeRepository.findByID(doctor.getEmpID());
         } catch (SQLException e) {
             return "system/error";

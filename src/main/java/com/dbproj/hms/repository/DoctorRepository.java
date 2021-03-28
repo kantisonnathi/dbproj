@@ -1,5 +1,57 @@
 package com.dbproj.hms.repository;
 
+import com.dbproj.hms.repository.DoctorRowMapper;
+import com.dbproj.hms.model.Doctor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
+
+import java.sql.SQLException;
+import java.util.List;
+
+@Component
+public class DoctorRepository {
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+    public Doctor findByID(Integer ID) throws DataAccessException, SQLException {
+        String query = "select * from doctor where DocID=" + ID.toString();
+        List<Doctor> list = jdbcTemplate.query(query, new DoctorRowMapper());
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
+    }
+
+    public List<Doctor> findByName(String name) throws DataAccessException,SQLException{
+        String query = "select * from doctor D where D.empID in (select EmpID" +
+                " from employee where EmpName=" + name;
+        return jdbcTemplate.query(query,new DoctorRowMapper());
+    }
+
+    public List<Doctor> findBySpeciality(String speciality) throws DataAccessException, SQLException {
+        String query = "select * from doctor where speciality=" + speciality;
+        return jdbcTemplate.query(query, new DoctorRowMapper());
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+package com.dbproj.hms.repository;
+
 import com.dbproj.hms.controller.DoctorController;
 import com.dbproj.hms.model.Doctor;
 import org.springframework.dao.DataAccessException;
@@ -19,24 +71,6 @@ public class DoctorRepository extends Repository{
         super();
     }
 
-    /* static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-        static final String DB_URL = "jdbc:mysql://localhost/dbproj";
-
-
-        static final String USER = "root";
-        static final String PASS = "";
-
-        static Connection connection = null;
-        static Statement statement = null;
-
-        public DoctorRepository() throws ClassNotFoundException, SQLException {
-            Class.forName(JDBC_DRIVER);
-            connection = DriverManager.getConnection(DB_URL, USER, PASS);
-            statement = connection.createStatement();
-        }
-
-
-    */
     public Doctor findByID(Integer ID) throws SQLException {
         String sql = "select * from doctor where DocID=?";
         PreparedStatement preparedStatement = connection.prepareStatement(sql);
@@ -89,3 +123,4 @@ public class DoctorRepository extends Repository{
 
 
 }
+*/

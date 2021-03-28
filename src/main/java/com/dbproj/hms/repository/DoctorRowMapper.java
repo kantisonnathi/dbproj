@@ -1,4 +1,4 @@
-package com.dbproj.hms.dao;
+package com.dbproj.hms.repository;
 
 import com.dbproj.hms.model.Doctor;
 import org.springframework.jdbc.core.RowMapper;
@@ -11,9 +11,9 @@ public class DoctorRowMapper implements RowMapper<Doctor> {
     @Override
     public Doctor mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         return new Doctor(resultSet.getInt("DocID"),
-               resultSet.getInt("empID"),
-               resultSet.getInt("visitation_fees"),
-               resultSet.getString("speciality"),
-               resultSet.getString("doc_type"));
+                resultSet.getInt("empID"),
+                resultSet.getInt("visitation_fees"),
+                resultSet.getString("speciality"),
+                resultSet.getString("doc_type"));
     }
 }

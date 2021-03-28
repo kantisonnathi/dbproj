@@ -2,30 +2,34 @@ package com.dbproj.hms.repository;
 
 import com.dbproj.hms.model.Doctor;
 import com.dbproj.hms.model.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
+import java.util.List;
 
 
+@Component
 public class EmployeeRepository {
-    /*@Query("SELECT owner FROM Owner owner left join fetch owner.pets WHERE owner.id =:id")
-    @Transactional(readOnly = true)
-    Owner findById(@Param("id") Integer id);*/
-    static final String JDBC_DRIVER = "com.mysql.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/dbproj";
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
 
-    static final String USER = "root";
-    static final String PASS = "";
-
-    static Connection connection = null;
-    static Statement statement = null;
-
-    public EmployeeRepository() throws ClassNotFoundException, SQLException {
-        Class.forName(JDBC_DRIVER);
-        connection = DriverManager.getConnection(DB_URL, USER, PASS);
-        statement = connection.createStatement();
+    public Employee findByID(Integer ID) throws DataAccessException, SQLException {
+        String query = "select * from employee where EmpID=" + ID.toString();
+        List<Employee> list = jdbcTemplate.query(query,new EmployeeRowMapper());
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 
+    /*public EmployeeRepository() throws ClassNotFoundException, SQLException {
+        super();
+    }
 
     public Employee findByID(Integer ID) throws SQLException {
         String sql = "select * from employee where EmpID=?";
@@ -46,7 +50,7 @@ public class EmployeeRepository {
                     result.getString("authorization"));
         }
         return employee;
-    }
+    }*/
 
 
 }
