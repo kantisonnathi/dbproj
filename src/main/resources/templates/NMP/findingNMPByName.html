@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Find NMP by Name</title>
+</head>
+<body>
+
+<p> non medical professionals by name</p>
+
+<form method="post">
+    <input type="text" name="name" th:object="${name}">
+    <button type="submit">Search Non medical professionals</button>
+</form>
+
+</body>
+</html>

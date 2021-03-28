@@ -8,6 +8,7 @@ import com.dbproj.hms.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,6 +17,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 @Controller
+@CrossOrigin
 public class DoctorController {
 
     @Autowired
@@ -56,6 +58,7 @@ public class DoctorController {
         List<Doctor> doctors;
         try {
             doctors = doctorRepository.findByName(name);
+            //System.out.println("Hello");
         } catch (SQLException e) {
             return "system/error";
         }

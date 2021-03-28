@@ -1,6 +1,5 @@
 package com.dbproj.hms.repository;
 
-import com.dbproj.hms.model.Doctor;
 import com.dbproj.hms.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;

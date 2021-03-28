@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Non-medical professionals</title>
+</head>
+<body>
+<p th:text="${title}"></p>
+<table>
+    <thead>
+    <tr>
+        <th>NMP ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="nmp : ${nmps}">
+        <td>
+            <a th:href="@{/nmp/__${nmp.ID}__}" th:text="${nmp.ID}"></a>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>

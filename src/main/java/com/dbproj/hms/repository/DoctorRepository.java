@@ -1,6 +1,6 @@
 package com.dbproj.hms.repository;
 
-import com.dbproj.hms.repository.DoctorRowMapper;
+
 import com.dbproj.hms.model.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -26,12 +26,12 @@ public class DoctorRepository {
 
     public List<Doctor> findByName(String name) throws DataAccessException,SQLException{
         String query = "select * from doctor D where D.empID in (select EmpID" +
-                " from employee where EmpName=" + name;
+                " from employee where EmpName='" + name + "')";
         return jdbcTemplate.query(query,new DoctorRowMapper());
     }
 
     public List<Doctor> findBySpeciality(String speciality) throws DataAccessException, SQLException {
-        String query = "select * from doctor where speciality=" + speciality;
+        String query = "select * from doctor where speciality='" + speciality + "'";
         return jdbcTemplate.query(query, new DoctorRowMapper());
     }
 }

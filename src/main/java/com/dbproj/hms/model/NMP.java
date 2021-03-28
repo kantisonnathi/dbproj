@@ -1,6 +1,6 @@
 package com.dbproj.hms.model;
 
-public class NMP extends Employee {
+public class NMP {
     private Integer ID;
     private Integer empID;
     private String title;
@@ -16,12 +16,10 @@ public class NMP extends Employee {
     public NMP() {
     }
 
-    @Override
     public Integer getID() {
         return ID;
     }
 
-    @Override
     public void setID(Integer ID) {
         this.ID = ID;
     }

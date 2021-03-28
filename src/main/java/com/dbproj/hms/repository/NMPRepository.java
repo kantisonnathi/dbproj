@@ -1,40 +1,38 @@
 package com.dbproj.hms.repository;
 
 import com.dbproj.hms.model.NMP;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.stereotype.Component;
 
 import java.sql.*;
+import java.util.List;
 
+@Component
 public class NMPRepository {
 
-    static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
-    static final String DB_URL = "jdbc:mysql://localhost/dbproj";
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
-    static final String USER = "root";
-    static final String PASS = "";
-
-    static Connection connection = null;
-    static Statement statement = null;
-
-    public NMPRepository() throws ClassNotFoundException, SQLException {
-        Class.forName(JDBC_DRIVER);
-        connection = DriverManager.getConnection(DB_URL, USER, PASS);
-        statement = connection.createStatement();
+    public NMP findByID(Integer ID) throws DataAccessException, SQLException {
+        String query = "select * from non_medical_professionals where NP_id="+ID.toString();
+        List<NMP> list = jdbcTemplate.query(query,new NMPRowMapper());
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(0);
     }
 
-    public NMP findByID(Integer id) throws SQLException {
-        String sql = "select * from non_medical_professionals where NP_id=?";
-        PreparedStatement preparedStatement = connection.prepareStatement(sql);
-        preparedStatement.setString(1,id.toString());
-        ResultSet resultSet = preparedStatement.executeQuery();
-        //id is unique - only one possible outcome
-        NMP nmp = null;
-        while (resultSet.next()) {
-            nmp = new NMP(resultSet.getInt("NP_id"),
-                    resultSet.getInt("empid"),
-                    resultSet.getString("title"));
-        }
-        return nmp;
+    public List<NMP> findByName(String name) throws DataAccessException, SQLException {
+        String query = "select * from non_medical_professionals where empid in (select EmpID from employee " +
+                "where EmpName='" + name + "')";
+        return jdbcTemplate.query(query, new NMPRowMapper());
+    }
 
+    public List<NMP> findByTitle(String title) throws DataAccessException, SQLException {
+        String query = "select * from non_medical_professionals where title='" + title + "'";
+        return jdbcTemplate.query(query,new NMPRowMapper());
     }
 
 
