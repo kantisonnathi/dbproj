@@ -99,8 +99,15 @@ public class NMPController {
     @GetMapping("/nmp/new")
     public String newNMP(ModelMap modelMap) {
         NMP nmp = new NMP();
+        Employee employee = new Employee();
+        modelMap.put("employee", employee);
         modelMap.put("nmp",nmp);
         return "NMP/new";
     }
+
+    /*@PostMapping("/nmp/new")
+    public String savingNewNMP(NMP nmp, Employee employee, ModelMap modelMap) {
+
+    }*/
 
 }

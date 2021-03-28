@@ -1,10 +1,17 @@
 <!DOCTYPE html>
-<html lang="en">
+<<html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Create New NMP</title>
 </head>
 <body>
-
+    <form method="post">
+        <!-- what shit do we need to input here -->
+        <input type="number" name="id" th:object="${nmp.ID}">
+        <input type="number" name="empid" th:object="${employee.ID}">
+        <input type="text" name="name" th:object="${employee.name}">
+        <input type="text" name="title" th:object="${nmp.title}">
+        <!--address and all idk I'll add later this is just for initial testing -->
+    </form>
 </body>
 </html>

@@ -1,6 +1,10 @@
 package com.dbproj.hms.model;
 
+
 public class Employee {
+
+    static Integer IDValue = 1;
+
     private Integer ID;
     private String name;
     private String username;
@@ -13,7 +17,7 @@ public class Employee {
     private String authorization;
 
     public Employee() {
-
+        this.ID = IDValue++;
     }
 
     public Employee(Integer ID, String name, String username, String password, Character gender, Integer salary, String phoneNumber, String email, String address, String authorization) {
