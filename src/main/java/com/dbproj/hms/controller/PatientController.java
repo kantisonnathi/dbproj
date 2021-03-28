@@ -50,7 +50,7 @@ public class PatientController {
         }
         model.put("patients",patients);
         model.put("title","Querying By Name");
-        return "patient/listResults";
+        return "patient/resultList";
     }
 
     @GetMapping("/petient/{patientID}")

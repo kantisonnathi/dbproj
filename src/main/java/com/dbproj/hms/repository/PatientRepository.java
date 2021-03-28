@@ -59,6 +59,7 @@ public class PatientRepository {
                     result.getInt("phno"),
                     result.getString("email"),
                     result.getString("address"));
+            patientList.add(patient);
         }
         return patientList;
     }
