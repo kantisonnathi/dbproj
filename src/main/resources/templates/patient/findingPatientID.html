@@ -1,10 +1,14 @@
 <!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Query Patient By ID</title>
 </head>
 <body>
-
+<form method="post" action="/findPatientByID">
+    <input type="number" name="id" th:value="${patientID}">
+    <button type="submit">search by id</button>
+</form>
 </body>
 </html>

@@ -53,7 +53,7 @@ public class PatientController {
         return "patient/resultList";
     }
 
-    @GetMapping("/petient/{patientID}")
+    @GetMapping("/patient/{patientID}")
     public String getPatientPage(@PathVariable("patientID") Integer patientID, ModelMap model) {
         Patient patient;
         try {
