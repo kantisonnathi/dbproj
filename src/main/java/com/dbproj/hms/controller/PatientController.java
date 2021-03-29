@@ -1,9 +1,8 @@
 package com.dbproj.hms.controller;
 
-import com.dbproj.hms.model.Doctor;
-import com.dbproj.hms.model.Employee;
 import com.dbproj.hms.model.Patient;
 import com.dbproj.hms.repository.PatientRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,11 +14,8 @@ import java.util.List;
 @Controller
 public class PatientController {
 
+    @Autowired
     PatientRepository patientRepository;
-
-    public PatientController() throws SQLException, ClassNotFoundException{
-        patientRepository = new PatientRepository();
-    }
 
     @GetMapping("/findPatientByID")
     public String getByID(ModelMap model){

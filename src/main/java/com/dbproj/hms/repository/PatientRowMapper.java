@@ -16,7 +16,7 @@ public class PatientRowMapper implements RowMapper<Patient>{
                 resultSet.getInt("age"),
                 resultSet.getString("gender"),
                 resultSet.getString("medicalDetails"),
-                resultSet.getInt("phno"),
+                resultSet.getString("phno"),
                 resultSet.getString("email"),
                 resultSet.getString("address"));
     }

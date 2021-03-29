@@ -7,7 +7,7 @@ public class Patient {
     private Integer age;
     private String gender;
     private String medicalDetails;
-    private Integer phno;
+    private String phno;
     private String email;
     private String address;
 
@@ -15,7 +15,7 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(Integer patientID, String patientName, Integer age, String gender, String medicalDetails, Integer phno, String email, String address){
+    public Patient(Integer patientID, String patientName, Integer age, String gender, String medicalDetails, String phno, String email, String address){
 
         this.patientID = patientID;
         this.patientName = patientName;
@@ -43,8 +43,8 @@ public class Patient {
     public String getMedicalDetails(){return medicalDetails;}
     public void setMedicalDetails(String medicalDetails){this.medicalDetails = medicalDetails;}
 
-    public Integer getPhno(){return phno;}
-    public void setPhno(Integer phno){this.phno = phno;}
+    public String getPhno(){return phno;}
+    public void setPhno(String phno){this.phno = phno;}
 
     public String getEmail(){return email;}
     public void setEmail(String email){this.email = email;}
