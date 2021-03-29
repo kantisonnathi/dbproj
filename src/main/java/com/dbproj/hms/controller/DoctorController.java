@@ -7,12 +7,11 @@ import com.dbproj.hms.repository.DoctorRepository;
 import com.dbproj.hms.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
+import javax.print.Doc;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -124,5 +123,18 @@ public class DoctorController {
     }
   return "main";
 
+}
+@RequestMapping("/doc/doc/{docid}/delete")
+@Transactional
+public String deletedoc(@PathVariable("docid") int docid) throws SQLException {
+        try {
+            Doctor doctor=doctorRepository.findByID(docid);
+            doctorRepository.delete(doctor);
+        }
+        catch(SQLException e)
+        {
+            return "system/error";
+        }
+       return "main";
 }
 }

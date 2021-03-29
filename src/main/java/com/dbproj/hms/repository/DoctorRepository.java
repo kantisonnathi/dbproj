@@ -40,8 +40,8 @@ public class DoctorRepository {
     }
     //To delete a doctor from the employee repository
     public void delete(Doctor doctor) throws DataAccessException,SQLException{
-        String query="delete from employee e where empid="+doctor.getEmpID();
-        jdbcTemplate.query(query,new DoctorRowMapper());
+        String query="delete from employee  where empid="+doctor.getEmpID();
+        jdbcTemplate.update(query);
     }
     //To add a doctor to the employee repository
     public void  save(Doctor doctor) throws DataAccessException,SQLException
