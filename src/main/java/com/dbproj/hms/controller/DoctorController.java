@@ -103,5 +103,23 @@ public class DoctorController {
         model.put("employee", employee);
         return "doctor/doctor";
     }
+@GetMapping("/adddoctor")
+    public String getformpage(ModelMap modelMap){
+        Doctor doctor= new Doctor();
+        modelMap.put("docotor",doctor);
+        return "doctor/newdoctor";
+}
+@PostMapping("/adddoctor")
+    public String postaddition(Doctor doctor,ModelMap modelMap)
+{
+    try {
+        doctorRepository.save(doctor);
+    }
+    catch (SQLException e)
+    {
+        return "system/error";
+    }
+  return "doctor/doctor";
 
+}
 }

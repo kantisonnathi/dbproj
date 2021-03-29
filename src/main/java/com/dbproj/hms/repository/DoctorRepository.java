@@ -4,9 +4,11 @@ package com.dbproj.hms.repository;
 import com.dbproj.hms.model.Doctor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
+import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
+import javax.print.Doc;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -34,6 +36,20 @@ public class DoctorRepository {
         String query = "select * from doctor where speciality='" + speciality + "'";
         return jdbcTemplate.query(query, new DoctorRowMapper());
     }
+    //To delete a doctor from the employee repository
+    public void delete(Doctor doctor) throws DataAccessException,SQLException{
+        String query="delete from employee e where empid="+doctor.getEmpID();
+        jdbcTemplate.query(query,new DoctorRowMapper());
+    }
+    //To add a doctor to the employee repository
+    public void  save(Doctor doctor) throws DataAccessException,SQLException
+    {
+        String query="insert into employee value";
+        jdbcTemplate.query(query,new DoctorRowMapper());
+        query="Insert into doctor value";
+        jdbcTemplate.query(query,new DoctorRowMapper());
+    }
+     // To update doctor value
 }
 
 
