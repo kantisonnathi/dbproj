@@ -124,7 +124,7 @@ public class DoctorController {
   return "main";
 
 }
-@RequestMapping("/doc/doc/{docid}/delete")
+@RequestMapping("/doc/{docid}/delete")
 @Transactional
 public String deletedoc(@PathVariable("docid") int docid) throws SQLException {
         try {
@@ -137,4 +137,29 @@ public String deletedoc(@PathVariable("docid") int docid) throws SQLException {
         }
        return "main";
 }
+@GetMapping("/doc/{docid}/update")
+@Transactional
+    public String updatedoc(@PathVariable("docid")int docid,ModelMap model )throws SQLException{
+        try{
+            Doctor doctor=doctorRepository.findByID(docid);
+            model.put("doctor",doctor);
+        }
+        catch (SQLException e)
+        {
+            return "system/error";
+        }
+        return "doctor/update";
+    }
+    @PostMapping("/doc/{docid/update")
+    public String postupdatedoc(Doctor doctor,ModelMap model) throws SQLException {
+       try {
+           doctorRepository.save(doctor);
+           model.put("doctor",doctor);
+       }
+       catch (SQLException e)
+       {
+           return "system/error";
+       }
+        return "main";
+    }
 }
