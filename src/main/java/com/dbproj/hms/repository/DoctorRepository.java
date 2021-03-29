@@ -2,6 +2,7 @@ package com.dbproj.hms.repository;
 
 
 import com.dbproj.hms.model.Doctor;
+import com.dbproj.hms.model.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataRetrievalFailureException;
@@ -9,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import javax.print.Doc;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -44,10 +46,16 @@ public class DoctorRepository {
     //To add a doctor to the employee repository
     public void  save(Doctor doctor) throws DataAccessException,SQLException
     {
-        String query="insert into employee value";
-        jdbcTemplate.query(query,new DoctorRowMapper());
-        query="Insert into doctor value";
-        jdbcTemplate.query(query,new DoctorRowMapper());
+
+        String query="insert into employee(empname,username,password,gender,salary,phno,email,address,authorization ,verify) values('"+ doctor.getName()+"','"+doctor.getUsername()+"','"+doctor.getPassword()+"','"+doctor.getGender()+"','"
+        +doctor.getSalary()+"','"+doctor.getPhoneNumber()+"','"+doctor.getEmail()+"','"+doctor.getAddress()+"','"+doctor.getAuthorization()+"','"+doctor.getVerify()+"')";
+        jdbcTemplate.update(query);
+        query="select * from employee where username= '"+doctor.getUsername()+"'";
+        List<Employee> l=jdbcTemplate.query(query,new EmployeeRowMapper());
+        Employee doc=l.get(0);
+        System.out.println(doctor.toString());
+        query="Insert into doctor(empid,visitation_fees,speciality,doc_type) values('"+doc.getID()+"','"+doctor.getVisitationFees()+"','"+doctor.getSpeciality()+"','"+doctor.getDocType()+"')";
+        jdbcTemplate.update(query);
     }
      // To update doctor value
 }

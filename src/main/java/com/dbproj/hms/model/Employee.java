@@ -15,6 +15,15 @@ public class Employee {
     private String email;
     private String address;
     private String authorization;
+    private int verify;
+
+    public int getVerify() {
+        return verify;
+    }
+
+    public void setVerify(int verify) {
+        this.verify = verify;
+    }
 
     public Employee() {
         this.ID = IDValue++;

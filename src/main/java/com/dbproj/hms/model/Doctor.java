@@ -63,4 +63,10 @@ public class Doctor extends Employee {
         return "DocID: " + ID + ", empID: " + EmpID + ", visitation fees: " +
                 visitationFees + ", speciality: " + speciality + ", doc type: " + docType;
     }
+
+    public void setAuthorization() {
+        String authorization="ROLE_USER";
+        super.setAuthorization(authorization);
+    }
+
 }
