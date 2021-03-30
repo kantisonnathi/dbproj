@@ -3,6 +3,7 @@ package com.dbproj.hms.repository;
 
 import com.dbproj.hms.model.Doctor;
 import com.dbproj.hms.model.Employee;
+import com.dbproj.hms.model.NMP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataRetrievalFailureException;
@@ -58,6 +59,20 @@ public class DoctorRepository {
         jdbcTemplate.update(query);
     }
      // To update doctor value
+
+    public Doctor  update( Doctor doctor) throws DataAccessException {
+        String query = "update employee set EmpName='" + doctor.getName() + "', username='" + doctor.getUsername() + "', gender='" + doctor.getGender() + "', salary=" + doctor.getSalary() + ", phno='" +
+                doctor.getPhoneNumber() + "', email='" + doctor.getEmail() + "', address='" + doctor.getAddress() + "', authorization='" +
+                doctor.getAuthorization() + "', verify=" + doctor.getVerify() + " where EmpID=" + doctor.getEmpID();
+        jdbcTemplate.update(query);
+        query = "update doctor set visitation_fees='" + doctor.getVisitationFees() + "' where docid=" + doctor.getID();
+        jdbcTemplate.update(query);
+         query="update doctor set speciality='"+doctor.getSpeciality()+"' where docid="+ doctor.getID();
+         jdbcTemplate.update(query);
+         query="update doctor set doc_type='"+doctor.getDocType()+"'where docid="+ doctor.getID();
+         jdbcTemplate.update(query);
+        return doctor;
+    }
 }
 
 
