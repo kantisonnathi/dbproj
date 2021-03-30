@@ -12,6 +12,10 @@
 <p th:text="${patient.gender}"></p>
 <p th:text="${patient.medicalDetails}"></p>
 
+<br>
+<a href="/patient/new">Delete Patient</a>
+<br>
+<a th:href="@{/patient/__${patient.patientID}__/update}">Update patient information</a>
 
 </body>
 </html>

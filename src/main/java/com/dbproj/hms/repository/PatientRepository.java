@@ -21,7 +21,7 @@ public class PatientRepository {
             return null;
         }
 
-        return list.get(0);
+        return list.get(list.size()-1);
     }
 
     public List<Patient> findByName(String patientName) throws DataAccessException, SQLException {
@@ -37,8 +37,21 @@ public class PatientRepository {
     public Patient save(Patient patient) throws DataAccessException, SQLException {
         String query = "insert into patient (patientName, age, gender, medicalDetails, phno, email" +
                 ", address) values ('" + patient.getPatientName() + "'," + patient.getAge() + ", '" + patient.getGender()
-                + "', '" + patient.getMedicalDetails() + "', '" + patient.getPhno() + "', '" + patient.getEmail() + "')";
+                + "', '" + patient.getMedicalDetails() + "', '" + patient.getPhno() + "', '" + patient.getEmail() + "','" + patient.getAddress() + "')";
         jdbcTemplate.update(query);
-        return patient; //set its ID before returning it. see what to query the patient table with.x
+        query = "select * from patient where patientName='" + patient.getPatientName() + "' and age=" + patient.getAge() + " and gender='" +
+                patient.getGender() + "' and medicalDetails='" + patient.getMedicalDetails() + "' and phno='" + patient.getPhno()
+                + "'and email='" + patient.getEmail() + "'and address='" + patient.getAddress() + "'";
+        List<Patient> list = jdbcTemplate.query(query, new PatientRowMapper());
+        return list.get(list.size()-1);
+
+        //return patient; //set its ID before returning it. see what to query the patient table with.x
+    }
+
+    public void update(Patient patient) throws DataAccessException, SQLException {
+        String query = "update patient set patientName='" + patient.getPatientName() + "', age=" + patient.getAge() +
+        ", gender='" + patient.getGender() + "',medicalDetails='" + patient.getMedicalDetails() + "', phno='" +
+                patient.getPhno() + "', email='" + patient.getEmail() + "',address= '" + patient.getAddress()  + "'";
+        jdbcTemplate.update(query);
     }
 }

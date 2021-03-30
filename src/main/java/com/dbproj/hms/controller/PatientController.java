@@ -61,5 +61,55 @@ public class PatientController {
         return "patient/patient";
     }
 
+    @GetMapping("/patient/new")
+    public String newPatient(ModelMap modelMap) {
+        Patient patient = new Patient();
+        modelMap.put("patient",patient);
+        return "patient/new";
+    }
+
+    @PostMapping("/patient/new")
+    public String postNewPatient(Patient patient) {
+        try {
+            patient = patientRepository.save(patient);
+        } catch (Exception e) {
+            return "system/error";
+        }
+        return "redirect:/patient/" + patient.getPatientID();
+    }
+
+    @GetMapping("/patient/{patientId}/delete")
+    public String deletePatient(@PathVariable("patientId") Integer patientId) {
+        try {
+            Patient patient = patientRepository.findByID(patientId);
+            patientRepository.delete(patient);
+        } catch (Exception e) {
+            return "system/error";
+        }
+        return "redirect://";
+    }
+
+    @GetMapping("/patient/{patientId}/update")
+    public String getUpdatePatient(@PathVariable("patientId") Integer patientID, ModelMap modelMap) {
+        Patient patient;
+        try {
+            patient = patientRepository.findByID(patientID);
+        } catch (Exception e) {
+            return "system/error";
+        }
+        modelMap.put("patient",patient);
+        return "patient/update";
+    }
+
+    @PostMapping("/patient/{patientId}/update")
+    public String postUpdatePatient(Patient patient, ModelMap modelMap) {
+        try {
+            patientRepository.update(patient);
+        } catch (Exception e) {
+            return "system/error";
+        }
+        return "redirect:/patient/" + patient.getPatientID();
+    }
+
 
 }
