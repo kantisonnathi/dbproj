@@ -96,13 +96,6 @@ public class NMPController {
         return "NMP/nmp";
     }
 
-    @GetMapping("/nmp/new")
-    public String newNMP(ModelMap modelMap) {
-        NMP nmp = new NMP();
-        modelMap.put("nmp",nmp);
-        return "NMP/new";
-    }
-
     @GetMapping("/nmp/{nmpID}/delete")
     public String deleteNMP(@PathVariable("nmpID") Integer nmpID) {
         try {
@@ -111,7 +104,15 @@ public class NMPController {
         } catch (Exception e) {
             return "system/error";
         }
-        return "main";
+        return "redirect:/";
+    }
+
+
+    @GetMapping("/nmp/new")
+    public String newNMP(ModelMap modelMap) {
+        NMP nmp = new NMP();
+        modelMap.put("nmp",nmp);
+        return "NMP/new";
     }
 
     @PostMapping("/nmp/new")
