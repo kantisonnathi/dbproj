@@ -103,6 +103,7 @@ public class DoctorController {
         return "doctor/doctor";
     }
 
+
     @GetMapping("/adddoctor")
     public String getformpage(ModelMap modelMap){
         Doctor doctor= new Doctor();
@@ -113,7 +114,7 @@ public class DoctorController {
 
 
     @PostMapping("/adddoctor")
-    public String postaddition(Doctor doctor,ModelMap modelMap)  {
+    public String postaddition(Doctor doctor,ModelMap modelMap) {
         try {
             doctor.setAuthorization();
             doctor.setVerify(1);
@@ -125,8 +126,7 @@ public class DoctorController {
         return "main";
     }
 
-
-    @RequestMapping("/doc/doc/{docid}/delete")
+    @RequestMapping("/doc/{docid}/delete")
     @Transactional
     public String deletedoc(@PathVariable("docid") int docid) throws SQLException {
         try {
@@ -137,5 +137,32 @@ public class DoctorController {
             return "system/error";
         }
        return "main";
+    }
+
+    @GetMapping("/doc/{docid}/update")
+    @Transactional
+    public String updatedoc(@PathVariable("docid")int docid,ModelMap model )throws SQLException{
+        try {
+            Doctor doctor=doctorRepository.findByID(docid);
+            model.put("doctor",doctor);
+        }
+        catch (SQLException e) {
+            return "system/error";
+        }
+        return "doctor/update";
+    }
+
+
+    @PostMapping("/doc/{docid/update")
+    public String postupdatedoc(Doctor doctor,ModelMap model) throws SQLException {
+       try {
+           doctorRepository.save(doctor);
+           model.put("doctor",doctor);
+       }
+       catch (SQLException e)
+       {
+           return "system/error";
+       }
+        return "main";
     }
 }
