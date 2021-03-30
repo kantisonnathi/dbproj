@@ -8,7 +8,9 @@
 <form method="post">
     <!-- what shit do we need to input here -->
     <input type="hidden" name="id" th:field="${nmp.ID}"/>
-    <input type="hidden" name="id" th:field="${empID}"/>
+    <input type="hidden" name="id" th:field="${nmp.empID}"/>
+    <input type="hidden" name="empID" th:field="${empID}"/>
+    <input type="hidden" name="empid" th:field="${emp.ID}"/>
     <label>Name</label>
     <input type="text" name="name" th:field="${emp.name}">
     <br>
