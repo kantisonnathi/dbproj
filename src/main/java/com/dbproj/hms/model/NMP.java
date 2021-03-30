@@ -1,6 +1,6 @@
 package com.dbproj.hms.model;
 
-public class NMP {
+public class NMP extends Employee{
     private Integer ID;
     private Integer empID;
     private String title;
@@ -38,5 +38,10 @@ public class NMP {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public void setAuthorization() {
+        String authorization="ROLE_USER"; //@Sahithi, should I keep admin?
+        super.setAuthorization(authorization);
     }
 }

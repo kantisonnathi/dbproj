@@ -28,4 +28,17 @@ public class PatientRepository {
         String sql = "select * from patient where patientName='" + patientName + "'";
         return jdbcTemplate.query(sql, new PatientRowMapper());
     }
+
+    public void delete(Patient patient) throws DataAccessException, SQLException {
+        String query = "delete from patient where patientID=" + patient.getPatientID();
+        jdbcTemplate.update(query);
+    }
+
+    public Patient save(Patient patient) throws DataAccessException, SQLException {
+        String query = "insert into patient (patientName, age, gender, medicalDetails, phno, email" +
+                ", address) values ('" + patient.getPatientName() + "'," + patient.getAge() + ", '" + patient.getGender()
+                + "', '" + patient.getMedicalDetails() + "', '" + patient.getPhno() + "', '" + patient.getEmail() + "')";
+        jdbcTemplate.update(query);
+        return patient; //set its ID before returning it. see what to query the patient table with.x
+    }
 }

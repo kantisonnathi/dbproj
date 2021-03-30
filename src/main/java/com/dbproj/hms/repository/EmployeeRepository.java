@@ -26,6 +26,19 @@ public class EmployeeRepository {
         return list.get(0);
     }
 
+    public void save(Employee employee) throws DataAccessException {
+        String query="insert into employee(empname,username,password,gender,salary,phno,email,address,authorization ,verify)" +
+                " values('" + employee.getName() + "','" + employee.getUsername() + "','" + employee.getPassword() + "','" +
+                employee.getGender() + "','" + employee.getSalary() + "','" + employee.getPhoneNumber() + "','" + employee.getEmail()
+                    + "','" + employee.getAddress() + "','" + employee.getAuthorization() + "'," + employee.getVerify() + ")";
+        jdbcTemplate.update(query);
+    }
+
+    public void delete(Employee employee) throws DataAccessException {
+        String query = "delete from employee where empid=" + employee.getID();
+        jdbcTemplate.update(query);
+    }
+
     /*public EmployeeRepository() throws ClassNotFoundException, SQLException {
         super();
     }

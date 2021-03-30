@@ -10,5 +10,7 @@
 <p th:text="${employee.name}"></p>
 <p th:text="${nmp.title}"></p>
 
+<a th:href="@{/nmp/__${nmp.ID}__/delete}">delete non medical professional</a>
+<a th:href="@{/nmp/__${nmp.ID}__/update}">Update non medical professional</a>
 </body>
 </html>

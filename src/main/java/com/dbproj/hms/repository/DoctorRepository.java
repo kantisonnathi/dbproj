@@ -38,15 +38,15 @@ public class DoctorRepository {
         String query = "select * from doctor where speciality='" + speciality + "'";
         return jdbcTemplate.query(query, new DoctorRowMapper());
     }
+
     //To delete a doctor from the employee repository
     public void delete(Doctor doctor) throws DataAccessException,SQLException{
         String query="delete from employee  where empid="+doctor.getEmpID();
         jdbcTemplate.update(query);
     }
-    //To add a doctor to the employee repository
-    public void  save(Doctor doctor) throws DataAccessException,SQLException
-    {
 
+    //To add a doctor to the employee repository
+    public void save(Doctor doctor) throws DataAccessException,SQLException {
         String query="insert into employee(empname,username,password,gender,salary,phno,email,address,authorization ,verify) values('"+ doctor.getName()+"','"+doctor.getUsername()+"','"+doctor.getPassword()+"','"+doctor.getGender()+"','"
         +doctor.getSalary()+"','"+doctor.getPhoneNumber()+"','"+doctor.getEmail()+"','"+doctor.getAddress()+"','"+doctor.getAuthorization()+"','"+doctor.getVerify()+"')";
         jdbcTemplate.update(query);

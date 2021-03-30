@@ -99,15 +99,55 @@ public class NMPController {
     @GetMapping("/nmp/new")
     public String newNMP(ModelMap modelMap) {
         NMP nmp = new NMP();
-        Employee employee = new Employee();
-        modelMap.put("employee", employee);
         modelMap.put("nmp",nmp);
         return "NMP/new";
     }
 
-    /*@PostMapping("/nmp/new")
-    public String savingNewNMP(NMP nmp, Employee employee, ModelMap modelMap) {
+    @GetMapping("/nmp/{nmpID}/delete")
+    public String deleteNMP(@PathVariable("nmpID") Integer nmpID) {
+        try {
+            NMP nmp = nmpRepository.findByID(nmpID);
+            employeeRepository.delete(nmp);
+        } catch (Exception e) {
+            return "system/error";
+        }
+        return "main";
+    }
 
-    }*/
+    @PostMapping("/nmp/new")
+    public String savingNewNMP(NMP nmp, Employee employee, ModelMap modelMap) {
+        try {
+            nmp.setAuthorization();
+            nmp.setVerify(1);
+            nmp = nmpRepository.save(nmp);
+        } catch (Exception e) {
+            return "system/error";
+        }
+        return "redirect:/nmp/"+nmp.getID();
+    }
+
+    @GetMapping("/nmp/{nmpID}/update")
+    public String getUpdatingNMP(@PathVariable("nmpID") Integer nmpID, ModelMap modelMap) {
+        NMP nmp;
+        try {
+            nmp = nmpRepository.findByID(nmpID);
+        } catch (Exception e) {
+            return "system/error";
+        }
+        modelMap.put("nmp", nmp);
+        return "NMP/new";
+    }
+
+    @PostMapping("/nmp/{nmpID}/update")
+    public String postUpdatingNMP(NMP nmp, ModelMap modelMap) {
+        try {
+            nmp.setAuthorization();
+            nmp.setVerify(1);
+            nmp = nmpRepository.update(nmp);
+        } catch (Exception e) {
+            return "system/error";
+        }
+        return "redirect:/nmp/"+nmp.getID();
+    }
 
 }

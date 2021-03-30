@@ -7,10 +7,35 @@
 <body>
     <form method="post">
         <!-- what shit do we need to input here -->
-        <input type="number" name="id" th:object="${nmp.ID}">
-        <input type="number" name="empid" th:object="${employee.ID}">
-        <input type="text" name="name" th:object="${employee.name}">
-        <input type="text" name="title" th:object="${nmp.title}">
+        <input type="hidden" name="id" th:field="${nmp.ID}"/>
+        <label>Name</label>
+        <input type="text" name="name" th:field="${nmp.name}">
+        <br>
+        <label>Username</label>
+        <input type="text" name="username" th:field="${nmp.username}">
+        <br>
+        <label>Password</label>
+        <input type="password" name="password" th:field="${nmp.password}">
+        <br>
+        <label>Salary</label>
+        <input type="number" name="salary" th:field="${nmp.salary}">
+        <br>
+        <label>Phone Number</label>
+        <input type="text" name="phoneNumber" th:field="${nmp.phoneNumber}">
+        <br>
+        <label>Gender</label>
+        <input type="text" name="gender" th:field="${nmp.gender}">
+        <br>
+        <label>Email</label>
+        <input type="email" name="email" th:field="${nmp.email}">
+        <br>
+        <label>Address</label>
+        <input type="text" name="address" th:field="${nmp.address}">
+        <br>
+        <label>Title of NMP</label>
+        <input type="text" name="title" th:field="${nmp.title}">
+        <br>
+        <button type="submit">Save Non medical professional</button>
         <!--address and all idk I'll add later this is just for initial testing -->
     </form>
 </body>
