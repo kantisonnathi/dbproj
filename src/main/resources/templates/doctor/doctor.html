@@ -10,7 +10,7 @@
 <p th:text="${employee.name}"></p>
 <p th:text="${doctor.speciality}"></p>
 <p th:text="${employee.address}"></p>
-<a th:href="@{doc/__${doctor.ID}__/delete}">delete</a>
-
+<a th:href="@{__${doctor.ID}__/delete}">delete</a>
+<a th:href="@{__${doctor.ID}__/update}">Update</a>
 </body>
 </html>
