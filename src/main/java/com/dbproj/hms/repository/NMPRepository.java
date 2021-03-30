@@ -26,9 +26,7 @@ public class NMPRepository {
         if (list.isEmpty()) {
             return null;
         }
-        NMP emp = findByEmpID(list.get(0).getEmpID());
-        emp.setTitle(list.get(0).getTitle());
-        return emp;
+        return list.get(0);
 
     }
 
@@ -67,13 +65,14 @@ public class NMPRepository {
     }
 
     public NMP update(NMP nmp) throws DataAccessException {
-        String query = "update employee set EmpName='" + nmp.getName() + "', username='" + nmp.getUsername() + ", password='"
+        String query = "update employee set EmpName='" + nmp.getName() + "', username='" + nmp.getUsername() + "', password='"
                 + nmp.getPassword() + "', gender='" + nmp.getGender() + "', salary=" + nmp.getSalary() + ", phno='" +
                 nmp.getPhoneNumber() + "', email='" + nmp.getEmail() + "', address='" + nmp.getAddress() + "', authorization='" +
-                nmp.getAuthorization() + "', verify=" + nmp.getAuthorization() + " where EmpID=" + nmp.getEmpID();
+                nmp.getAuthorization() + "', verify=" + nmp.getVerify() + " where EmpID=" + nmp.getEmpID();
         jdbcTemplate.update(query);
         query = "update non_medical_professionals set title='" + nmp.getTitle() + "' where NP_id=" + nmp.getID();
         jdbcTemplate.update(query);
+
         return nmp;
     }
 

@@ -129,21 +129,31 @@ public class NMPController {
     @GetMapping("/nmp/{nmpID}/update")
     public String getUpdatingNMP(@PathVariable("nmpID") Integer nmpID, ModelMap modelMap) {
         NMP nmp;
+        Employee emp;
         try {
             nmp = nmpRepository.findByID(nmpID);
+            emp = employeeRepository.findByID(nmp.getEmpID());
         } catch (Exception e) {
             return "system/error";
         }
         modelMap.put("nmp", nmp);
-        return "NMP/new";
+        modelMap.put("emp",emp);
+        modelMap.put("empID",emp.getID());
+        return "NMP/update";
     }
 
     @PostMapping("/nmp/{nmpID}/update")
-    public String postUpdatingNMP(NMP nmp, ModelMap modelMap) {
+    public String postUpdatingNMP(NMP nmp, Employee emp, Integer empID,ModelMap modelMap) {
         try {
             nmp.setAuthorization();
             nmp.setVerify(1);
+            nmp.setEmpID(empID);
             nmp = nmpRepository.update(nmp);
+            /*emp.setAuthorization("ROLE_USER");
+            emp.setVerify(1);*/
+
+            //emp = employeeRepository.update(nmp);
+
         } catch (Exception e) {
             return "system/error";
         }
