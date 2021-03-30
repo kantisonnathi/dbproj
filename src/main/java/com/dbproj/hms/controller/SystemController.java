@@ -11,4 +11,9 @@ public class SystemController {
     public String returnDocQueryPage() {
         return "main";
     }
+    @GetMapping("/error")
+    public String error()
+    {
+        return "system/Authorization error";
+    }
 }
