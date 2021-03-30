@@ -3,6 +3,7 @@ package com.dbproj.hms.controller;
 
 import com.dbproj.hms.model.Doctor;
 import com.dbproj.hms.model.Employee;
+import com.dbproj.hms.model.NMP;
 import com.dbproj.hms.repository.DoctorRepository;
 import com.dbproj.hms.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -140,29 +141,37 @@ public class DoctorController {
     }
 
     @GetMapping("/doc/{docid}/update")
-    @Transactional
-    public String updatedoc(@PathVariable("docid")int docid,ModelMap model )throws SQLException{
+    public String getUpdatingNMP(@PathVariable("docid") Integer docid, ModelMap modelMap) {
+        Doctor doctor;
+        Employee emp;
         try {
-            Doctor doctor=doctorRepository.findByID(docid);
-            model.put("doctor",doctor);
-        }
-        catch (SQLException e) {
+            doctor = doctorRepository.findByID(docid);
+            emp = employeeRepository.findByID(doctor.getEmpID());
+        } catch (Exception e) {
             return "system/error";
         }
+        modelMap.put("doctor", doctor);
+        modelMap.put("emp",emp);
+        modelMap.put("empID",emp.getID());
         return "doctor/update";
     }
 
+    @PostMapping("/doc/{docid}/update")
+    public String postUpdatingNMP(Doctor doctor, Employee emp, Integer empID,ModelMap modelMap) {
+        try {
+            doctor.setAuthorization();
+            doctor.setVerify(1);
+            doctor.setEmpID(empID);
+            doctor = doctorRepository.update(doctor);
+            /*emp.setAuthorization("ROLE_USER");
+            emp.setVerify(1);*/
 
-    @PostMapping("/doc/{docid/update")
-    public String postupdatedoc(Doctor doctor,ModelMap model) throws SQLException {
-       try {
-           doctorRepository.save(doctor);
-           model.put("doctor",doctor);
-       }
-       catch (SQLException e)
-       {
-           return "system/error";
-       }
-        return "main";
+            //emp = employeeRepository.update(nmp);
+
+        } catch (Exception e) {
+            return "system/error";
+        }
+        return "redirect:/doc/"+doctor.getID();
     }
+
 }
