@@ -1,2 +1,4 @@
-package com.dbproj.hms.repository;public class NurseRowMapper {
+package com.dbproj.hms.repository;
+
+public class NurseRowMapper {
 }

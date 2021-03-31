@@ -42,14 +42,14 @@ public class NurseRepository {
     }
 
     public void save(Nurse nurse) throws DataAccessException,SQLException {
-        String query="insert into employee(empname,username,password,gender,salary,phno,email,address,authorization ,verify) values('"+ nurse.getName()+"','"+nurse.getUsername()+"','"+nurse.getPassword()+"','"+nurse.getGender()+"','"
-                +nurse.getSalary()+"','"+nurse.getPhoneNumber()+"','"+nurse.getEmail()+"','"+nurse.getAddress()+"','"+nurse.getAuthorization()+"','"+nurse.getVerify()+"')";
+        String query="insert into employee(empname,username,password,gender,salary,phno,email,address,authorization ,verify) values('"+ nurse.getName()+"','"+nurse.getUsername()+"','"+nurse.getPassword()+"','"+nurse.getGender()+"',"
+                +nurse.getSalary()+",'"+nurse.getPhoneNumber()+"','"+nurse.getEmail()+"','"+nurse.getAddress()+"','"+nurse.getAuthorization()+"',"+nurse.getVerify()+")";
         jdbcTemplate1.update(query);
         query="select * from employee where username= '"+nurse.getUsername()+"'";
         List<Employee> l=jdbcTemplate1.query(query,new EmployeeRowMapper());
         Employee nur=l.get(0);
         System.out.println(nurse.toString());
-        query="Insert into nurse(nurseID,empID) values('"+nurse.getID()+"','"+nurse.getEmpID() +"')";
+        query="Insert into nurse(nurseID,empID) values("+nurse.getID()+","+nurse.getEmpID() +")";
         jdbcTemplate1.update(query);
     }
 
