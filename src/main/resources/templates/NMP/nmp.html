@@ -2,15 +2,14 @@
 <html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Non-medical professional</title>
+    <title>Nurses</title>
 </head>
 <body>
 
-<p th:text="${nmp.ID}"></p>
+<p th:text="${nurses.nurseID}"></p>
 <p th:text="${employee.name}"></p>
-<p th:text="${nmp.title}"></p>
 
-<a th:href="@{/nmp/__${nmp.ID}__/delete}">delete non medical professional</a>
-<a th:href="@{/nmp/__${nmp.ID}__/update}">Update non medical professional</a>
+<a th:href="@{/nurses/__${nurses.nurseID}__/delete}">delete this nurse from database</a>
+<a th:href="@{/nurses/__${nurses.nurseID}__/update}">Update this nurse in database</a>
 </body>
 </html>
