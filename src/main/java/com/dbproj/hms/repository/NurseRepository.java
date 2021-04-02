@@ -1,6 +1,5 @@
 package com.dbproj.hms.repository;
 
-
 import com.dbproj.hms.model.Employee;
 import com.dbproj.hms.model.Nurse;
 import org.springframework.beans.factory.annotation.Autowired;

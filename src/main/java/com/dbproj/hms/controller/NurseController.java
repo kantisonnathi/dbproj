@@ -23,7 +23,7 @@ public class NurseController {
     public String getByID(ModelMap model) {
         Integer id = 0;
         model.put("id",id);
-        return "nurse/findingNurseID";
+        return "nurse/findingNurseByID";
     }
 
     @PostMapping("/findNurseByID")
@@ -35,7 +35,7 @@ public class NurseController {
     public String getName(ModelMap model) {
         String name = "";
         model.put("name",name);
-        return "Nurse/findingNurByName";
+        return "nurse/findingNurseByName";
     }
 
     @PostMapping("/findNurseByName")
@@ -73,7 +73,7 @@ public class NurseController {
         Nurse nurse= new Nurse();
 
         modelMap.put("nurse",nurse);
-        return "nurse/newnurse";
+        return "nurse/newNurse";
     }
 
 
@@ -116,7 +116,7 @@ public class NurseController {
         modelMap.put("nurse",nurse);
         modelMap.put("emp",emp);
         modelMap.put("empID",emp.getID());
-        return "nurse/update";
+        return "nurse/updateNurse";
     }
 
     @PostMapping("/nur/{nurid}/update")

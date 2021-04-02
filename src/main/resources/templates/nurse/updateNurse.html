@@ -7,8 +7,8 @@
 <body>
 <form method="post">
     <!-- what shit do we need to input here -->
-    <input type="hidden" name="id" th:field="${nurses.nurseID}"/>
-    <input type="hidden" name="id" th:field="${nurses.empID}"/>
+    <input type="hidden" name="id" th:field="${nurse.nurseID}"/>
+    <input type="hidden" name="id" th:field="${nurse.empID}"/>
     <input type="hidden" name="empID" th:field="${empID}"/>
     <input type="hidden" name="empid" th:field="${emp.ID}"/>
     <label>Name</label>
@@ -34,9 +34,6 @@
     <br>
     <label>Address</label>
     <input type="text" name="address" th:field="${emp.address}">
-    <br>
-    <label>Title of NMP</label>
-    <input type="text" name="title" th:field="${nmp.title}">
     <br>
     <button type="submit">Save Nurse</button>
     <!--address and all idk I'll add later this is just for initial testing -->

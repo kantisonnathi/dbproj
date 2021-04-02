@@ -11,11 +11,11 @@ public class Nurse extends Employee {
 
     private Integer nurseID;
     private Integer EmpID;
-    public Integer getID() {
+    public Integer getNurseID() {
         return nurseID;
     }
 
-    public void setID(Integer ID) {
+    public void setNurseID(Integer ID) {
         this.nurseID = ID;
     }
 
