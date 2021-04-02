@@ -1,15 +1,13 @@
 <!DOCTYPE html>
-<<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Query Nurses By ID</title>
+  <meta charset="UTF-8">
+  <title>Finding Nurse by ID</title>
 </head>
 <body>
-
-<form method="post">
-    <input type="number" name="id" th:value="${nurseID}">
-    <button type="submit">Search Nurses</button>
+<form method="post" action="/findNurseByID">
+  <input type="number" name="id" th:value="${id}">
+  <button type="submit">search </button>
 </form>
-
 </body>
 </html>

@@ -1,17 +1,15 @@
 <!DOCTYPE html>
-<<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Find Nurse by Name</title>
+  <meta charset="UTF-8">
+  <title>Finding Nurse by Name</title>
 </head>
 <body>
-
-<p> Nurses by name</p>
-
-<form method="post">
-    <input type="text" name="name" th:object="${name}">
-    <button type="submit">Search Nurse</button>
+<form method="post" action="/findNurseByName">
+  <input type="text" name="name" th:value="${name}">
+  <button type="submit">Search </button>
 </form>
-
+</body>
+</html>
 </body>
 </html>
