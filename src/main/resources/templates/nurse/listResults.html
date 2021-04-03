@@ -13,9 +13,9 @@
     </tr>
     </thead>
     <tbody>
-    <tr th:each="nurse : ${nurseID}">
+    <tr th:each="nur : ${nurses}">
         <td>
-            <a th:href="@{/nurses/__${nurse.nurseID}__}" th:text="${nurse.nurseID}"></a>
+            <a th:href="@{/nur/__${nur.nurseID}__}" th:text="${nur.nurseID}"></a>
         </td>
     </tr>
     </tbody>
