@@ -35,4 +35,10 @@ public class AppointmentRepository {
         return list;
     }
 
+    public List<Appointment> findByPatientId(Integer id){
+        String query = "select * from appointment where patientid=" + id;
+        List<Appointment> list = jdbcTemplate.query(query, new AppointmentRowMapper());
+        return list;
+    }
+
 }

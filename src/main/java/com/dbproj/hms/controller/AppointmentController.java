@@ -109,6 +109,18 @@ public class AppointmentController {
         return "appointment/listResult";
     }
 
+    @GetMapping("patient/{patientid}/listAppointments")
+    public String getAppointmentListbyPatient(@PathVariable("patientid") Integer patientid, ModelMap modelMap){
+        List<Appointment> appointmentList;
+        try{
+            appointmentList = this.appointmentRepository.findByPatientId(patientid);
+        } catch (Exception e){
+            return "system/error";
+        }
+        modelMap.put("appointments", appointmentList);
+        return "appointment/listResult";
+    }
+
 
 
 }
