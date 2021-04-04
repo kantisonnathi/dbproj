@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.Doc;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -24,11 +23,6 @@ public class DoctorController {
     @Autowired
     EmployeeRepository employeeRepository;
 
-    /*public DoctorController() throws SQLException, ClassNotFoundException {
-        doctorRepository = new DoctorRepository();
-        employeeRepository = new EmployeeRepository();
-    }
-*/
     @GetMapping("/findDoctorByID")
     public String getByID(ModelMap model) {
         //this is the get method;
@@ -171,14 +165,15 @@ public class DoctorController {
         }
         return "redirect:/doc/"+doctor.getID();
     }
+
     @GetMapping("/doc/{docid}/timings")
-    public String getBookappontment(@PathVariable("docid") Integer docid,ModelMap model){
+    public String getBookappontment(@PathVariable("docid") Integer docid, ModelMap model){
         Doctor doctor;
-        slot slot;
-        List<slot> slots;
+        Slot slot;
+        List<Slot> slots;
         try{
             doctor=doctorRepository.findByID(docid);
-             slots=doctorRepository.getslots(doctor);
+            slots=doctorRepository.getslots(doctor);
         }
         catch (Exception e)
         {
@@ -187,5 +182,7 @@ public class DoctorController {
         model.put("slots",slots);
         return "doctor/showtimings";
     }
+
+
 
 }
