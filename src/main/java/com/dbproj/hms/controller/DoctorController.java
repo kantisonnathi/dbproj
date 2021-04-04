@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import com.dbproj.hms.model.Slot.*;
 
 import java.sql.SQLException;
 import java.util.List;

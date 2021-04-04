@@ -4,10 +4,16 @@
   <meta charset="UTF-8">
   <title>Finding Nurse by ID</title>
 </head>
-<body>
+<body style="background-color:#98AFC7;">
+<h1 style="text-align:center;">Enter Nurse ID</h1>
+<hr size="10px" width="50%"  style="background-color:black;">
 <form method="post" action="/findNurseByID">
+  <br><br>
+  <div style="text-align:center">
   <input type="number" name="id" th:value="${nurseID}">
-  <button type="submit">search </button>
+    <br><br>
+    <button  type="submit">Search</button>
+  </div>
 </form>
 </body>
 </html>

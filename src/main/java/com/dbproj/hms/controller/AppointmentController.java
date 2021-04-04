@@ -94,7 +94,7 @@ public class AppointmentController {
         return "appointment/appointment";
 
     }
-
+ /*
     @GetMapping("/findDoctorByID")
     public String getByID(ModelMap model) {
         //this is the get method;
@@ -103,7 +103,7 @@ public class AppointmentController {
         model.put("id",id);
         return "appointment/findDocByID";
     }
-
+*/
 
 
 
