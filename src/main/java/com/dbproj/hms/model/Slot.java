@@ -2,12 +2,12 @@ package com.dbproj.hms.model;
 
 import java.sql.Time;
 
-public class slot {
+public class Slot {
     int id;
     Time start_time;
     Time end_time;
 
-    public slot(int slot, Time start_time, Time end_time) {
+    public Slot(int slot, Time start_time, Time end_time) {
         this.id=slot;
         this.start_time=start_time;
         this.end_time=end_time;
@@ -37,7 +37,7 @@ public class slot {
         this.end_time = end_time;
     }
 
-    public slot(){
+    public Slot(){
 
     }
 }

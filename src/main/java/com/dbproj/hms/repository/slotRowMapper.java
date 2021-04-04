@@ -1,16 +1,15 @@
 package com.dbproj.hms.repository;
 
-import com.dbproj.hms.model.Doctor;
-import com.dbproj.hms.model.slot;
+import com.dbproj.hms.model.Slot;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class slotRowMapper implements RowMapper<slot> {
+public class slotRowMapper implements RowMapper<Slot> {
     @Override
-    public slot  mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-        return new slot(resultSet.getInt("slot"),
+    public Slot mapRow(ResultSet resultSet, int rowNum) throws SQLException {
+        return new Slot(resultSet.getInt("slot"),
                 resultSet.getTime("start_time"),
                 resultSet.getTime("end_time"));
     }

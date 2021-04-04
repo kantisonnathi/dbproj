@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Book new appointment</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Slots</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="slot : ${slots}">
+        <td>
+            <p th:text="${slot.id}"></p>
+            <p th:text="${slot.start_time}"></p>
+            <p th:text="${slot.end_time}"></p>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+<form method="post">
+    <input type="hidden" name="docID" th:value="${appointment.docID}">
+    <p>Please select a timing from the above timings only</p>
+    <input type="number" name="slot" th:value="${appointment.slot}">
+    <p>Please only enter a valid patient ID</p>
+    <input type="number" name="patientID" th:value="${appointment.patientID}">
+
+    <button type="submit">Submit</button>
+
+</form>
+</body>
+</html>

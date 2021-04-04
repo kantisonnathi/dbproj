@@ -2,9 +2,31 @@ package com.dbproj.hms.model;
 
 public class Appointment {
     private Integer ID;
+
+    public Appointment(Integer docID, Integer patientID, Integer slot, String complaint, String diagnosis, String date) {
+        this.docID = docID;
+        this.patientID = patientID;
+        this.slot = slot;
+        this.complaint = complaint;
+        this.diagnosis = diagnosis;
+        this.date = date;
+    }
+    public Appointment() {
+
+    }
+
     private Integer docID;
     private Integer patientID;
-    private Integer slotID;
+    private Integer slot;
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public Integer getID() {
         return ID;
@@ -30,12 +52,12 @@ public class Appointment {
         this.patientID = patientID;
     }
 
-    public Integer getSlotID() {
-        return slotID;
+    public Integer getSlot() {
+        return slot;
     }
 
-    public void setSlotID(Integer slotID) {
-        this.slotID = slotID;
+    public void setSlot(Integer slot) {
+        this.slot = slot;
     }
 
     public String getComplaint() {
