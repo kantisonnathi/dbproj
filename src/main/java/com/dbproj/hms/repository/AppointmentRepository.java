@@ -23,4 +23,10 @@ public class AppointmentRepository {
         return list.get(list.size()-1);
     }
 
+    public Appointment findById(Integer id) {
+        String query = "select * from appointment where appointmentID=" + id;
+        List<Appointment> list = jdbcTemplate.query(query, new AppointmentRowMapper());
+        return list.get(list.size()-1);
+    }
+
 }

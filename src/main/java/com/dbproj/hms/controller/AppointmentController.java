@@ -3,6 +3,7 @@ package com.dbproj.hms.controller;
 
 import com.dbproj.hms.model.Appointment;
 import com.dbproj.hms.model.Doctor;
+import com.dbproj.hms.model.Patient;
 import com.dbproj.hms.model.Slot;
 import com.dbproj.hms.repository.AppointmentRepository;
 import com.dbproj.hms.repository.DoctorRepository;
@@ -71,11 +72,28 @@ public class AppointmentController {
             return "system/error";
         }
         modelMap.put("appointment", appointment);
-        // TODO: make corresponding html page
-        return "appointment/appointment";
+        return "redirect:/appointment/" + appointment.getID();
 
     }
 
+    @GetMapping("/appointment/{appointmentId}")
+    public String getAppointmentDetails(@PathVariable("appointmentId") Integer appointmentId, ModelMap modelMap) {
+        Appointment appointment;
+        Patient patient;
+        Doctor doctor;
+        try {
+            appointment = this.appointmentRepository.findById(appointmentId);
+            patient = this.patientRepository.findByID(appointment.getPatientID());
+            doctor = this.doctorRepository.findByID(appointment.getDocID());
+        } catch (Exception e) {
+            return "system/error";
+        }
+        modelMap.put("appointment",appointment);
+        modelMap.put("doctor",doctor);
+        modelMap.put("patient", patient);
+        return "appointment/appointment";
+
+    }
 
 
 

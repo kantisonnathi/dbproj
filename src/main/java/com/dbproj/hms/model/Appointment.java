@@ -3,7 +3,8 @@ package com.dbproj.hms.model;
 public class Appointment {
     private Integer ID;
 
-    public Appointment(Integer docID, Integer patientID, Integer slot, String complaint, String diagnosis, String date) {
+    public Appointment(Integer ID,Integer docID, Integer patientID, Integer slot, String complaint, String diagnosis, String date) {
+        this.ID = ID;
         this.docID = docID;
         this.patientID = patientID;
         this.slot = slot;

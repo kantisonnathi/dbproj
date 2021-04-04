@@ -9,7 +9,8 @@ import java.sql.SQLException;
 public class AppointmentRowMapper implements RowMapper<Appointment> {
     @Override
     public Appointment mapRow(ResultSet resultSet, int i) throws SQLException {
-        return new Appointment(resultSet.getInt("docid"),
+        return new Appointment(resultSet.getInt("appointmentID"),
+                resultSet.getInt("docid"),
                 resultSet.getInt("patientid"),
                 resultSet.getInt("slot"),
                 resultSet.getString("complaints"),
