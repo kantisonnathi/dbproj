@@ -4,11 +4,14 @@ package com.dbproj.hms.repository;
 import com.dbproj.hms.model.Doctor;
 import com.dbproj.hms.model.Employee;
 import com.dbproj.hms.model.NMP;
+import com.dbproj.hms.model.slot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.DataRetrievalFailureException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+
+import javax.print.Doc;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -69,6 +72,12 @@ public class DoctorRepository {
          query="update doctor set doc_type='"+doctor.getDocType()+"'where docid="+ doctor.getID();
          jdbcTemplate.update(query);
         return doctor;
+    }
+    //to get slot numbers of  appointment numbers when docid is given
+    public List<slot> getslots(Doctor doctor) throws DataAccessException{
+        String query="select * from time_slots where slot not in(select slot from appointment where docid="+ doctor.getID() +")";
+        List<slot> slot= jdbcTemplate.query(query, new slotRowMapper());
+        return slot;
     }
 }
 

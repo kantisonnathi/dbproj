@@ -1,9 +1,7 @@
 package com.dbproj.hms.controller;
 
 
-import com.dbproj.hms.model.Doctor;
-import com.dbproj.hms.model.Employee;
-import com.dbproj.hms.model.NMP;
+import com.dbproj.hms.model.*;
 import com.dbproj.hms.repository.DoctorRepository;
 import com.dbproj.hms.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -172,6 +170,22 @@ public class DoctorController {
             return "system/error";
         }
         return "redirect:/doc/"+doctor.getID();
+    }
+    @GetMapping("/doc/{docid}/timings")
+    public String getBookappontment(@PathVariable("docid") Integer docid,ModelMap model){
+        Doctor doctor;
+        slot slot;
+        List<slot> slots;
+        try{
+            doctor=doctorRepository.findByID(docid);
+             slots=doctorRepository.getslots(doctor);
+        }
+        catch (Exception e)
+        {
+            return "system/error";
+        }
+        model.put("slots",slots);
+        return "doctor/showtimings";
     }
 
 }
