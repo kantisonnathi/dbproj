@@ -3,12 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
+    <style>
+ .alignleft {	float: left;font-size:40px;}
+.alignright {	float: right;font-size:40px;}
+.aligncenter{float:center; font-size:40px;}
+</style>
 </head>
-<body>
+<body style="background-color:#98AFC7;">
 
-<p>This page is for navigating to other pages
-</p>
-<a href="/findDoctorByID">Query Doctor By ID</a>
+<h1 style="text-align:center; font-size:50px;">Menu Page</h1>
+<div id="textbox" style="clear:both font-size:40px;">
+    <h2 class="alignleft">Doctor Details</h2>
+    <h2 class="alignright">NMP Details</h2>
+    <h2 class="aligncenter">Nurse Details</h2>
+</div>
+<a href="/findDoctorByID" style="margin:10px">Query Doctor By ID</a>
 <br>
 <a href="/findDoctorByName">Query Doctor By Name</a>
 <br>

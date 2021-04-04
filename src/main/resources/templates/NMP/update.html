@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <title>Create New NMP</title>
 </head>
-<body>
+<body style="background-color:#98AFC7;">
+<h1 style="text-align:center;">Update NMP Details</h1>
+<hr size="10px" width="50%"  style="background-color:black;">
+<div class="form">
 <form method="post">
     <!-- what shit do we need to input here -->
     <input type="hidden" name="id" th:field="${nmp.ID}"/>
@@ -13,33 +16,55 @@
     <input type="hidden" name="empid" th:field="${emp.ID}"/>
     <label>Name</label>
     <input type="text" name="name" th:field="${emp.name}">
-    <br>
+    <br><br>
     <label>Username</label>
     <input type="text" name="username" th:field="${emp.username}">
-    <br>
+    <br><br>
     <label>Password</label>
     <input type="password" name="password" th:field="${emp.password}">
-    <br>
+    <br><br>
     <label>Salary</label>
     <input type="number" name="salary" th:field="${emp.salary}">
-    <br>
+    <br><br>
     <label>Phone Number</label>
     <input type="text" name="phoneNumber" th:field="${emp.phoneNumber}">
-    <br>
+    <br><br>
     <label>Gender</label>
     <input type="text" name="gender" th:field="${emp.gender}">
-    <br>
+    <br><br>
     <label>Email</label>
     <input type="email" name="email" th:field="${emp.email}">
-    <br>
+    <br><br>
     <label>Address</label>
     <input type="text" name="address" th:field="${emp.address}">
-    <br>
+    <br><br>
     <label>Title of NMP</label>
     <input type="text" name="title" th:field="${nmp.title}">
-    <br>
-    <button type="submit">Save Non medical professional</button>
-    <!--address and all idk I'll add later this is just for initial testing -->
+    <br><br>
+    <div style="text-align:center; font-size:20px">
+        <button type="submit">Update</button>
+    </div>
 </form>
+</div>
+<!--address and all idk I'll add later this is just for initial testing -->
 </body>
 </html>
+<style type="text/css">
+	.form {
+		margin: 0 auto;
+		width: 325px;
+	}
+
+	.form label{
+		display: inline-block;
+		text-align: right;
+		float: left;
+		font-size:20px;
+	}
+
+	.form input{
+		display: inline-block;
+		text-align: left;
+		float: right;
+	}
+</style>

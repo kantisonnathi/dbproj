@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <title>Query By Speciality</title>
 </head>
-<body>
-
-<p>Querying doctors based on their speciality</p>
+<body style="background-color:#98AFC7;">
+<h1 style="text-align:center;">Enter Speciality</h1>
+<hr size="10px" width="50%" style="background-color:black;">
 <form method="post">
+    <br>
+    <br>
+    <div style="text-align:center">
     <input type="text" name="speciality" th:value="${speciality}">
-    <button type="submit">Search Doctors</button>
+        <br><br>
+    <button type="submit">Search</button>
+    </div>
 </form>
 
 </body>

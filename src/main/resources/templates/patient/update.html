@@ -5,31 +5,57 @@
     <meta charset="UTF-8">
     <title>Update Patient</title>
 </head>
-<body>
+<body style="background-color:#98AFC7;">
+<h1 style="text-align:center;">Update Patient Details</h1>
+<hr size="10px" width="50%"  style="background-color:black;">
+<div class="form">
     <form method="post">
         <input type="hidden" name="patientID" th:field="${patient.patientID}">
         <label>Name</label>
         <input type="text" name="patientName" th:field="${patient.patientName}">
-        <br>
+        <br><br>
         <label>Age</label>
         <input type="number" name="age" th:field="${patient.age}">
-        <br>
+        <br><br>
         <label>Gender</label>
         <input type="text" name="gender" th:field="${patient.gender}">
-        <br>
+        <br><br>
         <label>Medical Details</label>
         <input type="text" name="medicalDetails" th:field="${patient.medicalDetails}">
-        <br>
+        <br><br>
         <label>Phone Number</label>
         <input type="text" name="phno" th:field="${patient.phno}">
-        <br>
+        <br><br>
         <label>Email</label>
         <input type="email" name="email" th:field="${patient.email}">
-        <br>
+        <br><br>
         <label>Address</label>
         <input type="text" name="address" th:field="${patient.address}">
-        <br>
-        <button type="submit">Update Patient</button>
+        <br><br>
+        <div style="text-align:center; font-size:20px">
+            <button type="submit">Update</button>
+        </div>
     </form>
+    </div>
+    <!--address and all idk I'll add later this is just for initial testing -->
 </body>
 </html>
+<style type="text/css">
+	.form {
+		margin: 0 auto;
+		width: 325px;
+	}
+
+	.form label{
+		display: inline-block;
+		text-align: right;
+		float: left;
+		font-size:20px;
+	}
+
+	.form input{
+		display: inline-block;
+		text-align: left;
+		float: right;
+	}
+</style>

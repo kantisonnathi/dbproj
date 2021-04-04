@@ -4,15 +4,18 @@
     <meta charset="UTF-8">
     <title>Doctor</title>
 </head>
-<body>
+<body style="background-color:#98AFC7;">
+<h1 style="text-align:center;">Doctor Details</h1>
+<hr size="10px" width="50%"  style="background-color:black;">
 <!-- add whatever details we need to display for doctor -->
-<p th:text="${doctor.ID}"></p>
-<p th:text="${employee.name}"></p>
-<p th:text="${doctor.speciality}"></p>
-<p th:text="${employee.address}"></p>
-<a th:href="@{__${doctor.ID}__/delete}">delete</a>
-<a th:href="@{__${doctor.ID}__/update}">Update</a>
-<a th:href="@{__${doctor.ID}__/timings}">Show Timings</a>
-
+<p>DoctorID  : <span th:text="${doctor.ID}"></span></p>
+<p>Name      : <span th:text="${employee.name}"></span></p>
+<p>Speciality: <span th:text="${doctor.speciality}"></span></p>
+<p>Address   : <span th:text="${employee.address}"></span></p>
+<div style="text-align:center;">
+<a style="background-color:#D1D0CE; font-size:20px;margin:5px;" th:href="@{__${doctor.ID}__/delete}"> Delete </a>
+<a style="background-color:#D1D0CE; font-size:20px;margin:5px;" th:href="@{__${doctor.ID}__/update}"> Update </a>
+<a style="background-color:#D1D0CE; font-size:20px;margin:5px;" th:href="@{__${doctor.ID}__/timings}"> Show Timings </a>
+</div>
 </body>
 </html>
