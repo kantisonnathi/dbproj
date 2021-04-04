@@ -46,7 +46,7 @@ public class DoctorRepository {
     //To add a doctor to the employee repository
     public void save(Doctor doctor) throws DataAccessException,SQLException {
         String query="insert into employee(empname,username,password,gender,salary,phno,email,address,authorization ,verify) values('"+ doctor.getName()+"','"+doctor.getUsername()+"','"+doctor.getPassword()+"','"+doctor.getGender()+"','"
-        +doctor.getSalary()+"','"+doctor.getPhoneNumber()+"','"+doctor.getEmail()+"','"+doctor.getAddress()+"','"+doctor.getAuthorization()+"','"+doctor.getVerify()+"')";
+        +doctor.getSalary()+"','"+doctor.getPhoneNumber()+"','"+doctor.getEmail()+"','"+doctor.getAddress()+"','"+doctor.getAuthorization()+"',1)";
         jdbcTemplate.update(query);
         query="select * from employee where username= '"+doctor.getUsername()+"'";
         List<Employee> l=jdbcTemplate.query(query,new EmployeeRowMapper());

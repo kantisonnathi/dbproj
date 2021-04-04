@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Returning appointments</title>
+</head>
+<body>
+
+<table>
+    <thead>
+    <tr>
+        <th>Appointment ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="appointment : ${appointments}">
+        <td>
+            <a th:href="@{/appointment/__${appointment.ID}__}" th:text="${appointment.ID}"></a>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>

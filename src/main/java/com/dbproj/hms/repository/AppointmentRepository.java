@@ -29,4 +29,10 @@ public class AppointmentRepository {
         return list.get(list.size()-1);
     }
 
+    public List<Appointment> findByDocId(Integer id){
+        String query = "select * from appointment where docid=" + id;
+        List<Appointment> list = jdbcTemplate.query(query, new AppointmentRowMapper());
+        return list;
+    }
+
 }

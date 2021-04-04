@@ -94,17 +94,20 @@ public class AppointmentController {
         return "appointment/appointment";
 
     }
- /*
-    @GetMapping("/findDoctorByID")
-    public String getByID(ModelMap model) {
-        //this is the get method;
-        //post, we get the doctor and show page ez
-        Integer id = 0;
-        model.put("id",id);
-        return "appointment/findDocByID";
-    }
-*/
 
+    @GetMapping("/doc/{docid}/listAppointments")
+    public String getAppointmentList(@PathVariable("docid") Integer docid, ModelMap modelMap){
+        List<Appointment> appointmentList;
+        //Patient patient;
+        //Doctor doctor;
+        try {
+            appointmentList = this.appointmentRepository.findByDocId(docid);
+        } catch (Exception e){
+            return "system/error";
+        }
+        modelMap.put("appointments", appointmentList);
+        return "appointment/listResult";
+    }
 
 
 
