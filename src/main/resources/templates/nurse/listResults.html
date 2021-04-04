@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <title>Nurses</title>
 </head>
-<body>
-<p th:text="${title}"></p>
-<table>
+<body style="background-color:#98AFC7;">
+<h1 style="text-align:center;">List of NurseIDs</h1>
+<hr size="10px" width="50%"  style="background-color:black;">
+<br>
+<!--<p th:text="${title}"></p>-->
+<table class="center">
     <thead>
     <tr>
-        <th>Nurse ID</th>
+        <th style="font-size:20px;" >Nurse ID</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="nur : ${nurses}">
-        <td>
+        <td style="text-align:center">
             <a th:href="@{/nur/__${nur.nurseID}__}" th:text="${nur.nurseID}"></a>
         </td>
     </tr>
@@ -24,3 +27,16 @@
 
 </body>
 </html>
+<style>
+table, th, td {
+  width:100px;
+  size:20px;
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
