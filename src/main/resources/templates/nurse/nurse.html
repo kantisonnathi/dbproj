@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nurses</title>
+</head>
+<body>
+
+<p th:text="${nurse.nurseID}"></p>
+<p th:text="${employee.name}"></p>
+
+<a th:href="@{/nur/__${nurse.nurseID}__/delete}">delete this nurse from database</a>
+<a th:href="@{/nur/__${nurse.nurseID}__/update}">Update this nurse in database</a>
+</body>
+</html>

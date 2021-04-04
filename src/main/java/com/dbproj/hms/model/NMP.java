@@ -41,7 +41,7 @@ public class NMP extends Employee{
     }
 
     public void setAuthorization() {
-        String authorization="ROLE_USER"; //@Sahithi, should I keep admin?
+        String authorization="ROLE_ADMIN"; //@Sahithi, should I keep admin?
         super.setAuthorization(authorization);
     }
 }
