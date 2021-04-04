@@ -95,6 +95,17 @@ public class AppointmentController {
 
     }
 
+    @GetMapping("/findDoctorByID")
+    public String getByID(ModelMap model) {
+        //this is the get method;
+        //post, we get the doctor and show page ez
+        Integer id = 0;
+        model.put("id",id);
+        return "appointment/findDocByID";
+    }
+
+
+
 
 
 }
