@@ -6,8 +6,10 @@
 </style>
     <meta charset="UTF-8">
     <title>add doctor</title>
-    <h1>New Doctor </h1>
+    <h1 style="text-align:center;">New Doctor Details</h1>
+    <hr size="10px" width="50%"  style="background-color:black;">
     <br>
+    <div class="form">
     <form method="post">
            <label>Name</label>
             <input type="text" name="name" th:value="${name}">
@@ -45,8 +47,28 @@
         <button style="text-align:center;" type="submit">Submit </button>
         <br><br>
     </form>
+    </div>
 </head>
-<body>
+<body style="background-color:#98AFC7;">
 
 </body>
 </html>
+<style type="text/css">
+	.form {
+		margin: 0 auto;
+		width: 325px;
+	}
+
+	.form label{
+		display: inline-block;
+		text-align: right;
+		float: left;
+		font-size:20px;
+	}
+
+	.form input{
+		display: inline-block;
+		text-align: left;
+		float: right;
+	}
+</style>
