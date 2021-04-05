@@ -57,11 +57,11 @@ public class AppointmentController {
     }
 
     @PostMapping("/doc/{docid}/bookAppointment")
-    public String postBookAppointment(Appointment appointment, ModelMap modelMap) {
+    public String postBookAppointment(Appointment appointment, Patient patient, ModelMap modelMap) {
         //first check if patient is valid
         Boolean valid;
         try {
-            this.patientRepository.findByID(appointment.getPatientID());
+            patient = this.patientRepository.findByPhnoAndName(patient.getPhno(), patient.getPatientName());
             Doctor doctor = this.doctorRepository.findByID(appointment.getDocID());
             valid = this.employeeRepository.isEmpOnLeave(doctor.getEmpID(),appointment.getDate());
         } catch (SQLException throwables) {
@@ -74,6 +74,7 @@ public class AppointmentController {
         }
         //valid patient. woohoo
         try {
+            appointment.setPatientID(patient.getPatientID());
             appointment = this.appointmentRepository.save(appointment);
         } catch (Exception e) {
             return "system/error";
@@ -129,25 +130,25 @@ public class AppointmentController {
         return "appointment/listResult";
     }
 
-@GetMapping("/transaction")
-public String getpatientdetails(ModelMap model)
-{
-  Patient patient=new Patient();
-  model.put("patient",patient);
-  return "appointment/transaction";
-}
-@PostMapping("/transaction}")
-public String postfinalcost(@PathVariable("patientID") Integer patientId,ModelMap model) throws SQLException {
-Patient patient=new Patient();
-    try {
-        patient= patientRepository.findByID(patientId);
-    } catch (DataAccessException e) {
-        e.printStackTrace();
-    } catch (SQLException throwables) {
-        throwables.printStackTrace();
+    @GetMapping("/transaction")
+    public String getpatientdetails(ModelMap model) {
+        Patient patient=new Patient();
+        model.put("patient",patient);
+        return "appointment/transaction";
     }
-    model.put("patient",patient);
-    return "appointment/display";
-}
+
+    @PostMapping("/transaction}")
+    public String postfinalcost(@PathVariable("patientID") Integer patientId,ModelMap model) throws SQLException {
+        Patient patient=new Patient();
+        try {
+            patient= patientRepository.findByID(patientId);
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+        model.put("patient",patient);
+        return "appointment/display";
+    }
 
 }

@@ -61,4 +61,11 @@ public class PatientRepository {
         patient=jdbcTemplate.query(query,new PatientRowMapper());
         return patient.get(0);
     }
+
+    public Patient findByPhnoAndName(String phno, String name) {
+        List<Patient> patient;
+        String query="select * from patient where phno='"+ phno +"' and patientName='"+ name + "'";
+        patient=jdbcTemplate.query(query,new PatientRowMapper());
+        return patient.get(0);
+    }
 }
