@@ -1,11 +1,14 @@
 package com.dbproj.hms.repository;
 
 import com.dbproj.hms.model.Appointment;
+import com.dbproj.hms.model.Doctor;
+import com.dbproj.hms.model.Patient;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCallback;
 import org.springframework.jdbc.core.PreparedStatementSetter;
+import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
@@ -59,6 +62,12 @@ public class AppointmentRepository {
         String query = "select * from appointment where patientid=" + id;
         List<Appointment> list = jdbcTemplate.query(query, new AppointmentRowMapper());
         return list;
+    }
+
+    public List<Doctor> getprice(Integer patientID)
+    {
+        String query="select * from doctor where docid in(select docid from appointments where billed=True and patientid="+patientID;
+        return jdbcTemplate.query(query,new DoctorRowMapper());
     }
 
 }
