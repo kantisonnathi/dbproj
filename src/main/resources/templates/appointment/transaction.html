@@ -5,11 +5,16 @@
     <meta charset="UTF-8">
     <title>Generate Bill</title>
 </head>
-<body>
+<body style="background-color:#98AFC7; text-align:center;">
+<h1 style="text-align:center;">Transaction Details</h1>
+<hr size="10px" width="50%"  style="background-color:black;">
+<br><br>
 <label>Enter patient name</label>
 <input type="text" name="patientID" th:value="${patientID}">
+<br><br>
 <label>Enter phone Number</label>
 <input type="text" name="patientName" th:value="${patientName}">
+<br><br>
 <button typ="submit">Go to final bill</button>
 </body>
 </html>

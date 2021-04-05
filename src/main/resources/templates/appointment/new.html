@@ -1,19 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>Book new appointment</title>
 </head>
-<body>
-<table>
+<body style="background-color:#98AFC7; text-align:center;">
+<h1 style="text-align:center;">Appointment</h1>
+<hr size="10px" width="50%"  style="background-color:black;">
+<br>
+<table class="center">
     <thead>
     <tr>
-        <th>Slots</th>
+        <th style="font-size:20px;">Slots</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="slot : ${slots}">
-        <td>
+        <td style="text-align:center">
             <p th:text="${slot.id}"></p>
             <p th:text="${slot.start_time}"></p>
             <p th:text="${slot.end_time}"></p>
@@ -22,23 +25,63 @@
     </tbody>
 
 </table>
+<div class="form">
 <form method="post">
     <input type="hidden" name="docID" th:value="${appointment.docID}">
-    <p>Please select a timing from the above timings only</p>
-    <input type="number" name="slot" th:value="${appointment.slot}">
-    <p>Please only enter a valid patient Name</p>
-    <input type="text" name="patientName" th:value="${patient.patientName}">
-    <p>Please enter patient phone number</p>
-    <input type="text" name="phno" th:value="${patient.phno}">
-    <p>Enter your complaint: </p>
-    <input type="text" name="complaint" th:value="${appointment.complaint}">
-    <p>Enter diagnosis (after appointment terminates)</p>
-    <input type="text" name="diagnosis" th:value="${appointment.diagnosis}">
-    <p>Enter date</p>
-    <input type="date" name="date" th:value="${appointment.date}">
+    <p>*NOTE*:Please select a timing from the above timings only</p>
+    <p>Preferred Slot Timing:<span>
+        <input type="number" name="slot" th:value="${appointment.slot}"></span></p>
+    <p>Patient Name:<span>
+        <input type="text" name="patientName" th:value="${patient.patientName}"></span></p>
+    <p>Patient phone number:<span>
+        <input type="text" name="phno" th:value="${patient.phno}"></span></p>
+    <p>Enter your complaint:<span>
+        <input type="text" name="complaint" th:value="${appointment.complaint}"></span></p>
+    <p>Enter diagnosis:<span>
+    <input type="text" name="diagnosis" th:value="${appointment.diagnosis}"></span></p>
+    <!--(after appointment terminates)-->
+    <p>Enter date:<span>
+        <input type="date" name="date" th:value="${appointment.date}"></span></p>
     <br>
     <button type="submit">Submit</button>
 
 </form>
+</div>
 </body>
 </html>
+<style>
+table, th, td {
+  width:100px;
+  size:20px;
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+<style type="text/css">
+	.form {
+		margin: 0 auto;
+		width: 325px;
+	}
+
+	.form label{
+		display: inline-block;
+		text-align: right;
+		float: left;
+		font-size:20px;
+	}
+
+	.form input{
+		display: inline-block;
+		text-align: left;
+		float: right;
+	}
+	.form button{
+	display:inline-block;
+	text-align:center;
+	}
+</style>
