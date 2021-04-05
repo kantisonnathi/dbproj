@@ -1,10 +1,7 @@
 package com.dbproj.hms.controller;
 
 
-import com.dbproj.hms.model.Appointment;
-import com.dbproj.hms.model.Doctor;
-import com.dbproj.hms.model.Patient;
-import com.dbproj.hms.model.Slot;
+import com.dbproj.hms.model.*;
 import com.dbproj.hms.repository.AppointmentRepository;
 import com.dbproj.hms.repository.DoctorRepository;
 import com.dbproj.hms.repository.EmployeeRepository;
@@ -40,6 +37,7 @@ public class AppointmentController {
     @GetMapping("/doc/{docid}/bookAppointment")
     public String getBookAppointment(@PathVariable("docid") Integer docid, ModelMap modelMap) {
         Doctor doctor;
+        Patient patient = new Patient();
         List<Slot> slots;
         try {
             doctor=doctorRepository.findByID(docid);
@@ -51,6 +49,7 @@ public class AppointmentController {
         Appointment appointment = new Appointment();
         appointment.setDocID(doctor.getID());
         modelMap.put("slots",slots);
+        modelMap.put("patient",patient);
         modelMap.put("doctor",doctor);
         modelMap.put("appointment",appointment);
         return "appointment/new";
@@ -59,10 +58,17 @@ public class AppointmentController {
     @PostMapping("/doc/{docid}/bookAppointment")
     public String postBookAppointment(Appointment appointment, ModelMap modelMap) {
         //first check if patient is valid
+        Boolean valid;
         try {
             this.patientRepository.findByID(appointment.getPatientID());
+            Doctor doctor = this.doctorRepository.findByID(appointment.getDocID());
+            valid = this.employeeRepository.isEmpOnLeave(doctor.getEmpID(),appointment.getDate());
         } catch (SQLException throwables) {
             //no patient. for now just error yourself
+            return "system/error";
+        }
+        if (valid) {
+            //welp. error yourself - emp on leave. create page for that
             return "system/error";
         }
         //valid patient. woohoo
@@ -88,6 +94,7 @@ public class AppointmentController {
         } catch (Exception e) {
             return "system/error";
         }
+
         modelMap.put("appointment",appointment);
         modelMap.put("doctor",doctor);
         modelMap.put("patient", patient);

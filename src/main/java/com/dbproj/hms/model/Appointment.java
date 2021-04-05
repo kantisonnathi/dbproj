@@ -1,11 +1,12 @@
 package com.dbproj.hms.model;
 
 import java.io.Serializable;
+import java.sql.Date;
 
 public class Appointment implements Serializable {
     private Integer ID;
 
-    public Appointment(Integer ID,Integer docID, Integer patientID, Integer slot, String complaint, String diagnosis, String date) {
+    public Appointment(Integer ID,Integer docID, Integer patientID, Integer slot, String complaint, String diagnosis, Date date) {
         this.ID = ID;
         this.docID = docID;
         this.patientID = patientID;
@@ -21,13 +22,13 @@ public class Appointment implements Serializable {
     private Integer docID;
     private Integer patientID;
     private Integer slot;
-    private String date;
+    private Date date;
 
-    public String getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(String date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 

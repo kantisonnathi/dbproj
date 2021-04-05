@@ -5,9 +5,11 @@ import com.dbproj.hms.model.NMP;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -47,6 +49,24 @@ public class EmployeeRepository {
                 nmp.getAuthorization() + "', verify=" + nmp.getAuthorization() + " where EmpID=" + nmp.getID();
         jdbcTemplate.update(query);
         return nmp;
+    }
+
+    public Boolean isEmpOnLeave(Integer empID, Date date) {
+        String query = "select empID from emp_on_leave where date='" + date + "' and empID=" + empID;
+        List<Integer> list = jdbcTemplate.query(query, new ResultSetExtractor<List<Integer>>() {
+            @Override
+            public List<Integer> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                List<Integer> list = new ArrayList<>();
+                while (resultSet.next()) {
+                    list.add(resultSet.getInt("empID"));
+                }
+                return list;
+            }
+        });
+        if (list.isEmpty()) {
+            return false;
+        }
+        return true;
     }
 
 

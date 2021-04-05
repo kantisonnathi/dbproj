@@ -23,9 +23,9 @@ public class AppointmentRepository {
                 " values (" + appointment.getDocID() + "," + appointment.getPatientID() + ", " + appointment.getSlot()
                  + ",'" + appointment.getComplaint() + "','" + appointment.getDiagnosis() + "', " + appointment.getDate()+")";
         jdbcTemplate.update(query);*/
-        String query = "insert into appointment (docid, patientid, slot, complaints, diagnosis) values (?,?,?,?,?)";
+        String query = "insert into appointment (docid, patientid, slot, complaints, diagnosis, appointment_date) values (?,?,?,?,?,?)";
         jdbcTemplate.update(query,appointment.getDocID(), appointment.getPatientID(), appointment.getSlot(), appointment.getComplaint(),
-                appointment.getDiagnosis());
+                appointment.getDiagnosis(), appointment.getDate());
         /*jdbcTemplate.update(query, new PreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement preparedStatement) throws SQLException {

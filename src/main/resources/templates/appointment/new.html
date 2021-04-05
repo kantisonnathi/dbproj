@@ -26,12 +26,16 @@
     <input type="hidden" name="docID" th:value="${appointment.docID}">
     <p>Please select a timing from the above timings only</p>
     <input type="number" name="slot" th:value="${appointment.slot}">
-    <p>Please only enter a valid patient ID</p>
-    <input type="number" name="patientID" th:value="${appointment.patientID}">
+    <p>Please only enter a valid patient Name</p>
+    <input type="text" name="patientName" th:value="${patient.patientName}">
+    <p>Please enter patient phone number</p>
+    <input type="text" name="phno" th:value="${patient.phno}">
     <p>Enter your complaint: </p>
     <input type="text" name="complaint" th:value="${appointment.complaint}">
     <p>Enter diagnosis (after appointment terminates)</p>
     <input type="text" name="diagnosis" th:value="${appointment.diagnosis}">
+    <p>Enter date</p>
+    <input type="date" name="date" th:value="${appointment.date}">
     <br>
     <button type="submit">Submit</button>
 
