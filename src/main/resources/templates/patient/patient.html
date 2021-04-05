@@ -4,18 +4,17 @@
     <meta charset="UTF-8">
     <title>Patient</title>
 </head>
-<body>
-
-<p th:text="${patient.patientID}"></p>
-<p th:text="${patient.patientName}"></p>
-<p th:text="${patient.age}"></p>
-<p th:text="${patient.gender}"></p>
-<p th:text="${patient.medicalDetails}"></p>
-
-<br>
-<a href="/patient/new">Delete Patient</a>
-<br>
-<a th:href="@{/patient/__${patient.patientID}__/update}">Update patient information</a>
-
+<body style="background-color:#98AFC7; text-align:center;">
+<h1 style="text-align:center;">Patient Details</h1>
+<hr size="10px" width="50%"  style="background-color:black;">
+<p>PatientID  : <span th:text="${patient.patientID}"></span></p>
+<p>Name      : <span th:text="${patient.patientName}"></span></p>
+<p>Age       : <span th:text="${patient.age}"></span></p>
+<p>Gender   : <span th:text="${patient.gender}"></span></p>
+<p>Medical Details   : <span th:text="${patient.medicalDetails}"></span></p>
+<div style="text-align:center;">
+    <a style="background-color:#D1D0CE; font-size:20px;margin:5px;" th:href="/patient/new"> Delete </a>
+    <a style="background-color:#D1D0CE; font-size:20px;margin:5px;" th:href="@{/patient/__${patient.patientID}__/update}"> Update </a>
+</div>
 </body>
 </html>

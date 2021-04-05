@@ -5,10 +5,16 @@
     <meta charset="UTF-8">
     <title>Query Patients By Name</title>
 </head>
-<body>
+<body style="background-color:#98AFC7;">
+<h1 style="text-align:center;">Enter Patient Name</h1>
+<hr size="10px" width="50%"  style="background-color:black;">
 <form method="post">
+    <br><br>
+    <div style="text-align:center">
     <input type="text" name="name" th:value="${patientName}">
-    <button type="submit">Search Patients</button>
+        <br><br>
+        <button  type="submit">Search</button>
+    </div>
 </form>
 </body>
 </html>

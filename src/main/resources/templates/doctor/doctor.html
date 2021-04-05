@@ -4,14 +4,16 @@
     <meta charset="UTF-8">
     <title>Doctor</title>
 </head>
-<body style="background-color:#98AFC7;">
+<body style="background-color:#98AFC7; text-align:center;">
 <h1 style="text-align:center;">Doctor Details</h1>
 <hr size="10px" width="50%"  style="background-color:black;">
+<br>
 <!-- add whatever details we need to display for doctor -->
 <p>DoctorID  : <span th:text="${doctor.ID}"></span></p>
 <p>Name      : <span th:text="${employee.name}"></span></p>
 <p>Speciality: <span th:text="${doctor.speciality}"></span></p>
 <p>Address   : <span th:text="${employee.address}"></span></p>
+<br>
 <div style="text-align:center;">
 <a style="background-color:#D1D0CE; font-size:20px;margin:5px;" th:href="@{__${doctor.ID}__/delete}"> Delete </a>
 <a style="background-color:#D1D0CE; font-size:20px;margin:5px;" th:href="@{__${doctor.ID}__/update}"> Update </a>

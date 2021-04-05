@@ -4,11 +4,13 @@
     <meta charset="UTF-8">
     <title>Nurses</title>
 </head>
-<body style="background-color:#98AFC7;">
+<body style="background-color:#98AFC7; text-align:center;">
 <h1 style="text-align:center;">Nurse Details</h1>
 <hr size="10px" width="50%"  style="background-color:black;">
+<br>
 <p>NurseID  : <span th:text="${nurse.nurseID}"></span></p>
 <p>Name      : <span th:text="${employee.name}"></span></p>
+<br>
 <div style="text-align:center;">
     <a style="background-color:#D1D0CE; font-size:20px;margin:5px;" th:href="@{/nur/__${nurse.nurseID}__/delete}"> Delete </a>
     <a style="background-color:#D1D0CE; font-size:20px;margin:5px;" th:href="@{/nur/__${nurse.nurseID}__/update}"> Update </a>
