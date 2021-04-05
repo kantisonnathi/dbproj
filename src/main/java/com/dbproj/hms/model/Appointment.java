@@ -1,6 +1,8 @@
 package com.dbproj.hms.model;
 
-public class Appointment {
+import java.io.Serializable;
+
+public class Appointment implements Serializable {
     private Integer ID;
 
     public Appointment(Integer ID,Integer docID, Integer patientID, Integer slot, String complaint, String diagnosis, String date) {

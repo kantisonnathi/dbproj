@@ -28,7 +28,11 @@
     <input type="number" name="slot" th:value="${appointment.slot}">
     <p>Please only enter a valid patient ID</p>
     <input type="number" name="patientID" th:value="${appointment.patientID}">
-
+    <p>Enter your complaint: </p>
+    <input type="text" name="complaint" th:value="${appointment.complaint}">
+    <p>Enter diagnosis (after appointment terminates)</p>
+    <input type="text" name="diagnosis" th:value="${appointment.diagnosis}">
+    <br>
     <button type="submit">Submit</button>
 
 </form>

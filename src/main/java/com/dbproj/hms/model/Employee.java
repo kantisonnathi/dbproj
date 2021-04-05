@@ -1,7 +1,9 @@
 package com.dbproj.hms.model;
 
 
-public class Employee {
+import java.io.Serializable;
+
+public class Employee implements Serializable {
 
     static Integer IDValue = 1;
 
