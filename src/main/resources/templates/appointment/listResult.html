@@ -5,17 +5,19 @@
     <meta charset="UTF-8">
     <title>Returning appointments</title>
 </head>
-<body>
-
-<table>
+<body style="background-color:#98AFC7; text-align:center;">
+<h1 style="text-align:center;">Appointment Details</h1>
+<hr size="10px" width="50%"  style="background-color:black;">
+<br>
+<table class="center">
     <thead>
     <tr>
-        <th>Appointment ID</th>
+        <th style="font-size:20px;">Appointment ID</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="appointment : ${appointments}">
-        <td>
+        <td style="text-align:center">
             <a th:href="@{/appointment/__${appointment.ID}__}" th:text="${appointment.ID}"></a>
         </td>
     </tr>
@@ -25,3 +27,16 @@
 
 </body>
 </html>
+<style>
+table, th, td {
+  width:100px;
+  size:20px;
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>

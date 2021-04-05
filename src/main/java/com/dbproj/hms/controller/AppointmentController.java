@@ -137,19 +137,18 @@ public String getpatientdetails(ModelMap model)
   model.put("patient",patient);
   return "appointment/transaction";
 }
-@PostMapping("/transaction")
-public String postfinalcost(Patient patient, ModelMap model) throws SQLException {
+@PostMapping("/transaction}")
+public String postfinalcost(@PathVariable("patientID") Integer patientId,ModelMap model) throws SQLException {
+Patient patient=new Patient();
     try {
-        patient=patientRepository.findByPhnoAndName(patient.getPhno(),patient.getPatientName());
+        patient= patientRepository.findByID(patientId);
     } catch (DataAccessException e) {
-       return "system/error";
+        e.printStackTrace();
+    } catch (SQLException throwables) {
+        throwables.printStackTrace();
     }
     model.put("patient",patient);
     return "appointment/display";
 }
-@GetMapping("/transaction/{patientID}")
-public String getlist(@PathVariable("patientID") Integer patientId ,ModelMap modelMap)
-{
 
-}
 }
