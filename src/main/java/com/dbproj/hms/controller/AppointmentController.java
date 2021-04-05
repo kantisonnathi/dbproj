@@ -57,11 +57,11 @@ public class AppointmentController {
     }
 
     @PostMapping("/doc/{docid}/bookAppointment")
-    public String postBookAppointment(Appointment appointment, ModelMap modelMap) {
+    public String postBookAppointment(Appointment appointment, Patient patient, ModelMap modelMap) {
         //first check if patient is valid
         Boolean valid;
         try {
-            this.patientRepository.findByID(appointment.getPatientID());
+            patient = this.patientRepository.findByPhnoAndName(patient.getPhno(), patient.getPatientName());
             Doctor doctor = this.doctorRepository.findByID(appointment.getDocID());
             valid = this.employeeRepository.isEmpOnLeave(doctor.getEmpID(),appointment.getDate());
         } catch (SQLException throwables) {
@@ -74,6 +74,7 @@ public class AppointmentController {
         }
         //valid patient. woohoo
         try {
+            appointment.setPatientID(patient.getPatientID());
             appointment = this.appointmentRepository.save(appointment);
         } catch (Exception e) {
             return "system/error";
