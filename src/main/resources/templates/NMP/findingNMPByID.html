@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <title>Query By ID</title>
 </head>
-<body>
-
+<body style="background-color:#98AFC7;">
+<h1 style="text-align:center;">Enter NMP ID</h1>
+<hr size="10px" width="50%"  style="background-color:black;">
+<form method="post" action="/findDoctorByID">
+    <br><br>
+    <div style="text-align:center">
 <form method="post">
     <input type="number" name="id" th:value="${id}">
-    <button type="submit">Search Non medical Professionals</button>
+    <br><br>
+    <button type="submit">Search</button>
 </form>
-
+    </div>
 </body>
 </html>

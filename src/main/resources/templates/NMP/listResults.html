@@ -4,17 +4,20 @@
     <meta charset="UTF-8">
     <title>Non-medical professionals</title>
 </head>
-<body>
-<p th:text="${title}"></p>
-<table>
+<body style="background-color:#98AFC7;">
+<h1 style="text-align:center;">List of NMPIDs</h1>
+<hr size="10px" width="50%"  style="background-color:black;">
+<br>
+<!--<p th:text="${title}"></p>-->
+<table class="center">
     <thead>
     <tr>
-        <th>NMP ID</th>
+        <th style="font-size:20px;" >NMP ID</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="nmp : ${nmps}">
-        <td>
+        <td style="text-align:center">
             <a th:href="@{/nmp/__${nmp.ID}__}" th:text="${nmp.ID}"></a>
         </td>
     </tr>
@@ -24,3 +27,16 @@
 
 </body>
 </html>
+<style>
+table, th, td {
+  width:100px;
+  size:20px;
+  border: 2px solid black;
+  border-collapse: collapse;
+}
+
+table.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
