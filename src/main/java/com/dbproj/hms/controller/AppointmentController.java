@@ -41,18 +41,17 @@ public class AppointmentController {
         Patient patient = new Patient();
         List<Slot> slots;
         try {
-            doctor=doctorRepository.findByID(docid);
-            slots=doctorRepository.getslots(doctor);
-        }
-        catch (Exception e) {
+            doctor = doctorRepository.findByID(docid);
+            slots = doctorRepository.getslots(doctor);
+        } catch (Exception e) {
             return "system/error";
         }
         Appointment appointment = new Appointment();
         appointment.setDocID(doctor.getID());
-        modelMap.put("slots",slots);
-        modelMap.put("patient",patient);
-        modelMap.put("doctor",doctor);
-        modelMap.put("appointment",appointment);
+        modelMap.put("slots", slots);
+        modelMap.put("patient", patient);
+        modelMap.put("doctor", doctor);
+        modelMap.put("appointment", appointment);
         return "appointment/new";
     }
 
@@ -63,7 +62,7 @@ public class AppointmentController {
         try {
             patient = this.patientRepository.findByPhnoAndName(patient.getPhno(), patient.getPatientName());
             Doctor doctor = this.doctorRepository.findByID(appointment.getDocID());
-            valid = this.employeeRepository.isEmpOnLeave(doctor.getEmpID(),appointment.getDate());
+            valid = this.employeeRepository.isEmpOnLeave(doctor.getEmpID(), appointment.getDate());
         } catch (SQLException throwables) {
             //no patient. for now just error yourself
             return "system/error";
@@ -97,21 +96,21 @@ public class AppointmentController {
             return "system/error";
         }
 
-        modelMap.put("appointment",appointment);
-        modelMap.put("doctor",doctor);
+        modelMap.put("appointment", appointment);
+        modelMap.put("doctor", doctor);
         modelMap.put("patient", patient);
         return "appointment/appointment";
 
     }
 
     @GetMapping("/doc/{docid}/listAppointments")
-    public String getAppointmentList(@PathVariable("docid") Integer docid, ModelMap modelMap){
+    public String getAppointmentList(@PathVariable("docid") Integer docid, ModelMap modelMap) {
         List<Appointment> appointmentList;
         //Patient patient;
         //Doctor doctor;
         try {
             appointmentList = this.appointmentRepository.findByDocId(docid);
-        } catch (Exception e){
+        } catch (Exception e) {
             return "system/error";
         }
         modelMap.put("appointments", appointmentList);
@@ -119,11 +118,11 @@ public class AppointmentController {
     }
 
     @GetMapping("patient/{patientid}/listAppointments")
-    public String getAppointmentListbyPatient(@PathVariable("patientid") Integer patientid, ModelMap modelMap){
+    public String getAppointmentListbyPatient(@PathVariable("patientid") Integer patientid, ModelMap modelMap) {
         List<Appointment> appointmentList;
-        try{
+        try {
             appointmentList = this.appointmentRepository.findByPatientId(patientid);
-        } catch (Exception e){
+        } catch (Exception e) {
             return "system/error";
         }
         modelMap.put("appointments", appointmentList);
@@ -132,22 +131,22 @@ public class AppointmentController {
 
     @GetMapping("/transaction")
     public String getpatientdetails(ModelMap model) {
-        Patient patient=new Patient();
-        model.put("patient",patient);
+        Patient patient = new Patient();
+        model.put("patient", patient);
         return "appointment/transaction";
     }
 
     @PostMapping("/transaction}")
-    public String postfinalcost(@PathVariable("patientID") Integer patientId,ModelMap model) throws SQLException {
-        Patient patient=new Patient();
+    public String postfinalcost(@PathVariable("patientID") Integer patientId, ModelMap model) throws SQLException {
+        Patient patient = new Patient();
         try {
-            patient= patientRepository.findByID(patientId);
+            patient = patientRepository.findByID(patientId);
         } catch (DataAccessException e) {
             e.printStackTrace();
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        model.put("patient",patient);
+        model.put("patient", patient);
         return "appointment/display";
     }
 
