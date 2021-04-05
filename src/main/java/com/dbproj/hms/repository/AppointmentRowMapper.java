@@ -15,6 +15,7 @@ public class AppointmentRowMapper implements RowMapper<Appointment> {
                 resultSet.getInt("slot"),
                 resultSet.getString("complaints"),
                 resultSet.getString("diagnosis"),
-                resultSet.getDate("appointment_date"));
+                resultSet.getDate("appointment_date"),
+                resultSet.getInt("billed"));
     }
 }

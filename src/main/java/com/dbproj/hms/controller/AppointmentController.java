@@ -168,4 +168,11 @@ public String postfinalcost(Patient patient,ModelMap model) throws SQLException 
     model.put("sum",sum);
     return "appointment/costresult";
 }
+@PostMapping("/transaction/{patientid}")
+public String clearbalance(@PathVariable("patientid") Integer patientid,ModelMap model)
+{
+    List<Appointment> appointments;
+    appointmentRepository.updateappointment(patientid);
+   return "appointment/paymentsuccess";
+}
 }

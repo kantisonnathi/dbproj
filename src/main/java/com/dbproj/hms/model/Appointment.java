@@ -5,8 +5,17 @@ import java.sql.Date;
 
 public class Appointment implements Serializable {
     private Integer ID;
+    private Integer billed;
 
-    public Appointment(Integer ID,Integer docID, Integer patientID, Integer slot, String complaint, String diagnosis, Date date) {
+    public Integer getBilled() {
+        return billed;
+    }
+
+    public void setBilled(Integer billed) {
+        this.billed = billed;
+    }
+
+    public Appointment(Integer ID, Integer docID, Integer patientID, Integer slot, String complaint, String diagnosis, Date date, Integer billed) {
         this.ID = ID;
         this.docID = docID;
         this.patientID = patientID;
@@ -14,6 +23,7 @@ public class Appointment implements Serializable {
         this.complaint = complaint;
         this.diagnosis = diagnosis;
         this.date = date;
+        this.billed=billed;
     }
     public Appointment() {
 

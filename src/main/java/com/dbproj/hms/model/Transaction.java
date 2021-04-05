@@ -3,14 +3,25 @@ package com.dbproj.hms.model;
 import java.util.Date;
 
 public class Transaction {
+    int id;
     String docname;
     int visitationFees;
     Date appointmentdate;
     public Transaction(){
 
     }
-    public Transaction(String docname,int visitationFees,Date appointmentdate)
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Transaction(int id, String docname, int visitationFees, Date appointmentdate)
     {
+        this.id=id;
         this.docname=docname;
         this.visitationFees=visitationFees;
         this.appointmentdate=appointmentdate;

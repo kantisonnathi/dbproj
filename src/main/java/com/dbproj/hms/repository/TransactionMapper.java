@@ -10,7 +10,8 @@ import java.sql.SQLException;
 public class TransactionMapper implements RowMapper<Transaction> {
     @Override
     public Transaction mapRow(ResultSet resultSet, int rowNum) throws SQLException {
-        return new Transaction(resultSet.getString("EmpName"),
+        return new Transaction(resultSet.getInt("appointmentID"),
+                resultSet.getString("EmpName"),
                 resultSet.getInt("visitation_fees"),
                 resultSet.getDate("appointment_date"));
     }
