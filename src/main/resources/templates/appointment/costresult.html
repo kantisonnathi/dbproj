@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+<body style="background-color:#98AFC7; text-align:center;">
+<h1 style="text-align:center;">Appointment Details</h1>
+<hr size="10px" width="50%"  style="background-color:black;">
+<br>
+<table class="center">
+    <thead>
+    <tr>
+        <th style="font-size:20px;">Visitation-fees</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="transaction : ${transactions}">
+        <td style="text-align:center">
+            <a th:text="${transaction.docname}"></a>
+            <br>
+            <a th:text="${transaction.visitationFees}"></a>
+            <br>
+            <a th:text="${transaction.appointmentdate}"></a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+<label>The Total amount payable is</label>
+<a th:text="${sum}"></a>
+
+<button type="submit">Clear balance</button>
+</body>
+</html>
+<style>
+    table, th, td {
+        width:100px;
+        size:20px;
+        border: 2px solid black;
+        border-collapse: collapse;
+    }
+
+    table.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>

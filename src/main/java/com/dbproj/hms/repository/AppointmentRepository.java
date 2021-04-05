@@ -3,6 +3,7 @@ package com.dbproj.hms.repository;
 import com.dbproj.hms.model.Appointment;
 import com.dbproj.hms.model.Doctor;
 import com.dbproj.hms.model.Patient;
+import com.dbproj.hms.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -64,10 +65,10 @@ public class AppointmentRepository {
         return list;
     }
 
-    public List<Doctor> getprice(Integer patientID)
+    public List<Transaction> getprice(Integer patientID)
     {
-        String query="select * from doctor where docid in(select docid from appointments where billed=True and patientid="+patientID;
-        return jdbcTemplate.query(query,new DoctorRowMapper());
+        String query="select e.EmpName,d.visitation_fees,a.appointment_date from employee e,appointment a,doctor d  where e.empid=d.empid and d.docid=a.docid and a.billed=FALSE and a.patientid="+patientID;
+        return jdbcTemplate.query(query,new TransactionMapper());
     }
 
 }
