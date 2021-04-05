@@ -6,10 +6,13 @@
     <title>Generate Bill</title>
 </head>
 <body>
+<form method="post">
 <label>Enter patient name</label>
-<input type="text" name="patientID" th:value="${patientID}">
-<label>Enter phone Number</label>
 <input type="text" name="patientName" th:value="${patientName}">
-<button typ="submit">Go to final bill</button>
+<label>Enter phone Number</label>
+<input type="text" name="phno" th:value="${phno}">
+<button type="submit">Go to final bill</button>
+</form>
 </body>
+
 </html>
