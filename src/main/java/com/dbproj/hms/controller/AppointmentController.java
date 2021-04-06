@@ -130,49 +130,49 @@ public class AppointmentController {
         return "appointment/listResult";
     }
 
-@GetMapping("/transaction")
-public String getpatientdetails(ModelMap model)
-{
-  Patient patient=new Patient();
-  model.put("patient",patient);
-  return "appointment/transaction";
-}
-@PostMapping("/transaction")
-public String postfinalcost(Patient patient,ModelMap model) throws SQLException {
+    @GetMapping("/transaction")
+    public String getpatientdetails(ModelMap model) {
+        Patient patient=new Patient();
+        model.put("patient",patient);
+        return "appointment/transaction";
+    }
 
-    try {
-        patient= patientRepository.findByPhnoAndName(patient.getPhno(),patient.getPatientName());
-    } catch (DataAccessException e) {
-        e.printStackTrace();
+    @PostMapping("/transaction")
+    public String postfinalcost(Patient patient,ModelMap model) throws SQLException {
+
+        try {
+            patient= patientRepository.findByPhnoAndName(patient.getPhno(),patient.getPatientName());
+        } catch (DataAccessException e) {
+            e.printStackTrace();
+        }
+        model.put("patient",patient);
+        return "appointment/display";
     }
-    model.put("patient",patient);
-    return "appointment/display";
-}
-@GetMapping("/transaction/{patientid}")
-    public String displaydetails(@PathVariable("patientid") Integer patientid,ModelMap model)
-{
-    List<Transaction> transactions;
-    try {
-        transactions = appointmentRepository.getprice(patientid);
+
+    @GetMapping("/transaction/{patientid}")
+    public String displaydetails(@PathVariable("patientid") Integer patientid,ModelMap model) {
+        List<Transaction> transactions;
+        try {
+            transactions = appointmentRepository.getprice(patientid);
+        }
+        catch (Exception e)
+        {
+            return "system/error";
+        }
+        model.put("transactions",transactions);
+        int sum=0;
+        for(int i=0;i<transactions.size();i++)
+        {
+            sum+=transactions.get(i).getVisitationFees();
+        }
+        model.put("sum",sum);
+        return "appointment/costresult";
     }
-    catch (Exception e)
-    {
-        return "system/error";
+
+    @PostMapping("/transaction/{patientid}")
+    public String clearbalance(@PathVariable("patientid") Integer patientid,ModelMap model)  {
+        List<Appointment> appointments;
+        appointmentRepository.updateappointment(patientid);
+        return "appointment/paymentsuccess";
     }
-    model.put("transactions",transactions);
-    int sum=0;
-    for(int i=0;i<transactions.size();i++)
-    {
-        sum+=transactions.get(i).getVisitationFees();
-    }
-    model.put("sum",sum);
-    return "appointment/costresult";
-}
-@PostMapping("/transaction/{patientid}")
-public String clearbalance(@PathVariable("patientid") Integer patientid,ModelMap model)
-{
-    List<Appointment> appointments;
-    appointmentRepository.updateappointment(patientid);
-   return "appointment/paymentsuccess";
-}
 }
