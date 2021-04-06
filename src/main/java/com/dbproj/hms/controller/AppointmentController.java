@@ -187,4 +187,5 @@ public class AppointmentController {
         appointmentRepository.updateappointment(patientid);
         return "appointment/paymentsuccess";
     }
+
 }
