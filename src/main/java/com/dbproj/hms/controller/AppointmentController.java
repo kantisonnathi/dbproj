@@ -188,4 +188,26 @@ public class AppointmentController {
         return "appointment/paymentsuccess";
     }
 
+    @GetMapping("/appointment/{appointmentID}/update")
+    public String getUpdateAppointment(@PathVariable("appointmentID") Integer appointmentID, ModelMap modelMap) {
+        Appointment appointment;
+        try {
+            appointment = appointmentRepository.findById(appointmentID);
+        } catch (Exception e) {
+            return "system/error";
+        }
+        modelMap.put("appointment",appointment);
+        return "appointment/update";
+    }
+
+    @PostMapping("/appointment/{appointmentID}/update")
+    public String postUpdateAppointment(Appointment appointment ,ModelMap modelMap) {
+        try {
+            appointmentRepository.update(appointment);
+        } catch (Exception e) {
+            return "system/error";
+        }
+        return "redirect:/appointment/"+appointment.getID();
+    }
+
 }
