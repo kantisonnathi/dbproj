@@ -104,6 +104,18 @@ public class AppointmentController {
 
     }
 
+    @GetMapping("/appointment/{appointmentID}/delete")
+    public String deleteAppointment(@PathVariable("appointmentID") Integer appointmentID, ModelMap modelMap) {
+        Appointment appointment;
+        try {
+            appointment = this.appointmentRepository.findById(appointmentID);
+            this.appointmentRepository.delete(appointment);
+        } catch (Exception e) {
+            return "system/error";
+        }
+        return "main";
+    }
+
     @GetMapping("/doc/{docid}/listAppointments")
     public String getAppointmentList(@PathVariable("docid") Integer docid, ModelMap modelMap){
         List<Appointment> appointmentList;

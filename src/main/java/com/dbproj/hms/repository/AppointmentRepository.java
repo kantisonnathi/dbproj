@@ -27,9 +27,11 @@ public class AppointmentRepository {
                 " values (" + appointment.getDocID() + "," + appointment.getPatientID() + ", " + appointment.getSlot()
                  + ",'" + appointment.getComplaint() + "','" + appointment.getDiagnosis() + "', " + appointment.getDate()+")";
         jdbcTemplate.update(query);*/
+
         String query = "insert into appointment (docid, patientid, slot, complaints, diagnosis, appointment_date) values (?,?,?,?,?,?)";
         jdbcTemplate.update(query,appointment.getDocID(), appointment.getPatientID(), appointment.getSlot(), appointment.getComplaint(),
                 appointment.getDiagnosis(), appointment.getDate());
+
         /*jdbcTemplate.update(query, new PreparedStatementSetter() {
             @Override
             public void setValues(PreparedStatement preparedStatement) throws SQLException {
@@ -40,7 +42,6 @@ public class AppointmentRepository {
                 preparedStatement.setString(5,appointment.getDiagnosis());
             }
         });*/
-
 
         query = "select * from appointment where docid=" + appointment.getDocID() + " and slot=" + appointment.getSlot();
         List<Appointment> list = jdbcTemplate.query(query, new AppointmentRowMapper());
@@ -53,26 +54,36 @@ public class AppointmentRepository {
         return list.get(list.size()-1);
     }
 
-    public List<Appointment> findByDocId(Integer id){
+    public List<Appointment> findByDocId(Integer id) {
         String query = "select * from appointment where docid=" + id;
         List<Appointment> list = jdbcTemplate.query(query, new AppointmentRowMapper());
         return list;
     }
 
-    public List<Appointment> findByPatientId(Integer id){
+    public List<Appointment> findByPatientId(Integer id) {
         String query = "select * from appointment where patientid=" + id;
         List<Appointment> list = jdbcTemplate.query(query, new AppointmentRowMapper());
         return list;
     }
 
-    public List<Transaction> getprice(Integer patientID)
-    {
+    public List<Transaction> getprice(Integer patientID) {
         String query="select a.appointmentID,e.EmpName,d.visitation_fees,a.appointment_date from employee e,appointment a,doctor d  where e.empid=d.empid and d.docid=a.docid and a.billed=FALSE and a.patientid="+patientID;
         return jdbcTemplate.query(query,new TransactionMapper());
     }
- public void updateappointment(Integer patientId)
- {
-     String query="update appointment set billed=True where patientid="+patientId;
-     jdbcTemplate.update(query);
- }
+
+    public void updateappointment(Integer patientId) {
+        String query="update appointment set billed=True where patientid="+patientId;
+        jdbcTemplate.update(query);
+    }
+
+    public void delete(Appointment appointment) {
+        String query = "delete from appointment where appointmentID=" + appointment.getID();
+        jdbcTemplate.update(query);
+    }
+
+    public void update(Appointment appointment) {
+        String query = "update appointment set docid=?, patientid=?,slot=?, complaints=?, diagnosis=?, appointment_date=?, billed=?";
+        jdbcTemplate.update(query, appointment.getDocID(), appointment.getPatientID(), appointment.getSlot(), appointment.getComplaint(),
+                appointment.getDiagnosis(), appointment.getDate(), appointment.getBilled());
+    }
 }
