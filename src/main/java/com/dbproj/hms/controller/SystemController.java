@@ -53,7 +53,9 @@ public class SystemController {
         if (nmp != null) {
             return "redirect:/nmp/" + nmp.getID();
         }
-        return "main";
+        String error =  "You do not seem to be of any type, sorry no details :(";
+        modelMap.put("title",error);
+        return "system/customError";
     }
     @GetMapping("/makepayment")
     public String capturenmp(Principal principal,ModelMap modelMap)
