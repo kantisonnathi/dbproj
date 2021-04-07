@@ -2,6 +2,7 @@ package com.dbproj.hms.repository;
 
 import com.dbproj.hms.model.Employee;
 import com.dbproj.hms.model.NMP;
+import com.dbproj.hms.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -78,6 +79,10 @@ public class NMPRepository {
 
         return nmp;
     }
-
+public void updatetransaction(Integer empid)
+{
+    String query="update transaction set empid='"+empid+"' where empid is NULL";
+    jdbcTemplate.update(query);
+}
 
 }

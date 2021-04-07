@@ -2,8 +2,10 @@ package com.dbproj.hms.controller;
 
 import com.dbproj.hms.model.Employee;
 import com.dbproj.hms.model.NMP;
+import com.dbproj.hms.model.Transaction;
 import com.dbproj.hms.repository.EmployeeRepository;
 import com.dbproj.hms.repository.NMPRepository;
+import com.dbproj.hms.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -22,6 +24,7 @@ public class NMPController {
 
     @Autowired
     EmployeeRepository employeeRepository;
+
 
     /*public NMPController() throws SQLException, ClassNotFoundException {
         nmpRepository = new NMPRepository();
@@ -160,5 +163,18 @@ public class NMPController {
         }
         return "redirect:/nmp/"+nmp.getID();
     }
-
+    @GetMapping("/makepayment/{nmpID}")
+    public String updatetransactiontable(@PathVariable("nmpID") Integer nmpid, Transaction transaction,ModelMap model) throws SQLException {
+        NMP nmp=new NMP();
+        nmp=nmpRepository.findByID(nmpid);
+        try {
+            nmpRepository.updatetransaction(nmp.getEmpID());
+        }
+        catch (Exception e)
+        {
+            return "system/error";
+        }
+        transaction.setEmpid(nmp.getEmpID());
+     return "main";
+    }
 }

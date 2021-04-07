@@ -1,6 +1,7 @@
 package com.dbproj.hms.controller;
 
 
+import com.dbproj.hms.SpringSecurity.SecurityController;
 import com.dbproj.hms.model.*;
 import com.dbproj.hms.repository.AppointmentRepository;
 import com.dbproj.hms.repository.DoctorRepository;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -33,7 +35,7 @@ public class AppointmentController {
 
     @Autowired
     AppointmentRepository appointmentRepository;
-
+    SecurityController securityController=new SecurityController();
 
     @GetMapping("/doc/{docid}/bookAppointment")
     public String getBookAppointment(@PathVariable("docid") Integer docid, ModelMap modelMap) {
@@ -171,13 +173,17 @@ public class AppointmentController {
         {
             return "system/error";
         }
-        model.put("transactions",transactions);
         int sum=0;
         for(int i=0;i<transactions.size();i++)
         {
             sum+=transactions.get(i).getVisitationFees();
         }
+        Transaction transaction=new Transaction();
+        transaction.setTotalcost(sum);
+        transaction.setPatientid(patientid);
+        appointmentRepository.addtransaction(transaction);
         model.put("sum",sum);
+        model.put("transaction",transaction);
         return "appointment/costresult";
     }
 

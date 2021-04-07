@@ -7,6 +7,34 @@ public class Transaction {
     String docname;
     int visitationFees;
     Date appointmentdate;
+    int empid;
+    int patientid;
+
+    public int getEmpid() {
+        return empid;
+    }
+
+    public void setEmpid(int empid) {
+        this.empid = empid;
+    }
+
+    public int getPatientid() {
+        return patientid;
+    }
+
+    public void setPatientid(int patientid) {
+        this.patientid = patientid;
+    }
+
+    public int getTotalcost() {
+        return totalcost;
+    }
+
+    public void setTotalcost(int totalcost) {
+        this.totalcost = totalcost;
+    }
+
+    int totalcost;
     public Transaction(){
 
     }
@@ -25,6 +53,7 @@ public class Transaction {
         this.docname=docname;
         this.visitationFees=visitationFees;
         this.appointmentdate=appointmentdate;
+
     }
 
     public String getDocname() {

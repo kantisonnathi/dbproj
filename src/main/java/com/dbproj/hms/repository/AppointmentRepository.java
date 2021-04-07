@@ -1,5 +1,6 @@
 package com.dbproj.hms.repository;
 
+import com.dbproj.hms.SpringSecurity.SecurityController;
 import com.dbproj.hms.model.Appointment;
 import com.dbproj.hms.model.Doctor;
 import com.dbproj.hms.model.Patient;
@@ -67,6 +68,7 @@ public class AppointmentRepository {
     }
 
     public List<Transaction> getprice(Integer patientID) {
+
         String query="select a.appointmentID,e.EmpName,d.visitation_fees,a.appointment_date from employee e,appointment a,doctor d  where e.empid=d.empid and d.docid=a.docid and a.billed=FALSE and a.patientid="+patientID;
         return jdbcTemplate.query(query,new TransactionMapper());
     }
@@ -85,5 +87,10 @@ public class AppointmentRepository {
         String query = "update appointment set docid=?, patientid=?,slot=?, complaints=?, diagnosis=?, appointment_date=?, billed=?";
         jdbcTemplate.update(query, appointment.getDocID(), appointment.getPatientID(), appointment.getSlot(), appointment.getComplaint(),
                 appointment.getDiagnosis(), appointment.getDate(), appointment.getBilled());
+    }
+    public void addtransaction(Transaction transaction)
+    {
+        String query="insert into transaction(patientid,totalcost) values('"+transaction.getPatientid()+"','"+ transaction.getTotalcost()+"')";
+        jdbcTemplate.update(query);
     }
 }
