@@ -7,6 +7,7 @@ import com.dbproj.hms.repository.EmployeeRepository;
 import com.dbproj.hms.repository.NMPRepository;
 import com.dbproj.hms.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -176,5 +177,15 @@ public class NMPController {
         }
         transaction.setEmpid(nmp.getEmpID());
      return "main";
+    }
+
+    @GetMapping("/nmp/{nmpID}/transaction")
+    public String pasttransactions(@PathVariable("nmpID") Integer nmpID, ModelMap modelMap) throws SQLException {
+        List<Transaction> transactions;
+        NMP n=new NMP();
+        n=nmpRepository.findByID(nmpID);
+        transactions=nmpRepository.gettransactions(n.getEmpID());
+        modelMap.put("transactions",transactions);
+        return "NMP/transaction details";
     }
 }

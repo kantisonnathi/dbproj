@@ -46,7 +46,12 @@ public class Transaction {
     public void setId(int id) {
         this.id = id;
     }
-
+public Transaction(int empid,int patientid,int totalcost)
+{
+    this.empid=empid;
+    this.patientid=patientid;
+    this.totalcost=totalcost;
+}
     public Transaction(int id, String docname, int visitationFees, Date appointmentdate)
     {
         this.id=id;

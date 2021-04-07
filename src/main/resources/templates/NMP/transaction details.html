@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Transaction details</title>
+</head>
+<body>
+<table class="center">
+    <thead>
+    <tr>
+        <th style="font-size:20px;" >NMP ID</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="transaction : ${transactions}">
+        <td style="text-align:center">
+            <a th:text="${transaction.empid}"></a>
+            <a th:text="${transaction.patientid}"></a>
+            <a th:text="${transaction.totalcost}"></a>
+            <br>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+</body>
+</html>

@@ -84,5 +84,10 @@ public void updatetransaction(Integer empid)
     String query="update transaction set empid='"+empid+"' where empid is NULL";
     jdbcTemplate.update(query);
 }
+public List<Transaction> gettransactions(Integer empid)
+{
+    String query="select * from transaction where empid="+empid;
 
+   return  jdbcTemplate.query(query,new TransactionRowMapper());
+}
 }
