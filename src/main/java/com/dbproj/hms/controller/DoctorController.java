@@ -112,12 +112,20 @@ public class DoctorController {
         try {
             doctor.setAuthorization();
             doctor.setVerify(1);
-            doctorRepository.save(doctor);
+            doctor = doctorRepository.save(doctor);
         }
         catch (SQLException e) {
             return "system/error";
         }
-        return "main";
+        return "redirect:/doc/" + doctor.getID();
+    }
+
+    @GetMapping("/doc/all")
+    public String viewAllDoctors(ModelMap modelMap) {
+        List<Doctor> list = this.doctorRepository.listAllDoctors();
+        modelMap.put("doctors", list);
+        modelMap.put("title","All Doctors");
+        return "doctor/listResults";
     }
 
     @RequestMapping("/doc/{docid}/delete")

@@ -44,7 +44,7 @@ public class DoctorRepository {
     }
 
     //To add a doctor to the employee repository
-    public void save(Doctor doctor) throws DataAccessException,SQLException {
+    public Doctor save(Doctor doctor) throws DataAccessException,SQLException {
         String query="insert into employee(empname,username,password,gender,salary,phno,email,address,authorization ,verify) values('"+ doctor.getName()+"','"+doctor.getUsername()+"','"+doctor.getPassword()+"','"+doctor.getGender()+"','"
         +doctor.getSalary()+"','"+doctor.getPhoneNumber()+"','"+doctor.getEmail()+"','"+doctor.getAddress()+"','"+doctor.getAuthorization()+"',1)";
         jdbcTemplate.update(query);
@@ -54,10 +54,13 @@ public class DoctorRepository {
         System.out.println(doctor.toString());
         query="Insert into doctor(empid,visitation_fees,speciality,doc_type) values('"+doc.getID()+"','"+doctor.getVisitationFees()+"','"+doctor.getSpeciality()+"','"+doctor.getDocType()+"')";
         jdbcTemplate.update(query);
+        query = "select * from doctor where empID=" + doc.getID();
+        List<Doctor> list = jdbcTemplate.query(query, new DoctorRowMapper());
+        return list.get(list.size()-1);
     }
      // To update doctor value
 
-    public Doctor  update( Doctor doctor) throws DataAccessException {
+    public Doctor update(Doctor doctor) throws DataAccessException {
         String query = "update employee set EmpName='" + doctor.getName() + "', username='" + doctor.getUsername() + "', gender='" + doctor.getGender() + "', salary=" + doctor.getSalary() + ", phno='" +
                 doctor.getPhoneNumber() + "', email='" + doctor.getEmail() + "', address='" + doctor.getAddress() + "', authorization='" +
                 doctor.getAuthorization() + "', verify=" + doctor.getVerify() + " where EmpID=" + doctor.getEmpID();
@@ -84,6 +87,11 @@ public class DoctorRepository {
             return null;
         }
         return list.get(list.size()-1);
+    }
+
+    public List<Doctor> listAllDoctors() {
+        String query = "select * from doctor";
+        return jdbcTemplate.query(query, new DoctorRowMapper());
     }
 }
 

@@ -64,4 +64,9 @@ public class NurseRepository {
         }
         return list.get(list.size()-1);
     }
+
+    public List<Nurse> listAllNurses() {
+        String query = "select * from nurse";
+        return jdbcTemplate1.query(query, new NurseRowMapper());
+    }
 }

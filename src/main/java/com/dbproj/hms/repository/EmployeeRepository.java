@@ -90,7 +90,7 @@ public class EmployeeRepository {
     }
 
     public String type(Employee employee) {
-        /*Doctor doctor = this.doctorRepository.findByEmpID(employee.getID());
+        Doctor doctor = this.doctorRepository.findByEmpID(employee.getID());
         if (doctor != null) {
             return "doctor";
         }
@@ -101,11 +101,14 @@ public class EmployeeRepository {
         NMP nmp = this.nmpRepository.findByEmpID(employee.getID());
         if (nmp != null) {
             return "nmp";
-        }*/
+        }
         return "null";
     }
 
-
+    public List<Employee> listAllEmployees() {
+        String query = "select * from employee";
+        return jdbcTemplate.query(query, new EmployeeRowMapper());
+    }
 
 
     /*public EmployeeRepository() throws ClassNotFoundException, SQLException {

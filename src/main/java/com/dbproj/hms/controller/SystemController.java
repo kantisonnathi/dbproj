@@ -57,19 +57,24 @@ public class SystemController {
         modelMap.put("title",error);
         return "system/customError";
     }
+
     @GetMapping("/makepayment")
-    public String capturenmp(Principal principal,ModelMap modelMap)
-    {
+    public String capturenmp(Principal principal,ModelMap modelMap) {
         Employee employee=this.employeeRepository.findByUsername(principal.getName());
         NMP nmp=this.nmpRepository.findByEmpID(employee.getID());
-        if(nmp==null)
-        {
+        if(nmp==null) {
             return "system/Authorization error";
         }
-        else
-        {
+        else {
             return "redirect:/makepayment/"+ nmp.getID();
         }
+    }
+
+    @GetMapping("/emp/all")
+    public String getAllEmps(ModelMap modelMap) {
+        List<Employee> list = this.employeeRepository.listAllEmployees();
+        modelMap.put("employees", list);
+        return "system/listEmps";
     }
 
     @GetMapping("/error")
