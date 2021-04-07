@@ -191,12 +191,15 @@ public class AppointmentController {
     @GetMapping("/appointment/{appointmentID}/update")
     public String getUpdateAppointment(@PathVariable("appointmentID") Integer appointmentID, ModelMap modelMap) {
         Appointment appointment;
+        Patient patient;
         try {
             appointment = appointmentRepository.findById(appointmentID);
+            patient = this.patientRepository.findByID(appointment.getPatientID());
         } catch (Exception e) {
             return "system/error";
         }
         modelMap.put("appointment",appointment);
+        modelMap.put("patient",patient);
         return "appointment/update";
     }
 
