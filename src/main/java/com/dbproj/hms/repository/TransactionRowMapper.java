@@ -11,7 +11,8 @@ public class TransactionRowMapper implements RowMapper<Transaction> {
     public Transaction mapRow(ResultSet resultSet, int rowNum) throws SQLException {
         return new Transaction(resultSet.getInt("empid"),
                 resultSet.getInt("patientid"),
-                resultSet.getInt("totalcost"));
+                resultSet.getInt("totalcost"),
+        resultSet.getDate("date_of_transaction"));
 
     }
 }

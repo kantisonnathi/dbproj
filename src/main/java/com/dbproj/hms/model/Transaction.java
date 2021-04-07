@@ -9,6 +9,15 @@ public class Transaction {
     Date appointmentdate;
     int empid;
     int patientid;
+    Date transactiondate;
+
+    public Date getTransactiondate() {
+        return transactiondate;
+    }
+
+    public void setTransactiondate(Date transactiondate) {
+        this.transactiondate = transactiondate;
+    }
 
     public int getEmpid() {
         return empid;
@@ -46,11 +55,12 @@ public class Transaction {
     public void setId(int id) {
         this.id = id;
     }
-public Transaction(int empid,int patientid,int totalcost)
+public Transaction(int empid,int patientid,int totalcost,Date transactiondate)
 {
     this.empid=empid;
     this.patientid=patientid;
     this.totalcost=totalcost;
+    this.transactiondate=transactiondate;
 }
     public Transaction(int id, String docname, int visitationFees, Date appointmentdate)
     {

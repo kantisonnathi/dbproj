@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 @Component
@@ -90,7 +91,7 @@ public class AppointmentRepository {
     }
     public void addtransaction(Transaction transaction)
     {
-        String query="insert into transaction(empid,patientid,totalcost) values('"+transaction.getEmpid()+"','"+transaction.getPatientid()+"','"+ transaction.getTotalcost()+"')";
+        String query="insert into transaction(empid,patientid,totalcost,date_of_transaction) values('"+transaction.getEmpid()+"','"+transaction.getPatientid()+"','"+ transaction.getTotalcost()+"','"+ LocalDate.now() +"')";
         jdbcTemplate.update(query);
     }
 }
