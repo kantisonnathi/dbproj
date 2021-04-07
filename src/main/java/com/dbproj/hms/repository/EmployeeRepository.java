@@ -44,7 +44,7 @@ public class EmployeeRepository {
         String query="insert into employee(empname,username,password,gender,salary,phno,email,address,authorization ,verify)" +
                 " values('" + employee.getName() + "','" + employee.getUsername() + "','" + employee.getPassword() + "','" +
                 employee.getGender() + "','" + employee.getSalary() + "','" + employee.getPhoneNumber() + "','" + employee.getEmail()
-                    + "','" + employee.getAddress() + "','" + employee.getAuthorization() + "'," + employee.getVerify() + ")";
+                + "','" + employee.getAddress() + "','" + employee.getAuthorization() + "'," + employee.getVerify() + ")";
         jdbcTemplate.update(query);
     }
 
