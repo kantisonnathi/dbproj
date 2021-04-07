@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>All Employees</title>
+</head>
+<body style="background-color:#98AFC7;">
+<h1 style="text-align:center;">List of NMPIDs</h1>
+<hr size="10px" width="50%"  style="background-color:black;">
+<br>
+<!--<p th:text="${title}"></p>-->
+<table class="center">
+    <thead>
+    <tr>
+        <th style="font-size:20px;" >Employee Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="emp : ${employees}">
+        <td style="text-align:center">
+            <p th:text="${emp.name}"></p>
+        </td>
+    </tr>
+    </tbody>
+
+</table>
+
+</body>
+</html>
+<style>
+    table, th, td {
+        width:100px;
+        size:20px;
+        border: 2px solid black;
+        border-collapse: collapse;
+    }
+
+    table.center {
+        margin-left: auto;
+        margin-right: auto;
+    }
+</style>
