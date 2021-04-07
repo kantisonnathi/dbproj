@@ -17,8 +17,11 @@ public class NurseController {
 
     @Autowired
     NurseRepository nurseRepository;
+
     @Autowired
     EmployeeRepository employeeRepository;
+
+
     @GetMapping("/findNurseByID")
     public String getByID(ModelMap model) {
         Integer id = 0;
@@ -51,7 +54,6 @@ public class NurseController {
         return "nurse/listResults";
     }
 
-
     @GetMapping("/nur/{nurID}")
     public String getNurPage(@PathVariable("nurID") Integer NurID, ModelMap model) {
         Nurse nurse;
@@ -67,7 +69,6 @@ public class NurseController {
         return "nurse/nurse";
     }
 
-
     @GetMapping("/addnurse")
     public String getformpage(ModelMap modelMap){
         Nurse nurse= new Nurse();
@@ -75,7 +76,6 @@ public class NurseController {
         modelMap.put("nurse",nurse);
         return "nurse/newNurse";
     }
-
 
     @PostMapping("/addnurse")
     public String postaddition( Nurse nurse,ModelMap modelMap) {
@@ -131,6 +131,14 @@ public class NurseController {
             return "system/error";
         }
         return "redirect:/nur/"+nurse.getID();
+    }
+
+    @GetMapping("/nur/all")
+    public String getAll(ModelMap modelMap) {
+        List<Nurse> list = this.nurseRepository.listAllNurses();
+        modelMap.put("nurses",list);
+        modelMap.put("title","All Nurses");
+        return "nurse/listResults";
     }
 
 }

@@ -30,7 +30,6 @@ public class NurseRepository {
         return jdbcTemplate1.query(query,new NurseRowMapper());
     }
 
-
     public void delete(Nurse nurse) throws DataAccessException,SQLException{
         String query="delete from employee  where empID="+nurse.getEmpID();
         jdbcTemplate1.update(query);
@@ -63,5 +62,10 @@ public class NurseRepository {
             return null;
         }
         return list.get(list.size()-1);
+    }
+
+    public List<Nurse> listAllNurses() {
+        String query = "select * from nurse";
+        return jdbcTemplate1.query(query, new NurseRowMapper());
     }
 }

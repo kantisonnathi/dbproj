@@ -33,6 +33,7 @@ public class Doctor extends Employee {
 
     public void setEmpID(Integer empID) {
         EmpID = empID;
+        super.setID(empID);
     }
 
     public Integer getVisitationFees() {

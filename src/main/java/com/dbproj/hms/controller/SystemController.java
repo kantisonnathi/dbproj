@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
+import java.util.List;
 
 @Controller
 @CrossOrigin
@@ -57,9 +58,9 @@ public class SystemController {
         modelMap.put("title",error);
         return "system/customError";
     }
+
     @GetMapping("/makepayment")
-    public String capturenmp(Principal principal,ModelMap modelMap)
-    {
+    public String capturenmp(Principal principal,ModelMap modelMap) {
         Employee employee=this.employeeRepository.findByUsername(principal.getName());
         NMP nmp=this.nmpRepository.findByEmpID(employee.getID());
         if(nmp==null)
@@ -76,5 +77,12 @@ public class SystemController {
     public String error()
     {
         return "system/Authorization error";
+    }
+
+    @GetMapping("/emp/all")
+    public String getAllEmps(ModelMap modelMap) {
+        List<Employee> list = this.employeeRepository.listAllEmployees();
+        modelMap.put("employees", list);
+        return "system/listEmps";
     }
 }
