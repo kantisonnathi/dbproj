@@ -63,19 +63,16 @@ public class SystemController {
     public String capturenmp(Principal principal,ModelMap modelMap) {
         Employee employee=this.employeeRepository.findByUsername(principal.getName());
         NMP nmp=this.nmpRepository.findByEmpID(employee.getID());
-        if(nmp==null)
-        {
+        if(nmp == null) {
             return "system/Authorization error";
         }
-        else
-        {
+        else {
             return "redirect:/makepayment/"+ nmp.getID();
         }
     }
 
     @GetMapping("/error")
-    public String error()
-    {
+    public String error() {
         return "system/Authorization error";
     }
 
