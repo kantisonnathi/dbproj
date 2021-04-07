@@ -2,11 +2,12 @@
 <<html xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Update Doctor</title>
+    <title>Create New NMP</title>
 </head>
 <body style="background-color:#98AFC7;">
 <h1 style="text-align:center;">Update Doctor Details</h1>
 <hr size="10px" width="50%"  style="background-color:black;">
+<br><br>
 <div class="form">
 <form method="post">
     <input type="hidden" name="id" th:field="${doctor.ID}"/>
@@ -44,7 +45,7 @@
     <input type="text" name="docType"  th:field="${doctor.docType}">
     <br><br>
     <div style="text-align:center; font-size:20px">
-        <button type="submit">Update</button>
+        <button style="background-color:#D1D0CE;" type="submit">Update</button>
     </div>
 </form>
     </div>

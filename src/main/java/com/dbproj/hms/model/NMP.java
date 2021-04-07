@@ -1,6 +1,6 @@
 package com.dbproj.hms.model;
 
-public class NMP extends Employee {
+public class NMP extends Employee{
     private Integer ID;
     private Integer empID;
     private String title;

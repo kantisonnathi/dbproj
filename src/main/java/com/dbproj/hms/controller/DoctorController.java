@@ -36,7 +36,6 @@ public class DoctorController {
     @PostMapping("/findDoctorByID")
     public String postID(Integer id) {
         //System.out.println("found doctor:" + doctor.toString());
-
         return "redirect:/doc/" + id ;
     }
 
@@ -102,6 +101,7 @@ public class DoctorController {
     @GetMapping("/adddoctor")
     public String getformpage(ModelMap modelMap){
         Doctor doctor= new Doctor();
+
         modelMap.put("doctor",doctor);
         return "doctor/newdoctor";
     }
@@ -112,12 +112,12 @@ public class DoctorController {
         try {
             doctor.setAuthorization();
             doctor.setVerify(1);
-            doctor = doctorRepository.save(doctor);
+            doctorRepository.save(doctor);
         }
         catch (SQLException e) {
             return "system/error";
         }
-        return "redirect:/doc/" + doctor.getID();
+        return "main";
     }
 
     @RequestMapping("/doc/{docid}/delete")
@@ -182,14 +182,6 @@ public class DoctorController {
         }
         model.put("slots",slots);
         return "doctor/showtimings";
-    }
-
-    @GetMapping("/doc/all")
-    public String viewAllDoctors(ModelMap modelMap) {
-        List<Doctor> list = this.doctorRepository.listAllDoctors();
-        modelMap.put("doctors", list);
-        modelMap.put("title","All Doctors");
-        return "doctor/listResults";
     }
 
 

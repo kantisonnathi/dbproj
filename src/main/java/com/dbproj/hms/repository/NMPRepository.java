@@ -79,21 +79,15 @@ public class NMPRepository {
 
         return nmp;
     }
+public void updatetransaction(Integer empid)
+{
+    String query="update transaction set empid='"+empid+"' where empid is NULL";
+    jdbcTemplate.update(query);
+}
+public List<Transaction> gettransactions(Integer empid)
+{
+    String query="select * from transaction where empid="+empid;
 
-    public void updatetransaction(Integer empid) {
-        String query="update transaction set empid='"+empid+"' where empid is NULL";
-        jdbcTemplate.update(query);
-    }
-
-    public List<Transaction> gettransactions(Integer empid) {
-        String query="select * from transaction where empid="+empid;
-
-        return  jdbcTemplate.query(query,new TransactionRowMapper());
-    }
-
-    public List<NMP> listAllNMPs() {
-        String query = "select * from non_medical_professionals";
-        return jdbcTemplate.query(query, new NMPRowMapper());
-
-    }
+   return  jdbcTemplate.query(query,new TransactionRowMapper());
+}
 }
