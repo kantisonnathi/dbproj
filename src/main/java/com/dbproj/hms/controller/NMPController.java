@@ -164,21 +164,6 @@ public class NMPController {
         }
         return "redirect:/nmp/"+nmp.getID();
     }
-
-    @GetMapping("/makepayment/{nmpID}")
-    public String updatetransactiontable(@PathVariable("nmpID") Integer nmpid, Transaction transaction,ModelMap model) throws SQLException {
-        NMP nmp=new NMP();
-        nmp=nmpRepository.findByID(nmpid);
-        try {
-            nmpRepository.updatetransaction(nmp.getEmpID());
-        }
-        catch (Exception e) {
-            return "system/error";
-        }
-        transaction.setEmpid(nmp.getEmpID());
-     return "main";
-    }
-
     @GetMapping("/nmp/{nmpID}/transaction")
     public String pasttransactions(@PathVariable("nmpID") Integer nmpID, ModelMap modelMap) throws SQLException {
         List<Transaction> transactions;

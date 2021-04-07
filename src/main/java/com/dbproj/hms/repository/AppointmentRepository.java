@@ -90,7 +90,7 @@ public class AppointmentRepository {
     }
     public void addtransaction(Transaction transaction)
     {
-        String query="insert into transaction(patientid,totalcost) values('"+transaction.getPatientid()+"','"+ transaction.getTotalcost()+"')";
+        String query="insert into transaction(empid,patientid,totalcost) values('"+transaction.getEmpid()+"','"+transaction.getPatientid()+"','"+ transaction.getTotalcost()+"')";
         jdbcTemplate.update(query);
     }
 }
