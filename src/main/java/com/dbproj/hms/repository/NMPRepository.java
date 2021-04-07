@@ -49,6 +49,9 @@ public class NMPRepository {
     public NMP findByEmpID(Integer empID) throws DataAccessException{
         String query = "select * from non_medical_professionals where empid="+ empID;
         List<NMP> list = jdbcTemplate.query(query, new NMPRowMapper());
+        if (list.isEmpty()) {
+            return null;
+        }
         return list.get(list.size()-1);
     }
 

@@ -7,11 +7,11 @@
 <body style="background-color:#98AFC7; text-align:center;">
 <h1 style="text-align:center;">Non Medical Professional Details</h1>
 <hr size="10px" width="50%"  style="background-color:black;">
-<p>NMPID  : <span th:text="${nmp.id}"></span></p>
+<p>NMPID  : <span th:text="${nmp.ID}"></span></p>
 <p>Name      : <span th:text="${employee.name}"></span></p>
 <div style="text-align:center;">
-    <a style="background-color:#D1D0CE; font-size:20px;margin:5px;" th:href="@{/nmp/__${nmp.id}__/delete}"> Delete </a>
-    <a style="background-color:#D1D0CE; font-size:20px;margin:5px;" th:href="@{/nmp/__${nmp.id}__/update}"> Update </a>
+    <a style="background-color:#D1D0CE; font-size:20px;margin:5px;" th:href="@{/nmp/__${nmp.ID}__/delete}"> Delete </a>
+    <a style="background-color:#D1D0CE; font-size:20px;margin:5px;" th:href="@{/nmp/__${nmp.ID}__/update}"> Update </a>
 </div>
 </body>
 </html>

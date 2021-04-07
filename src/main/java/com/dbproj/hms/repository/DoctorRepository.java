@@ -76,6 +76,15 @@ public class DoctorRepository {
         List<Slot> slot= jdbcTemplate.query(query, new slotRowMapper());
         return slot;
     }
+
+    public Doctor findByEmpID(Integer empID) {
+        String query = "select * from doctor where empID=" + empID;
+        List<Doctor> list = jdbcTemplate.query(query, new DoctorRowMapper());
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(list.size()-1);
+    }
 }
 
 

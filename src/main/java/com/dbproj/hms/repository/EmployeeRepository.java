@@ -1,7 +1,9 @@
 package com.dbproj.hms.repository;
 
+import com.dbproj.hms.model.Doctor;
 import com.dbproj.hms.model.Employee;
 import com.dbproj.hms.model.NMP;
+import com.dbproj.hms.model.Nurse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -18,6 +20,15 @@ public class EmployeeRepository {
 
     @Autowired
     JdbcTemplate jdbcTemplate;
+
+    @Autowired
+    NurseRepository nurseRepository;
+
+    @Autowired
+    DoctorRepository doctorRepository;
+
+    @Autowired
+    NMPRepository nmpRepository;
 
 
     public Employee findByID(Integer ID) throws DataAccessException, SQLException {
@@ -67,6 +78,31 @@ public class EmployeeRepository {
             return false;
         }
         return true;
+    }
+
+    public Employee findByUsername(String username) {
+        String query = "select * from employee where username='" + username + "'";
+        List<Employee> list = jdbcTemplate.query(query, new EmployeeRowMapper());
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(list.size()-1);
+    }
+
+    public String type(Employee employee) {
+        /*Doctor doctor = this.doctorRepository.findByEmpID(employee.getID());
+        if (doctor != null) {
+            return "doctor";
+        }
+        Nurse nurse = this.nurseRepository.findByEmpID(employee.getID());
+        if (nurse != null) {
+            return "nurse";
+        }
+        NMP nmp = this.nmpRepository.findByEmpID(employee.getID());
+        if (nmp != null) {
+            return "nmp";
+        }*/
+        return "null";
     }
 
 

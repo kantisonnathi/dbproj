@@ -55,4 +55,13 @@ public class NurseRepository {
         jdbcTemplate1.update(query);
         return nurse;
     }
+
+    public Nurse findByEmpID(Integer empID) {
+        String query = "select * from nurse where empID=" + empID;
+        List<Nurse> list = jdbcTemplate1.query(query, new NurseRowMapper());
+        if (list.isEmpty()) {
+            return null;
+        }
+        return list.get(list.size()-1);
+    }
 }
