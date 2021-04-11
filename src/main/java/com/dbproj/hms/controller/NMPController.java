@@ -2,9 +2,12 @@ package com.dbproj.hms.controller;
 
 import com.dbproj.hms.model.Employee;
 import com.dbproj.hms.model.NMP;
+import com.dbproj.hms.model.Transaction;
 import com.dbproj.hms.repository.EmployeeRepository;
 import com.dbproj.hms.repository.NMPRepository;
+import com.dbproj.hms.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +25,7 @@ public class NMPController {
 
     @Autowired
     EmployeeRepository employeeRepository;
+
 
     /*public NMPController() throws SQLException, ClassNotFoundException {
         nmpRepository = new NMPRepository();
@@ -160,5 +164,21 @@ public class NMPController {
         }
         return "redirect:/nmp/"+nmp.getID();
     }
+    @GetMapping("/nmp/{nmpID}/transaction")
+    public String pasttransactions(@PathVariable("nmpID") Integer nmpID, ModelMap modelMap) throws SQLException {
+        List<Transaction> transactions;
+        NMP n=new NMP();
+        n=nmpRepository.findByID(nmpID);
+        transactions=nmpRepository.gettransactions(n.getEmpID());
+        modelMap.put("transactions",transactions);
+        return "NMP/transaction details";
+    }
 
+    @GetMapping("/nmp/all")
+    public String getAll(ModelMap modelMap) {
+        List<NMP> list = this.nmpRepository.listAllNMPs();
+        modelMap.put("nmps",list);
+        modelMap.put("title","All NMPs");
+        return "NMP/listResults";
+    }
 }

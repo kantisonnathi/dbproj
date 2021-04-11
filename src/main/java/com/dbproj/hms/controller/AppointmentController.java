@@ -1,11 +1,9 @@
 package com.dbproj.hms.controller;
 
 
+import com.dbproj.hms.SpringSecurity.SecurityController;
 import com.dbproj.hms.model.*;
-import com.dbproj.hms.repository.AppointmentRepository;
-import com.dbproj.hms.repository.DoctorRepository;
-import com.dbproj.hms.repository.EmployeeRepository;
-import com.dbproj.hms.repository.PatientRepository;
+import com.dbproj.hms.repository.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Controller;
@@ -15,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.security.Principal;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -33,7 +32,8 @@ public class AppointmentController {
 
     @Autowired
     AppointmentRepository appointmentRepository;
-
+   @Autowired
+   NMPRepository nmpRepository;
 
     @GetMapping("/doc/{docid}/bookAppointment")
     public String getBookAppointment(@PathVariable("docid") Integer docid, ModelMap modelMap) {
@@ -162,23 +162,31 @@ public class AppointmentController {
     }
 
     @GetMapping("/transaction/{patientid}")
-    public String displaydetails(@PathVariable("patientid") Integer patientid,ModelMap model) {
+    public String displaydetails(@PathVariable("patientid") Integer patientid,Principal principal,ModelMap model) {
         List<Transaction> transactions;
-        try {
-            transactions = appointmentRepository.getprice(patientid);
+        String username=principal.getName();
+        Employee emp=employeeRepository.findByUsername(username);
+        NMP nmp= nmpRepository.findByEmpID(emp.getID());
+        if(nmp!=null) {
+            try {
+                transactions = appointmentRepository.getprice(patientid);
+            } catch (Exception e) {
+                return "system/error";
+            }
+            int sum = 0;
+            for (int i = 0; i < transactions.size(); i++) {
+                sum += transactions.get(i).getVisitationFees();
+            }
+            Transaction transaction = new Transaction();
+            transaction.setTotalcost(sum);
+            transaction.setPatientid(patientid);
+            transaction.setEmpid(nmp.getEmpID());
+            appointmentRepository.addtransaction(transaction);
+            model.put("sum", sum);
+            model.put("transaction", transaction);
+            return "appointment/costresult";
         }
-        catch (Exception e)
-        {
-            return "system/error";
-        }
-        model.put("transactions",transactions);
-        int sum=0;
-        for(int i=0;i<transactions.size();i++)
-        {
-            sum+=transactions.get(i).getVisitationFees();
-        }
-        model.put("sum",sum);
-        return "appointment/costresult";
+        return "system/Autorization error";
     }
 
     @PostMapping("/transaction/{patientid}")
@@ -191,12 +199,15 @@ public class AppointmentController {
     @GetMapping("/appointment/{appointmentID}/update")
     public String getUpdateAppointment(@PathVariable("appointmentID") Integer appointmentID, ModelMap modelMap) {
         Appointment appointment;
+        Patient patient;
         try {
             appointment = appointmentRepository.findById(appointmentID);
+            patient = this.patientRepository.findByID(appointment.getPatientID());
         } catch (Exception e) {
             return "system/error";
         }
         modelMap.put("appointment",appointment);
+        modelMap.put("patient",patient);
         return "appointment/update";
     }
 

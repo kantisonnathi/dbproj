@@ -12,10 +12,6 @@
         <input type="hidden" name="docID" th:value="${appointment.docID}">
         <p>Preferred Slot Timing:<span>
         <input type="number" name="slot" th:value="${appointment.slot}"></span></p>
-        <p>Patient Name:<span>
-        <input type="text" name="patientName" th:value="${patient.patientName}"></span></p>
-        <p>Patient phone number:<span>
-        <input type="text" name="phno" th:value="${patient.phno}"></span></p>
         <p>Enter your complaint:<span>
         <input type="text" name="complaint" th:value="${appointment.complaint}"></span></p>
         <p>Enter diagnosis:<span>
@@ -26,7 +22,7 @@
         <br>
 
         <div style="text-align:center; font-size:20px">
-            <button type="submit">Update</button>
+            <button style="background-color:#D1D0CE;" type="submit">Update</button>
         </div>
     </form>
 </div>

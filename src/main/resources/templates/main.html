@@ -12,40 +12,89 @@
 <body style="background-color:#98AFC7;">
 
 <h1 style="text-align:center; font-size:50px;">Menu Page</h1>
-<div id="textbox" style="clear:both font-size:40px;">
-    <h2 class="alignleft">Doctor Details</h2>
-    <h2 class="alignright">NMP Details</h2>
-    <h2 class="aligncenter">Nurse Details</h2>
+<hr size="10px" width="50%"  style="background-color:black;">
+<br>
+<div class="row">
+    <div class="column" style="float:left;" >
+        <h2 style="font-size:35px;">Doctor </h2>
+        <a href="/findDoctorByID" >Query Doctor By ID</a>
+        <br>
+        <a href="/findDoctorByName">Query Doctor By Name</a>
+        <br>
+        <a href="/findDoctorBySpeciality">Query Doctor By Speciality</a>
+        <br>
+    </div>
+    <div class="column" style="float:left;" >
+        <h2 style="font-size:35px;">Nurse </h2>
+        <a href="/findNurseByID">Query Nurses by ID</a>
+        <br>
+        <a href="/findNurseByName">Query Nurses by name</a>
+        <br>
+        <br>
+    </div>
+    <div class="column" style="float:right; text-align:center;">
+        <h2 style="font-size:35px;">Patient </h2>
+        <a href="/findPatientByID">Query Patient By ID</a>
+        <br>
+        <a href="/findPatientByName">Query Patient By Name</a>
+        <br>
+        <br>
+    </div>
+    <div class="column" style="float:right;">
+        <h2 style="font-size:35px;">NMP </h2>
+        <a href="/findNMPByID">Query Non-medical professionals by ID</a>
+        <br>
+        <a href="/findNMPByName">Query Non-medical professionals by name</a>
+        <br>
+        <a href="/findNMPByTitle">Query Non-medical professionals by title</a>
+        <br>
+    </div>
 </div>
-<a href="/findDoctorByID" style="margin:10px">Query Doctor By ID</a>
-<br>
-<a href="/findDoctorByName">Query Doctor By Name</a>
-<br>
-<a href="/findDoctorBySpeciality">Query Doctor By Speciality</a>
-<br>
-<a href="/findPatientByID">Query Patient By ID</a>
-<br>
-<a href="/findPatientByName">Query Patient By Name</a>
-<br>
-<a href="/findNMPByID">Query Non-medical professionals by ID</a>
-<br>
-<a href="/findNMPByName">Query Non-medical professionals by name</a>
-<br>
-<a href="/findNMPByTitle">Query Non-medical professionals by title</a>
-<br>
-<a href="/findNurseByID">Query Nurses by ID</a>
-<br>
-<a href="/findNurseByName">Query Nurses by name</a>
-<br>
-<a href="/adddoctor">Add doctor</a>
-<br>
-<a href="/nmp/new">Add new Non medical professional</a>
-<br>
-<a href="/addnurse">Add nurse</a>
-<br>
-<a href="/patient/new">Add new Patient</a>
-<br>
-<a href="/transaction">Make payment</a>
-<br>
+<br><br>
+<div class="abc">
+    <div>
+        <h2 style="font-size:35px;">For Admin Only</h2></div>
+    <a href="/adddoctor">Add new doctor</a>
+    <br>
+    <a href="/nmp/new">Add new Non medical professional</a>
+    <br>
+    <a href="/addnurse">Add nurse</a>
+    <br>
+    <a href="/patient/new">Add new Patient</a>
+    <br>
+    <a href="/transaction">Make payment</a>
+
+    <a href="/findPatientByID">Query Patient By ID</a>
+    <br>
+    <a href="/findPatientByName">Query Patient By Name</a>
+    <br>
+    <a href="/doc/all">View All doctors</a>
+    <br>
+    <a href="/nmp/all">View All NMPs</a>
+    <br>
+    <a href="/nur/all">View All nurses</a>
+    <br>
+    <br>
+    <a href="/myUserDetails">My User Details</a>
+</div>
 </body>
 </html>
+<style>
+* {
+  box-sizing: border-box;
+}
+.column {
+  width: 25%;
+  padding: 10px;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.abc
+{
+text-align:center;
+}
+</style>

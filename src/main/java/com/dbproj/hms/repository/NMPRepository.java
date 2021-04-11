@@ -2,6 +2,7 @@ package com.dbproj.hms.repository;
 
 import com.dbproj.hms.model.Employee;
 import com.dbproj.hms.model.NMP;
+import com.dbproj.hms.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -49,6 +50,9 @@ public class NMPRepository {
     public NMP findByEmpID(Integer empID) throws DataAccessException{
         String query = "select * from non_medical_professionals where empid="+ empID;
         List<NMP> list = jdbcTemplate.query(query, new NMPRowMapper());
+        if (list.isEmpty()) {
+            return null;
+        }
         return list.get(list.size()-1);
     }
 
@@ -76,5 +80,20 @@ public class NMPRepository {
         return nmp;
     }
 
+    public void updatetransaction(Integer empid) {
+        String query="update transaction set empid='"+empid+"' where empid is NULL";
+        jdbcTemplate.update(query);
+    }
 
+    public List<Transaction> gettransactions(Integer empid) {
+        String query="select * from transaction where empid="+empid;
+
+        return  jdbcTemplate.query(query,new TransactionRowMapper());
+    }
+
+    public List<NMP> listAllNMPs() {
+        String query = "select * from non_medical_professionals";
+        return jdbcTemplate.query(query, new NMPRowMapper());
+
+    }
 }
