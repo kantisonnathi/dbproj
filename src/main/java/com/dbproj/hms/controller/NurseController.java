@@ -137,7 +137,7 @@ public class NurseController {
              } catch (Exception e) {
             return "system/error";
         }
-        return "redirect:/nur/"+nurse.getID();
+        return "redirect:/nur/"+nurse.getNurseID();
     }
 
 }
