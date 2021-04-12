@@ -69,8 +69,7 @@ public class NMPRepository {
     }
 
     public NMP update(NMP nmp) throws DataAccessException {
-        String query = "update employee set EmpName='" + nmp.getName() + "', username='" + nmp.getUsername() + "', password='"
-                + nmp.getPassword() + "', gender='" + nmp.getGender() + "', salary=" + nmp.getSalary() + ", phno='" +
+        String query = "update employee set EmpName='" + nmp.getName() + "', username='" + nmp.getUsername() + "', gender='" + nmp.getGender() + "', salary=" + nmp.getSalary() + ", phno='" +
                 nmp.getPhoneNumber() + "', email='" + nmp.getEmail() + "', address='" + nmp.getAddress() + "', authorization='" +
                 nmp.getAuthorization() + "', verify=" + nmp.getVerify() + " where EmpID=" + nmp.getEmpID();
         jdbcTemplate.update(query);

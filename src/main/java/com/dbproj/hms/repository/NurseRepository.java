@@ -48,7 +48,7 @@ public class NurseRepository {
         jdbcTemplate1.update(query);
     }
 
-    public Nurse  update( Nurse nurse) throws DataAccessException {
+    public Nurse update(Nurse nurse) throws DataAccessException {
         String query = "update employee set EmpName='" + nurse.getName() + "', username='" + nurse.getUsername() + "', gender='" + nurse.getGender() + "', salary=" + nurse.getSalary() + ", phno='" +
                 nurse.getPhoneNumber() + "', email='" + nurse.getEmail() + "', address='" + nurse.getAddress() + "', authorization='" +
                 nurse.getAuthorization() + "', verify=" + nurse.getVerify() + " where EmpID=" + nurse.getEmpID();
