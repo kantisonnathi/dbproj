@@ -62,7 +62,7 @@ public class SystemController {
     public String getAllEmps(ModelMap modelMap) {
         List<Employee> list = this.employeeRepository.listAllEmployees();
         modelMap.put("employees", list);
-        return "system/listEmps";
+        return "system/listEmp";
     }
 
     @GetMapping("/error")

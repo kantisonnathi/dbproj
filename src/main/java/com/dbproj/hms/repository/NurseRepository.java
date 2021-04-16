@@ -1,6 +1,7 @@
 package com.dbproj.hms.repository;
 
 import com.dbproj.hms.model.Employee;
+import com.dbproj.hms.model.NMP;
 import com.dbproj.hms.model.Nurse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
@@ -8,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 @Component
 public class NurseRepository {
@@ -16,18 +18,28 @@ public class NurseRepository {
 
     public Nurse findByID(@org.jetbrains.annotations.NotNull Integer ID) throws DataAccessException, SQLException {
         String query = "select * from nurse where nurseID=" + ID.toString();
-        List<Nurse> listn = jdbcTemplate1.query(query, new NurseRowMapper());
-        if (listn.isEmpty())
-        {
+        List<Nurse> list = jdbcTemplate1.query(query, new NurseRowMapper());
+        if (list.isEmpty()) {
             return null;
         }
-        return listn.get(0);
+        query = "select * from employee where EmpID=" + list.get(list.size()-1).getEmpID();
+        List<Employee> employees = jdbcTemplate1.query(query, new EmployeeRowMapper());
+        Nurse ret = mapper(list.get(list.size()-1),employees.get(list.size()-1));
+        return ret;
     }
 
     public List<Nurse> findByName(String name) throws DataAccessException,SQLException{
         String query = "select * from nurse N where N.empID in (select EmpID" +
                 " from employee where EmpName='" + name + "')";
-        return jdbcTemplate1.query(query,new NurseRowMapper());
+        List<Nurse> list = jdbcTemplate1.query(query, new NurseRowMapper());
+        List<Nurse> returnable = new ArrayList<>();
+        for (Nurse nmp : list) {
+            query = "select * from employee where EmpID=" + nmp.getEmpID();
+            List<Employee> emps = jdbcTemplate1.query(query, new EmployeeRowMapper());
+            nmp = mapper(nmp, emps.get(emps.size()-1));
+            returnable.add(nmp);
+        }
+        return returnable;
     }
 
 
@@ -67,6 +79,30 @@ public class NurseRepository {
 
     public List<Nurse> listAllNurses() {
         String query = "select * from nurse";
-        return jdbcTemplate1.query(query, new NurseRowMapper());
+        List<Nurse> list = jdbcTemplate1.query(query, new NurseRowMapper());
+        List<Nurse> returnable = new ArrayList<>();
+        for (Nurse nmp : list) {
+            query = "select * from employee where EmpID=" + nmp.getEmpID();
+            List<Employee> emps = jdbcTemplate1.query(query, new EmployeeRowMapper());
+            nmp = mapper(nmp, emps.get(emps.size()-1));
+            returnable.add(nmp);
+        }
+        return returnable;
+    }
+
+    public Nurse mapper(Nurse ret, Employee emp) {
+        ret.setEmail(emp.getEmail());
+        ret.setName(emp.getName());
+        ret.setUsername(emp.getUsername());
+        ret.setGender(emp.getGender());
+        ret.setSalary(emp.getSalary());
+        ret.setPhoneNumber(emp.getPhoneNumber());
+        ret.setAddress(emp.getAddress());
+        ret.setAuthorization();
+        ret.setVerify(emp.getVerify());
+        ret.setStartSlot(emp.getStartSlot());
+        ret.setEndSlot(emp.getEndSlot());
+        ret.setBreaks(emp.getBreaks());
+        return ret;
     }
 }

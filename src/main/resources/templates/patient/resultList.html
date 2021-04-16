@@ -13,12 +13,16 @@
     <thead>
     <tr>
         <th style="font-size:20px;" >Patient ID</th>
+        <th style="font-size:20px;" >Patient Name</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="patient : ${patients}">
         <td style="text-align:center">
             <a th:href="@{/patient/__${patient.patientID}__}" th:text="${patient.patientID}"></a>
+        </td>
+        <td>
+            <p th:text="${patient.patientName}"></p>
         </td>
     </tr>
     </tbody>

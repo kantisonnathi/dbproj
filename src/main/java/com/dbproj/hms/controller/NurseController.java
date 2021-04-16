@@ -29,8 +29,18 @@ public class NurseController {
     }
 
     @PostMapping("/findNurseByID")
-    public String postID(Integer id) {
-                return "redirect:/nur/" + id ;
+    public String postID(Integer id, ModelMap modelMap) {
+        try {
+            Nurse nurse = this.nurseRepository.findByID(id);
+            if (nurse == null) {
+                modelMap.put("title", "There is no such nurse");
+                return "system/customError";
+            }
+        } catch (Exception e) {
+            modelMap.put("title","Sorry something went wrong :(");
+            return "system/customError";
+        }
+        return "redirect:/nur/" + id ;
     }
 
     @GetMapping("/findNurseByName")
@@ -47,6 +57,10 @@ public class NurseController {
             nurses = nurseRepository.findByName(name);
         } catch (SQLException e) {
             return "system/error";
+        }
+        if (nurses.isEmpty()) {
+            model.put("title","There are no nurses with this name");
+            return "system/customError";
         }
         model.put("nurses",nurses);
         model.put("title","Querying By Name");

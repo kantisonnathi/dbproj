@@ -29,19 +29,38 @@ public class NMPRepository {
         if (list.isEmpty()) {
             return null;
         }
-        return list.get(0);
+        query = "select * from employee where EmpID=" + list.get(list.size()-1).getEmpID();
+        List<Employee> employees = jdbcTemplate.query(query, new EmployeeRowMapper());
+        NMP ret = mapper(list.get(list.size()-1),employees.get(list.size()-1));
+        return ret;
 
     }
 
     public List<NMP> findByName(String name) throws DataAccessException, SQLException {
         String query = "select * from non_medical_professionals where empid in (select EmpID from employee " +
                 "where EmpName='" + name + "')";
-        return jdbcTemplate.query(query, new NMPRowMapper());
+        List<NMP> list = jdbcTemplate.query(query, new NMPRowMapper());
+        List<NMP> returnable = new ArrayList<>();
+        for (NMP nmp : list) {
+            query = "select * from employee where EmpID=" + nmp.getEmpID();
+            List<Employee> emps = jdbcTemplate.query(query, new EmployeeRowMapper());
+            nmp = mapper(nmp, emps.get(emps.size()-1));
+            returnable.add(nmp);
+        }
+        return returnable;
     }
 
     public List<NMP> findByTitle(String title) throws DataAccessException, SQLException {
         String query = "select * from non_medical_professionals where title='" + title + "'";
-        return jdbcTemplate.query(query,new NMPRowMapper());
+        List<NMP> list = jdbcTemplate.query(query, new NMPRowMapper());
+        List<NMP> returnable = new ArrayList<>();
+        for (NMP nmp : list) {
+            query = "select * from employee where EmpID=" + nmp.getEmpID();
+            List<Employee> emps = jdbcTemplate.query(query, new EmployeeRowMapper());
+            nmp = mapper(nmp, emps.get(emps.size()-1));
+            returnable.add(nmp);
+        }
+        return returnable;
     }
 
     public void delete(NMP nmp) throws DataAccessException, SQLException {
@@ -95,31 +114,29 @@ public class NMPRepository {
     public List<NMP> listAllNMPs() {
         String query = "select * from non_medical_professionals";
         List<NMP> list = jdbcTemplate.query(query, new NMPRowMapper());
-        /*List<NMP> finalList = new ArrayList<>();
+        List<NMP> returnable = new ArrayList<>();
         for (NMP nmp : list) {
             query = "select * from employee where EmpID=" + nmp.getEmpID();
-            NMP temp = jdbcTemplate.query(query, new ResultSetExtractor<NMP>() {
-                @Override
-                public NMP extractData(@NotNull ResultSet resultSet) throws SQLException, DataAccessException {
-                    NMP nmp = new NMP();
-                    nmp.setEmpID(resultSet.getInt("EmpID"));
-                    nmp.setName(resultSet.getString("EmpName"));
-                    nmp.setUsername(resultSet.getString("username"));
-                    nmp.setGender(resultSet.getString("gender").charAt(0));
-                    nmp.setAddress(resultSet.getString("address"));
-                    nmp.setSalary(resultSet.getInt("salary"));
-                    nmp.setPhoneNumber(resultSet.getString("phno"));
-                    nmp.setEmail(resultSet.getString("email"));
-                    return nmp;
-                }
-            });
-            if (temp != null) {
-                temp.setID(nmp.getID());
-                temp.setTitle(nmp.getTitle());
-            }
-            finalList.add(temp);
+            List<Employee> emps = jdbcTemplate.query(query, new EmployeeRowMapper());
+            nmp = mapper(nmp, emps.get(emps.size()-1));
+            returnable.add(nmp);
         }
-        return finalList;*/
-        return list;
+        return returnable;
+    }
+
+    public NMP mapper(NMP ret, Employee emp) {
+        ret.setEmail(emp.getEmail());
+        ret.setName(emp.getName());
+        ret.setUsername(emp.getUsername());
+        ret.setGender(emp.getGender());
+        ret.setSalary(emp.getSalary());
+        ret.setPhoneNumber(emp.getPhoneNumber());
+        ret.setAddress(emp.getAddress());
+        ret.setAuthorization();
+        ret.setVerify(emp.getVerify());
+        ret.setStartSlot(emp.getStartSlot());
+        ret.setEndSlot(emp.getEndSlot());
+        ret.setBreaks(emp.getBreaks());
+        return ret;
     }
 }
