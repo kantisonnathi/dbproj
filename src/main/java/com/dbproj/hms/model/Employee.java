@@ -17,7 +17,35 @@ public class Employee implements Serializable {
     private String email;
     private String address;
     private String authorization;
+
+    public Integer getStartSlot() {
+        return startSlot;
+    }
+
+    public void setStartSlot(Integer startSlot) {
+        this.startSlot = startSlot;
+    }
+
+    public Integer getEndSlot() {
+        return endSlot;
+    }
+
+    public void setEndSlot(Integer endSlot) {
+        this.endSlot = endSlot;
+    }
+
+    public Integer getBreaks() {
+        return breaks;
+    }
+
+    public void setBreaks(Integer breaks) {
+        this.breaks = breaks;
+    }
+
     private int verify;
+    private Integer startSlot;
+    private Integer endSlot;
+    private Integer breaks;
 
     public int getVerify() {
         return verify;

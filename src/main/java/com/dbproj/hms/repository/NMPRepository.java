@@ -3,6 +3,7 @@ package com.dbproj.hms.repository;
 import com.dbproj.hms.model.Employee;
 import com.dbproj.hms.model.NMP;
 import com.dbproj.hms.model.Transaction;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -10,6 +11,7 @@ import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Component;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -92,7 +94,32 @@ public class NMPRepository {
 
     public List<NMP> listAllNMPs() {
         String query = "select * from non_medical_professionals";
-        return jdbcTemplate.query(query, new NMPRowMapper());
-
+        List<NMP> list = jdbcTemplate.query(query, new NMPRowMapper());
+        /*List<NMP> finalList = new ArrayList<>();
+        for (NMP nmp : list) {
+            query = "select * from employee where EmpID=" + nmp.getEmpID();
+            NMP temp = jdbcTemplate.query(query, new ResultSetExtractor<NMP>() {
+                @Override
+                public NMP extractData(@NotNull ResultSet resultSet) throws SQLException, DataAccessException {
+                    NMP nmp = new NMP();
+                    nmp.setEmpID(resultSet.getInt("EmpID"));
+                    nmp.setName(resultSet.getString("EmpName"));
+                    nmp.setUsername(resultSet.getString("username"));
+                    nmp.setGender(resultSet.getString("gender").charAt(0));
+                    nmp.setAddress(resultSet.getString("address"));
+                    nmp.setSalary(resultSet.getInt("salary"));
+                    nmp.setPhoneNumber(resultSet.getString("phno"));
+                    nmp.setEmail(resultSet.getString("email"));
+                    return nmp;
+                }
+            });
+            if (temp != null) {
+                temp.setID(nmp.getID());
+                temp.setTitle(nmp.getTitle());
+            }
+            finalList.add(temp);
+        }
+        return finalList;*/
+        return list;
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 @Component
@@ -23,18 +24,40 @@ public class DoctorRepository {
         if (list.isEmpty()) {
             return null;
         }
-        return list.get(0);
+        Doctor ret = list.get(list.size()-1);
+        Integer empID = list.get(0).getEmpID();
+        query = "select * from employee where EmpID=" + empID.toString();
+        List<Employee> list1 = jdbcTemplate.query(query, new EmployeeRowMapper());
+        Employee emp = list1.get(list1.size()-1);
+        ret = mapper(ret, emp);
+        return ret;
     }
 
     public List<Doctor> findByName(String name) throws DataAccessException,SQLException{
         String query = "select * from doctor D where D.empID in (select EmpID" +
                 " from employee where EmpName='" + name + "')";
-        return jdbcTemplate.query(query,new DoctorRowMapper());
+        List<Doctor> list = jdbcTemplate.query(query,new DoctorRowMapper());
+        List<Doctor> returnable = new ArrayList<>();
+        for (Doctor doctor : list) {
+            query = "select * from employee where EmpID="+doctor.getEmpID();
+            List<Employee> list1 = jdbcTemplate.query(query, new EmployeeRowMapper());
+            doctor = mapper(doctor, list1.get(list.size()-1));
+            returnable.add(doctor);
+        }
+        return returnable;
     }
 
     public List<Doctor> findBySpeciality(String speciality) throws DataAccessException, SQLException {
         String query = "select * from doctor where speciality='" + speciality + "'";
-        return jdbcTemplate.query(query, new DoctorRowMapper());
+        List<Doctor> list = jdbcTemplate.query(query,new DoctorRowMapper());
+        List<Doctor> returnable = new ArrayList<>();
+        for (Doctor doctor : list) {
+            query = "select * from employee where EmpID="+doctor.getEmpID();
+            List<Employee> list1 = jdbcTemplate.query(query, new EmployeeRowMapper());
+            doctor = mapper(doctor, list1.get(list.size()-1));
+            returnable.add(doctor);
+        }
+        return returnable;
     }
 
     //To delete a doctor from the employee repository
@@ -91,7 +114,31 @@ public class DoctorRepository {
 
     public List<Doctor> listAllDoctors() {
         String query = "select * from doctor";
-        return jdbcTemplate.query(query, new DoctorRowMapper());
+        List<Doctor> list = jdbcTemplate.query(query,new DoctorRowMapper());
+        List<Doctor> returnable = new ArrayList<>();
+        for (Doctor doctor : list) {
+            query = "select * from employee where EmpID="+doctor.getEmpID();
+            List<Employee> list1 = jdbcTemplate.query(query, new EmployeeRowMapper());
+            doctor = mapper(doctor, list1.get(list.size()-1));
+            returnable.add(doctor);
+        }
+        return returnable;
+    }
+
+    public Doctor mapper(Doctor ret, Employee emp) {
+        ret.setEmail(emp.getEmail());
+        ret.setName(emp.getName());
+        ret.setUsername(emp.getUsername());
+        ret.setGender(emp.getGender());
+        ret.setSalary(emp.getSalary());
+        ret.setPhoneNumber(emp.getPhoneNumber());
+        ret.setAddress(emp.getAddress());
+        ret.setAuthorization();
+        ret.setVerify(emp.getVerify());
+        ret.setStartSlot(emp.getStartSlot());
+        ret.setEndSlot(emp.getEndSlot());
+        ret.setBreaks(emp.getBreaks());
+        return ret;
     }
 }
 

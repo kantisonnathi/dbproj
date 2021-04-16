@@ -13,12 +13,20 @@
     <thead>
         <tr>
             <th style="font-size:20px;" >Doctor ID</th>
+            <th style="font-size:20px;" >Doctor Name</th>
+            <th style="font-size:20px;" >Speciality</th>
         </tr>
     </thead>
     <tbody>
     <tr th:each="doc : ${doctors}">
         <td style="text-align:center">
             <a th:href="@{/doc/__${doc.ID}__}" th:text="${doc.ID}"></a>
+        </td>
+        <td>
+            <p th:text="${doc.name}"></p>
+        </td>
+        <td>
+            <p th:text="${doc.speciality}"></p>
         </td>
     </tr>
     </tbody>

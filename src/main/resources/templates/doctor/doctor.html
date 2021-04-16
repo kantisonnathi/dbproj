@@ -10,9 +10,14 @@
 <br>
 <!-- add whatever details we need to display for doctor -->
 <p>DoctorID  : <span th:text="${doctor.ID}"></span></p>
-<p>Name      : <span th:text="${employee.name}"></span></p>
+<p>Name      : <span th:text="${doctor.name}"></span></p>
 <p>Speciality: <span th:text="${doctor.speciality}"></span></p>
-<p>Address   : <span th:text="${employee.address}"></span></p>
+<p>Address   : <span th:text="${doctor.address}"></span></p>
+<p>Phone Number   : <span th:text="${doctor.phoneNumber}"></span></p>
+<p>Gender   : <span th:text="${doctor.gender}"></span></p>
+<p>Salary   : <span th:text="${doctor.salary}"></span></p>
+<p>Username   : <span th:text="${doctor.username}"></span></p>
+<p>Visitation Fees   : <span th:text="${doctor.visitationFees}"></span></p>
 <br>
 <div style="text-align:center;">
 <a style="background-color:#D1D0CE; font-size:20px;margin:5px;" th:href="@{__${doctor.ID}__/delete}"> Delete </a>
