@@ -111,5 +111,18 @@ public class PatientController {
         return "redirect:/patient/" + patient.getPatientID();
     }
 
+    @GetMapping("/patient/all")
+    public String getAllPatients(ModelMap modelMap) {
+        List<Patient> patients;
+        try {
+            patients = this.patientRepository.findAll();
+        } catch (Exception e) {
+            modelMap.put("title","Sorry something went wrong");
+            return "system/customError";
+        }
+        modelMap.put("patients",patients);
+        modelMap.put("title","All Patients");
+        return "patient/resultList";
+    }
 
 }

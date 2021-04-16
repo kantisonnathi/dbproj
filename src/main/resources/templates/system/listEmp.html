@@ -5,7 +5,7 @@
     <title>All Employees</title>
 </head>
 <body style="background-color:#98AFC7;">
-<h1 style="text-align:center;">List of NMPIDs</h1>
+<h1 style="text-align:center;">All Employees</h1>
 <hr size="10px" width="50%"  style="background-color:black;">
 <br>
 <!--<p th:text="${title}"></p>-->
@@ -13,12 +13,36 @@
     <thead>
     <tr>
         <th style="font-size:20px;" >Employee Name</th>
+        <th style="font-size:20px;" >Username</th>
+        <th style="font-size:20px;" >Gender</th>
+        <th style="font-size:20px;" >Email</th>
+        <th style="font-size:20px;" >Phone Number</th>
+        <th style="font-size:20px;" >Address</th>
+        <th style="font-size:20px;" >Salary</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="emp : ${employees}">
         <td style="text-align:center">
             <p th:text="${emp.name}"></p>
+        </td>
+        <td>
+            <p th:text="${emp.username}"></p>
+        </td>
+        <td>
+            <p th:text="${emp.gender}"></p>
+        </td>
+        <td>
+            <p th:text="${emp.email}"></p>
+        </td>
+        <td>
+            <p th:text="${emp.phoneNumber}"></p>
+        </td>
+        <td>
+            <p th:text="${emp.address}"></p>
+        </td>
+        <td>
+            <p th:text="${emp.salary}"></p>
         </td>
     </tr>
     </tbody>

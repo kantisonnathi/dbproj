@@ -1,5 +1,6 @@
 package com.dbproj.hms.controller;
 
+import com.dbproj.hms.model.Doctor;
 import com.dbproj.hms.model.Employee;
 import com.dbproj.hms.model.NMP;
 import com.dbproj.hms.model.Transaction;
@@ -40,7 +41,17 @@ public class NMPController {
     }
 
     @PostMapping("/findNMPByID")
-    public String postID(Integer id) {
+    public String postID(Integer id, ModelMap modelMap) {
+        try {
+            NMP nmp = this.nmpRepository.findByID(id);
+            if (nmp == null) {
+                modelMap.put("title","There is no such non medical professional");
+                return "system/customError";
+            }
+        } catch (Exception e) {
+            modelMap.put("title","Sorry something went wrong :(");
+            return "system/customError";
+        }
         return "redirect:/nmp/"+ id;
     }
 
@@ -59,6 +70,10 @@ public class NMPController {
             list = nmpRepository.findByName(name);
         } catch (Exception e) {
             return "system/error";
+        }
+        if (list.isEmpty()) {
+            modelMap.put("title","There are no non medical professionals with this name");
+            return "system/customError";
         }
         modelMap.put("nmps",list);
         modelMap.put("title","Querying nmps by name");
@@ -79,6 +94,10 @@ public class NMPController {
             list = nmpRepository.findByTitle(name);
         } catch (Exception e) {
             return "system/error";
+        }
+        if (list.isEmpty()) {
+            modelMap.put("title","There are no non medical professionals with this title");
+            return "system/customError";
         }
         modelMap.put("nmps",list);
         modelMap.put("title","Querying nmps by title");

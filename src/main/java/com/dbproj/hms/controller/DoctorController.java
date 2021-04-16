@@ -34,8 +34,17 @@ public class DoctorController {
     }
 
     @PostMapping("/findDoctorByID")
-    public String postID(Integer id) {
+    public String postID(Integer id, ModelMap modelMap) {
         //System.out.println("found doctor:" + doctor.toString());
+        try {
+            Doctor doctor = this.doctorRepository.findByID(id);
+            if (doctor == null) {
+                modelMap.put("title","There is no such doctor");
+                return "system/customError";
+            }
+        } catch (Exception e) {
+            modelMap.put("title","Sorry something went wrong :(");
+        }
         return "redirect:/doc/" + id ;
     }
 
@@ -54,6 +63,10 @@ public class DoctorController {
             //System.out.println("Hello");
         } catch (SQLException e) {
             return "system/error";
+        }
+        if (doctors.isEmpty()) {
+            model.put("title","There are no doctors with this name");
+            return "system/customError";
         }
         model.put("doctors",doctors);
         model.put("title","Querying By Name");
@@ -75,12 +88,14 @@ public class DoctorController {
         } catch (SQLException e) {
             return "system/error";
         }
+        if (doctors.isEmpty()) {
+            modelMap.put("title","There are no doctors with this speciality");
+            return "system/customError";
+        }
         modelMap.put("doctors",doctors);
         modelMap.put("title","Querying By Speciality");
         return "doctor/listResults";
     }
-
-
 
     @GetMapping("/doc/{docID}")
     public String getDocPage(@PathVariable("docID") Integer DocID, ModelMap model) {
@@ -122,9 +137,14 @@ public class DoctorController {
 
     @GetMapping("/doc/all")
     public String viewAllDoctors(ModelMap modelMap) {
-        List<Doctor> list = this.doctorRepository.listAllDoctors();
-        modelMap.put("doctors", list);
-        modelMap.put("title","All Doctors");
+        try {
+            List<Doctor> list = this.doctorRepository.listAllDoctors();
+            modelMap.put("doctors", list);
+            modelMap.put("title", "All Doctors");
+        } catch (Exception e) {
+            modelMap.put("title","Sorry somethign went wrong");
+            return "system/customError";
+        }
         return "doctor/listResults";
     }
 

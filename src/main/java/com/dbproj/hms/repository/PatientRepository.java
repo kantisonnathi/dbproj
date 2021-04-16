@@ -61,4 +61,9 @@ public class PatientRepository {
         patient=jdbcTemplate.query(query,new PatientRowMapper());
         return patient.get(0);
     }
+
+    public List<Patient> findAll() {
+        String query = "select * from patient";
+        return jdbcTemplate.query(query, new PatientRowMapper());
+    }
 }
