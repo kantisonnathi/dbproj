@@ -41,11 +41,15 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/admin").hasRole("ADMIN")
                 .antMatchers("/user").hasAnyRole("ADMIN","USER")
                 .antMatchers("/").authenticated()
-               /* .antMatchers("/doc/{docid}").hasAnyRole("ADMIN","USER")
-                .antMatchers("/doc/{docid}/**").hasRole("ADMIN")*/
+                .antMatchers("/doc/{docid}").hasAnyRole("ADMIN","USER")
+                .antMatchers("/doc/{docid}/**").hasRole("ADMIN")
 
                 .and().formLogin()
-                .defaultSuccessUrl("/");
+                .defaultSuccessUrl("/")
+                .and().logout().logoutUrl("/logout").logoutSuccessUrl("/login")
+                 .and()
+                .logout().permitAll();
+
         http.cors().and().csrf().disable();
     }
 
