@@ -12,16 +12,19 @@
 <table class="center">
     <thead>
     <tr>
-        <th style="font-size:20px;" >NMP ID</th>
+        <th style="font-size:20px;" >Emp ID</th>
+        <th style="font-size:20px;" >Pat ID</th>
+        <th style="font-size:20px;" >Total Cost</th>
+        <th style="font-size:20px;" >Transaction date</th>
     </tr>
     </thead>
     <tbody>
     <tr th:each="transaction : ${transactions}">
         <td style="text-align:center">
             <a th:text="${transaction.empid}"></a>
-            <a th:text="${transaction.patientid}"></a>
-            <a th:text="${transaction.totalcost}"></a>
-            <a th:text="${transaction.transactiondate}"></a>
+        <td>    <a th:text="${transaction.patientid}"></a></td>
+        <td><a th:text="${transaction.totalcost}"></a></td>
+            <td><a th:text="${transaction.transactiondate}"></a></td>
             <br>
         </td>
     </tr>
