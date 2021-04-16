@@ -19,6 +19,9 @@ public class EmployeeRowMapper implements RowMapper<Employee> {
                 result.getString("phno"),
                 result.getString("email"),
                 result.getString("address"),
-                result.getString("authorization"));
+                result.getString("authorization"),
+                result.getInt("start_slot"),
+                result.getInt("end_slot"),
+                result.getInt("break_slot"));
     }
 }

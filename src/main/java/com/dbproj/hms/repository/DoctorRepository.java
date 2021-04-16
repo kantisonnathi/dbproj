@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 
 import java.sql.SQLException;
+import java.sql.Time;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -99,7 +100,11 @@ public class DoctorRepository {
     //to get slot numbers of  appointment numbers when docid is given
     public List<Slot> getslots(Doctor doctor) throws DataAccessException{
         String query="select * from time_slots where slot not in(select slot from appointment where docid="+ doctor.getID() +")";
-        List<Slot> slot= jdbcTemplate.query(query, new slotRowMapper());
+        int start=doctor.getStartSlot();
+        int  end= doctor.getEndSlot();
+        int breaks=doctor.getBreaks();
+       String q2="select * from time_slots where  slot not in(select slot from appointment where docid="+ doctor.getID() +") and  slot between "+start+" and "+end+" and slot!="+breaks+"";
+        List<Slot> slot= jdbcTemplate.query(q2, new slotRowMapper());
         return slot;
     }
 

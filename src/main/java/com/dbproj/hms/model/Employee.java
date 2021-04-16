@@ -59,7 +59,7 @@ public class Employee implements Serializable {
         this.ID = IDValue++;
     }
 
-    public Employee(Integer ID, String name, String username, String password, Character gender, Integer salary, String phoneNumber, String email, String address, String authorization) {
+    public Employee(Integer ID, String name, String username, String password, Character gender, Integer salary, String phoneNumber, String email, String address, String authorization,int startSlot,int endSlot,int breaks) {
         this.ID = ID;
         this.name = name;
         this.username = username;
@@ -70,6 +70,9 @@ public class Employee implements Serializable {
         this.email = email;
         this.address = address;
         this.authorization = authorization;
+        this.startSlot=startSlot;
+        this.endSlot=endSlot;
+        this.breaks=breaks;
     }
 
     public Integer getID() {
