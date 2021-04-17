@@ -6,8 +6,10 @@ import com.dbproj.hms.model.Nurse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Component;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +42,29 @@ public class NurseRepository {
             returnable.add(nmp);
         }
         return returnable;
+    }
+
+    public List<Nurse> findNursesWorkingUnder(Integer ID) throws DataAccessException,SQLException{
+        String query = "select * from doctor_nurse where DocID=" + ID.toString();
+        List<Integer> list = jdbcTemplate1.query(query, new ResultSetExtractor<List<Integer>>() {
+            @Override
+            public List<Integer> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                List<Integer> newList = new ArrayList<>();
+                while(resultSet.next()){
+                    newList.add(resultSet.getInt("NurseID"));
+                }
+                return newList;
+            }
+        });
+
+        List<Nurse> returnable = new ArrayList<>();
+        for(Integer id : list){
+            Nurse nurse = findByID(id);
+            returnable.add(nurse);
+        }
+
+        return returnable;
+
     }
 
 

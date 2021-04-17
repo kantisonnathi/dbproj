@@ -3,12 +3,16 @@ package com.dbproj.hms.repository;
 
 import com.dbproj.hms.model.Doctor;
 import com.dbproj.hms.model.Employee;
+import com.dbproj.hms.model.Nurse;
 import com.dbproj.hms.model.Slot;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.stereotype.Component;
 
+import javax.print.Doc;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
 import java.util.ArrayList;
@@ -60,6 +64,28 @@ public class DoctorRepository {
         }
         return returnable;
     }
+
+    public List<Doctor> findDocWorkingWith(Integer ID) throws DataAccessException, SQLException{
+        String query = "select * from doctor_nurse where NurseID=" + ID.toString();
+        List<Integer> list = jdbcTemplate.query(query, new ResultSetExtractor<List<Integer>>() {
+            @Override
+            public List<Integer> extractData(ResultSet resultSet) throws SQLException, DataAccessException {
+                List<Integer> newList = new ArrayList<>();
+                while(resultSet.next()){
+                    newList.add(resultSet.getInt("DocID"));
+                }
+                return newList;
+            }
+        });
+        List<Doctor> returnable = new ArrayList<>();
+        for(Integer id : list){
+            Doctor doctor = findByID(id);
+            returnable.add(doctor);
+        }
+
+        return returnable;
+    }
+
 
     //To delete a doctor from the employee repository
     public void delete(Doctor doctor) throws DataAccessException,SQLException{

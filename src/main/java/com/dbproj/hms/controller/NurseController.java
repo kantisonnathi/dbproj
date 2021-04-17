@@ -1,7 +1,9 @@
 package com.dbproj.hms.controller;
 import com.dbproj.hms.model.Nurse;
+import com.dbproj.hms.model.Doctor;
 import com.dbproj.hms.model.Employee;
 import com.dbproj.hms.repository.NurseRepository;
+import com.dbproj.hms.repository.DoctorRepository;
 import com.dbproj.hms.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,9 @@ public class NurseController {
 
     @Autowired
     NurseRepository nurseRepository;
+
+    @Autowired
+    DoctorRepository doctorRepository;
 
     @Autowired
     EmployeeRepository employeeRepository;
@@ -152,6 +157,20 @@ public class NurseController {
             return "system/error";
         }
         return "redirect:/nur/"+nurse.getNurseID();
+    }
+
+    @GetMapping("/nur/{nurid}/doctors")
+    public String getDocWorkingWith(@PathVariable("nurid") Integer nurid, ModelMap model) {
+        List<Doctor> list;
+        try{
+            list = this.doctorRepository.findDocWorkingWith(nurid);
+        }
+        catch(Exception e){
+            return "system/error";
+        }
+        model.put("doctors", list);
+
+        return "doctor/listResults";
     }
 
 }

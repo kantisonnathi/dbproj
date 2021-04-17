@@ -4,7 +4,9 @@ package com.dbproj.hms.controller;
 import com.dbproj.hms.model.*;
 import com.dbproj.hms.repository.DoctorRepository;
 import com.dbproj.hms.repository.EmployeeRepository;
+import com.dbproj.hms.repository.NurseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.Banner;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -20,6 +22,9 @@ public class DoctorController {
 
     @Autowired
     DoctorRepository doctorRepository;
+
+    @Autowired
+    NurseRepository nurseRepository;
 
     @Autowired
     EmployeeRepository employeeRepository;
@@ -212,6 +217,18 @@ public class DoctorController {
         return "doctor/showtimings";
     }
 
+    @GetMapping("/doc/{docid}/nurses")
+    public String getNursesWorkingUnder(@PathVariable("docid") Integer DocID, ModelMap model){
+        List<Nurse> list;
+        try{
+            list = this.nurseRepository.findNursesWorkingUnder(DocID);
 
+        }catch (Exception e){
+            return "system/error";
+        }
+        model.put("nurses", list);
+
+        return "nurse/listResults";
+    }
 
 }
