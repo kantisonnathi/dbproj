@@ -59,7 +59,7 @@ public class DoctorRepository {
         for (Doctor doctor : list) {
             query = "select * from employee where EmpID="+doctor.getEmpID();
             List<Employee> list1 = jdbcTemplate.query(query, new EmployeeRowMapper());
-            doctor = mapper(doctor, list1.get(list.size()-1));
+            doctor = mapper(doctor, list1.get(0));
             returnable.add(doctor);
         }
         return returnable;
