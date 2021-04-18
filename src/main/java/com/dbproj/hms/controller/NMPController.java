@@ -9,6 +9,7 @@ import com.dbproj.hms.repository.NMPRepository;
 import com.dbproj.hms.repository.TransactionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -141,7 +142,8 @@ public class NMPController {
     @PostMapping("/nmp/new")
     public String savingNewNMP(NMP nmp, Employee employee, ModelMap modelMap) {
         try {
-            nmp.setAuthorization();
+            nmp.setAuthorization("ROLE_USER");
+            nmp.setPassword(BCrypt.hashpw(nmp.getPassword(), BCrypt.gensalt()));
             nmp.setVerify(1);
             nmp = nmpRepository.save(nmp);
         } catch (Exception e) {

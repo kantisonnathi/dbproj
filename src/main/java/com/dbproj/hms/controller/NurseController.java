@@ -6,6 +6,7 @@ import com.dbproj.hms.repository.NurseRepository;
 import com.dbproj.hms.repository.DoctorRepository;
 import com.dbproj.hms.repository.EmployeeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -99,6 +100,7 @@ public class NurseController {
     public String postaddition( Nurse nurse,ModelMap modelMap) {
         try {
             nurse.setAuthorization();
+            nurse.setPassword(BCrypt.hashpw(nurse.getPassword(), BCrypt.gensalt()));
             nurse.setVerify(1);
             nurseRepository.save(nurse);
         }
