@@ -51,7 +51,7 @@ public class PatientRepository {
     public void update(Patient patient) throws DataAccessException, SQLException {
         String query = "update patient set patientName='" + patient.getPatientName() + "', age=" + patient.getAge() +
         ", gender='" + patient.getGender() + "',medicalDetails='" + patient.getMedicalDetails() + "', phno='" +
-                patient.getPhno() + "', email='" + patient.getEmail() + "',address= '" + patient.getAddress()  + "'";
+                patient.getPhno() + "', email='" + patient.getEmail() + "',address= '" + patient.getAddress()  + "' where patientID=" + patient.getPatientID();
         jdbcTemplate.update(query);
     }
 
