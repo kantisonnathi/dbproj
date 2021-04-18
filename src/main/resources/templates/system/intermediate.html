@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+    <meta charset="UTF-8">
+    <title>OOPS</title>
+</head>
+<body>
+
+<p th:text="${title}"></p>
+
+<p>Here are the appointments: </p>
+<a th:href="@{/doc/__${doctor.ID}__/listAppointments}">Appointments associated with doctor</a>
+
+</body>
+</html>

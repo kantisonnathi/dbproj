@@ -2,6 +2,7 @@ package com.dbproj.hms.controller;
 
 
 import com.dbproj.hms.model.*;
+import com.dbproj.hms.repository.AppointmentRepository;
 import com.dbproj.hms.repository.DoctorRepository;
 import com.dbproj.hms.repository.EmployeeRepository;
 import com.dbproj.hms.repository.NurseRepository;
@@ -22,6 +23,9 @@ public class DoctorController {
 
     @Autowired
     DoctorRepository doctorRepository;
+
+    @Autowired
+    AppointmentRepository appointmentRepository;
 
     @Autowired
     NurseRepository nurseRepository;
@@ -155,9 +159,17 @@ public class DoctorController {
 
     @RequestMapping("/doc/{docid}/delete")
     @Transactional
-    public String deletedoc(@PathVariable("docid") int docid) throws SQLException {
+    public String deletedoc(@PathVariable("docid") int docid, ModelMap modelMap) throws SQLException {
         try {
             Doctor doctor=doctorRepository.findByID(docid);
+            List<Appointment> list = this.appointmentRepository.findByDocId(docid);
+            if (!list.isEmpty()) {
+                modelMap.put("doctor",doctor);
+                String message = "There are appointments associated with this doctor. Please delete or reassign these" +
+                        " appointments before deleting this doctor";
+                modelMap.put("title",message);
+                return "system/intermediate";
+            }
             doctorRepository.delete(doctor);
         }
         catch(SQLException e) {

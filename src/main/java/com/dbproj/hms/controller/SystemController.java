@@ -76,12 +76,6 @@ public class SystemController {
 
     @GetMapping("/emp/{empid}/addHoliday")
     public String getEmp(@PathVariable("empid") Integer empID, ModelMap modelMap) {
-        Employee emp;
-        try {
-            emp = this.employeeRepository.findByID(empID);
-        } catch (Exception e) {
-            return "system/error";
-        }
         Date date = null;
         modelMap.put("date",date);
         return "system/holiday";
