@@ -66,7 +66,7 @@ public class NMPRepository {
     public void delete(NMP nmp) throws DataAccessException, SQLException {
         /*String query = "delete from employee where empID="+nmp.getEmpID();
         jdbcTemplate.update(query);*/
-        query = "delete from non_medical_professionals where NP_id=" + nmp.getID();
+        String query = "delete from non_medical_professionals where NP_id=" + nmp.getID();
         jdbcTemplate.update(query);
     }
 
