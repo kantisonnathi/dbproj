@@ -214,6 +214,23 @@ public class DoctorController {
         return "redirect:/doc/"+doctor.getID();
     }
 
+    @GetMapping("/doc/{docid}/addNurse")
+    public String addNurseToDoc(ModelMap modelMap) {
+        Integer id = null;
+        modelMap.put("id",id);
+        return "doctor/addNurse";
+    }
+
+    @PostMapping("/doc/{docid}/addNurse")
+    public String postAddingNurse(@PathVariable("docid") Integer docid, Integer id) {
+        try {
+            this.doctorRepository.addNurseToDoctor(docid, id);
+        } catch (Exception e) {
+            return "system/error";
+        }
+        return "redirect:/doc/" + docid + "/nurses";
+    }
+
     @GetMapping("/doc/{docid}/timings")
     public String getBookappontment(@PathVariable("docid") Integer docid, ModelMap model){
         Doctor doctor;

@@ -86,6 +86,11 @@ public class DoctorRepository {
         return returnable;
     }
 
+    public void addNurseToDoctor(Integer docid, Integer nurseid) {
+        String query = "insert into doctor_nurse values (" + docid + "," + nurseid + ")";
+        jdbcTemplate.update(query);
+    }
+
 
     //To delete a doctor from the employee repository
     public void delete(Doctor doctor) throws DataAccessException,SQLException{
