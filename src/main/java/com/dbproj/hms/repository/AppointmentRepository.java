@@ -85,12 +85,12 @@ public class AppointmentRepository {
     }
 
     public void update(Appointment appointment) {
-        String query = "update appointment set docid=?, patientid=?,slot=?, complaints=?, diagnosis=?, appointment_date=?, billed=?";
-        jdbcTemplate.update(query, appointment.getDocID(), appointment.getPatientID(), appointment.getSlot(), appointment.getComplaint(),
-                appointment.getDiagnosis(), appointment.getDate(), appointment.getBilled());
+        String query = "update appointment set slot=?, complaints=?, diagnosis=?, appointment_date=?, billed=? where appointmentID=?";
+        jdbcTemplate.update(query, appointment.getSlot(), appointment.getComplaint(),
+                appointment.getDiagnosis(), appointment.getDate(), appointment.getBilled(), appointment.getID());
     }
-    public void addtransaction(Transaction transaction)
-    {
+
+    public void addtransaction(Transaction transaction) {
         String query="insert into transaction(empid,patientid,totalcost,date_of_transaction) values('"+transaction.getEmpid()+"','"+transaction.getPatientid()+"','"+ transaction.getTotalcost()+"','"+ LocalDate.now() +"')";
         jdbcTemplate.update(query);
     }

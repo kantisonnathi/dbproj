@@ -9,7 +9,10 @@
 <hr size="10px" width="50%"  style="background-color:black;">
 <div class="form">
     <form method="post">
+        <input type="hidden" name="ID" th:value="${appointment.ID}">
         <input type="hidden" name="docID" th:value="${appointment.docID}">
+        <input type="hidden" name="patientID" th:value="${appointment.patientID}">
+        <input type="hidden" name="billed" th:value="${appointment.billed}">
         <p>Preferred Slot Timing:<span>
         <input type="number" name="slot" th:value="${appointment.slot}"></span></p>
         <p>Enter your complaint:<span>

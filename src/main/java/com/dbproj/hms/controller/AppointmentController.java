@@ -215,11 +215,18 @@ public class AppointmentController {
 
     @PostMapping("/appointment/{appointmentID}/update")
     public String postUpdateAppointment(Appointment appointment ,ModelMap modelMap) {
+        Doctor doctor;
+        Patient patient;
         try {
+            doctor = this.doctorRepository.findByID(appointment.getDocID());
+            patient = this.patientRepository.findByID(appointment.getPatientID());
             appointmentRepository.update(appointment);
         } catch (Exception e) {
             return "system/error";
         }
+        modelMap.put("appointment",appointment);
+        modelMap.put("doctor",doctor);
+        modelMap.put("patient",patient);
         return "redirect:/appointment/"+appointment.getID();
     }
 

@@ -110,6 +110,10 @@ public class EmployeeRepository {
         return jdbcTemplate.query(query, new EmployeeRowMapper());
     }
 
+    public void putHoliday(Integer empid, Date date) {
+        String query = "insert into emp_on_leave (empID, date) values (?,?)";
+        jdbcTemplate.update(query,empid,date);
+    }
 
     /*public EmployeeRepository() throws ClassNotFoundException, SQLException {
         super();
