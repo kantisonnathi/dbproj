@@ -12,6 +12,7 @@
 <table class="center">
     <thead>
     <tr>
+        <th>Add holiday</th>
         <th style="font-size:20px;" >Employee Name</th>
         <th style="font-size:20px;" >Username</th>
         <th style="font-size:20px;" >Gender</th>
@@ -23,6 +24,9 @@
     </thead>
     <tbody>
     <tr th:each="emp : ${employees}">
+        <td style="text-align:center">
+            <a th:href="@{/emp/__${emp.ID}__/addHoliday}">Add holiday</a>
+        </td>
         <td style="text-align:center">
             <p th:text="${emp.name}"></p>
         </td>

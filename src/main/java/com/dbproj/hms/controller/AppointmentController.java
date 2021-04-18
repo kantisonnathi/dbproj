@@ -182,7 +182,7 @@ public class AppointmentController {
             Transaction transaction = new Transaction();
             transaction.setTotalcost(sum);
             transaction.setPatientid(patientid);
-            transaction.setEmpid(nmp.getEmpID());
+            transaction.setEmpid(nmp.getID());
             appointmentRepository.addtransaction(transaction);
             model.put("sum", sum);
             model.put("transaction", transaction);

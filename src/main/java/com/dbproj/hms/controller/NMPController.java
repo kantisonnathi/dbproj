@@ -190,7 +190,7 @@ public class NMPController {
         List<Transaction> transactions;
         NMP n=new NMP();
         n=nmpRepository.findByID(nmpID);
-        transactions=nmpRepository.gettransactions(n.getEmpID());
+        transactions=nmpRepository.gettransactions(n.getID());
         modelMap.put("transactions",transactions);
         return "NMP/transaction details";
     }
