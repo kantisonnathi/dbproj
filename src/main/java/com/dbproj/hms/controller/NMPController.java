@@ -124,7 +124,7 @@ public class NMPController {
     public String deleteNMP(@PathVariable("nmpID") Integer nmpID) {
         try {
             NMP nmp = nmpRepository.findByID(nmpID);
-            employeeRepository.delete(nmp);
+            nmpRepository.delete(nmp);
         } catch (Exception e) {
             return "system/error";
         }
