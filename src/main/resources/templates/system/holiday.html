@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Holiday</title>
+</head>
+<body>
+
+<form method="post">
+<p>Enter date:<span>
+        <input type="date" name="date" th:value="${date}"></span></p>
+    <button type="submit">Submit</button>
+</form>
+</body>
+</html>

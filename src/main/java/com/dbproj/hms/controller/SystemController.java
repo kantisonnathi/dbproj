@@ -13,8 +13,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.security.Principal;
+import java.sql.Date;
 import java.util.List;
 
 @Controller
@@ -69,5 +72,29 @@ public class SystemController {
     public String error()
     {
         return "system/Authorization error";
+    }
+
+    @GetMapping("/emp/{empid}/addHoliday")
+    public String getEmp(@PathVariable("empid") Integer empID, ModelMap modelMap) {
+        Employee emp;
+        try {
+            emp = this.employeeRepository.findByID(empID);
+        } catch (Exception e) {
+            return "system/error";
+        }
+        Date date = null;
+        modelMap.put("date",date);
+        return "system/holiday";
+    }
+
+    @PostMapping("/emp/{empid}/addHoliday")
+    public String setHoliday(@PathVariable("empid") Integer empid, Date date) {
+        Employee employee;
+        try {
+            this.employeeRepository.putHoliday(empid,date);
+        } catch (Exception e) {
+            return "system/error";
+        }
+        return "redirect:/";
     }
 }
