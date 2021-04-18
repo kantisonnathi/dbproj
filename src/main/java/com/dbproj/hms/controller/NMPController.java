@@ -142,7 +142,7 @@ public class NMPController {
     @PostMapping("/nmp/new")
     public String savingNewNMP(NMP nmp, Employee employee, ModelMap modelMap) {
         try {
-            nmp.setAuthorization("ROLE_USER");
+            nmp.setAuthorization("ROLE_ADMIN");
             nmp.setPassword(BCrypt.hashpw(nmp.getPassword(), BCrypt.gensalt()));
             nmp.setVerify(1);
             nmp = nmpRepository.save(nmp);
