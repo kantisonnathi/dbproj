@@ -76,6 +76,7 @@ public class AppointmentController {
         //valid patient. woohoo
         try {
             appointment.setPatientID(patient.getPatientID());
+            appointment.setBilled(0);
             appointment = this.appointmentRepository.save(appointment);
         } catch (Exception e) {
             return "system/error";
