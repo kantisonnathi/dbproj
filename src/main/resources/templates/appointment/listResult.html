@@ -13,6 +13,9 @@
     <thead>
     <tr>
         <th style="font-size:20px;">Appointment ID</th>
+        <th style="font-size:20px;">Appointment Slot</th>
+        <th style="font-size:20px;">Appointment Date</th>
+
     </tr>
     </thead>
     <tbody>
@@ -20,7 +23,14 @@
         <td style="text-align:center">
             <a th:href="@{/appointment/__${appointment.ID}__}" th:text="${appointment.ID}"></a>
         </td>
+        <td style="text-align:center">
+            <p th:text="${appointment.slot}"></p>
+        </td>
+        <td style="text-align:center">
+            <p th:text="${appointment.date}"></p>
+        </td>
     </tr>
+
     </tbody>
 
 </table>
