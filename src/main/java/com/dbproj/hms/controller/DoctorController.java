@@ -7,6 +7,7 @@ import com.dbproj.hms.repository.EmployeeRepository;
 import com.dbproj.hms.repository.NurseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.Banner;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
@@ -130,8 +131,9 @@ public class DoctorController {
     @PostMapping("/adddoctor")
     public String postaddition(Doctor doctor,ModelMap modelMap) {
         try {
-            doctor.setAuthorization();
+            doctor.setAuthorization("ROLE_USER");
             doctor.setVerify(1);
+           doctor.setPassword(BCrypt.hashpw(doctor.getPassword(), BCrypt.gensalt()));
             doctor = doctorRepository.save(doctor);
         }
         catch (SQLException e) {
