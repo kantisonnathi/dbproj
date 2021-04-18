@@ -70,7 +70,8 @@ public class AppointmentController {
         }
         if (valid) {
             //welp. error yourself - emp on leave. create page for that
-            return "system/error";
+            modelMap.put("title","this employee is on leave");
+            return "system/customError";
         }
         //valid patient. woohoo
         try {
