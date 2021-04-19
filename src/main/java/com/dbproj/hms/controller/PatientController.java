@@ -1,6 +1,8 @@
 package com.dbproj.hms.controller;
 
+import com.dbproj.hms.model.Appointment;
 import com.dbproj.hms.model.Patient;
+import com.dbproj.hms.repository.AppointmentRepository;
 import com.dbproj.hms.repository.PatientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,6 +18,9 @@ public class PatientController {
 
     @Autowired
     PatientRepository patientRepository;
+
+    @Autowired
+    AppointmentRepository appointmentRepository;
 
     @GetMapping("/findPatientByID")
     public String getByID(ModelMap model){
@@ -79,10 +84,15 @@ public class PatientController {
     }
 
     @GetMapping("/patient/{patientId}/delete")
-    public String deletePatient(@PathVariable("patientId") Integer patientId) {
+    public String deletePatient(@PathVariable("patientId") Integer patientId, ModelMap modelMap) {
         try {
             Patient patient = patientRepository.findByID(patientId);
             patientRepository.delete(patient);
+            List<Appointment> list = this.appointmentRepository.findByPatientId(patientId);
+            if (!list.isEmpty()) {
+                modelMap.put("title","there are appointments associated with this patient");
+                return "system/customError";
+            }
         } catch (Exception e) {
             return "system/error";
         }
