@@ -76,7 +76,7 @@ public class AppointmentRepository {
     }
 
     public List<Transaction> getprice(Integer patientID) {
-
+        // select sum(d.visitation_fees) from doctor d, appointment a, employee e where e.empid=d.empid and d.docid=a.docid and a.billed=FALSE and a.patientid=patientID;
         String query="select a.appointmentID,e.EmpName,d.visitation_fees,a.appointment_date from employee e,appointment a,doctor d  where e.empid=d.empid and d.docid=a.docid and a.billed=FALSE and a.patientid="+patientID;
         return jdbcTemplate.query(query,new TransactionMapper());
     }
