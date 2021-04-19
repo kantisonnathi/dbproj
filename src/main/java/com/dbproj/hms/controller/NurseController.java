@@ -107,7 +107,7 @@ public class NurseController {
         catch (SQLException e) {
             return "system/error";
         }
-        return "main";
+        return "redirect:";
     }
 
     @GetMapping("/nur/all")
@@ -133,7 +133,7 @@ public class NurseController {
         catch(SQLException e) {
             return "system/error";
         }
-        return "main";
+        return "redirect:/";
     }
 
     @GetMapping("/nur/{nurid}/update")
