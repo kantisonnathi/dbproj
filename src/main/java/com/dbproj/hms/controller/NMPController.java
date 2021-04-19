@@ -121,9 +121,14 @@ public class NMPController {
     }
 
     @GetMapping("/nmp/{nmpID}/delete")
-    public String deleteNMP(@PathVariable("nmpID") Integer nmpID) {
+    public String deleteNMP(@PathVariable("nmpID") Integer nmpID, ModelMap modelMap) {
         try {
             NMP nmp = nmpRepository.findByID(nmpID);
+            List<Transaction> list = this.nmpRepository.gettransactions(nmpID);
+            if (!list.isEmpty()) {
+                modelMap.put("title","There are transactions associated with this non medical professional");
+                return "system/customError";
+            }
             nmpRepository.delete(nmp);
         } catch (Exception e) {
             return "system/error";

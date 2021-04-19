@@ -1,9 +1,6 @@
 package com.dbproj.hms.repository;
 
-import com.dbproj.hms.model.Doctor;
-import com.dbproj.hms.model.Employee;
-import com.dbproj.hms.model.NMP;
-import com.dbproj.hms.model.Nurse;
+import com.dbproj.hms.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -26,6 +23,9 @@ public class EmployeeRepository {
 
     @Autowired
     DoctorRepository doctorRepository;
+
+    @Autowired
+    AppointmentRepository appointmentRepository;
 
     @Autowired
     NMPRepository nmpRepository;
@@ -111,9 +111,18 @@ public class EmployeeRepository {
         return jdbcTemplate.query(query, new EmployeeRowMapper());
     }
 
-    public void putHoliday(Integer empid, Date date) {
+    public boolean putHoliday(Integer empid, Date date) {
+        //first check whether there are any other appointments with this doctor and this date
+        Doctor doctor = this.doctorRepository.findByEmpID(empid);
+        if (doctor != null) {
+            List<Appointment> list = this.appointmentRepository.findByDocAndDate(doctor, date);
+            if (!list.isEmpty()) {
+                return false;
+            }
+        }
         String query = "insert into emp_on_leave (empID, date) values (?,?)";
         jdbcTemplate.update(query,empid,date);
+        return true;
     }
 
     /*public EmployeeRepository() throws ClassNotFoundException, SQLException {

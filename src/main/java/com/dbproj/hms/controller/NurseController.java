@@ -120,9 +120,14 @@ public class NurseController {
 
     @RequestMapping("/nur/{nurid}/delete")
     @Transactional
-    public String deletenur(@PathVariable("nurid") int nurid) throws SQLException {
+    public String deletenur(@PathVariable("nurid") int nurid, ModelMap modelMap) throws SQLException {
         try {
             Nurse nurse=nurseRepository.findByID(nurid);
+            List<Doctor> list = this.doctorRepository.findDocWorkingWith(nurid);
+            if (!list.isEmpty()) {
+                modelMap.put("title","There are doctors working with this nurse, this nurse cannot be deleted");
+                return "system/customError";
+            }
             nurseRepository.delete(nurse);
         }
         catch(SQLException e) {

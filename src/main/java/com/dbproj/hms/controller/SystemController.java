@@ -82,12 +82,22 @@ public class SystemController {
     }
 
     @PostMapping("/emp/{empid}/addHoliday")
-    public String setHoliday(@PathVariable("empid") Integer empid, Date date) {
-        Employee employee;
+    public String setHoliday(@PathVariable("empid") Integer empid, Date date, ModelMap modelMap) {
+        //Employee employee;
+        Doctor doctor;
+        boolean success;
         try {
-            this.employeeRepository.putHoliday(empid,date);
+            success = this.employeeRepository.putHoliday(empid,date);
+            doctor = this.doctorRepository.findByEmpID(empid);
         } catch (Exception e) {
             return "system/error";
+        }
+        if (!success) {
+            String message = "This employee cannot go on leave since there are appointments associated " +
+                    "with him/her. Please clear these appointments before applying for a holiday";
+            modelMap.put("doctor",doctor);
+            modelMap.put("title", message);
+            return "system/intermediate";
         }
         return "redirect:/";
     }

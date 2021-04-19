@@ -188,7 +188,7 @@ public class AppointmentController {
             model.put("transaction", transaction);
             return "appointment/costresult";
         }
-        return "system/Autorization error";
+        return "system/Authorization error";
     }
 
     @PostMapping("/transaction/{patientid}")

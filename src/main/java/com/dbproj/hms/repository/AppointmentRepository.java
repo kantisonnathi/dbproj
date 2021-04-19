@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.PreparedStatementSetter;
 import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Component;
 
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -66,6 +67,12 @@ public class AppointmentRepository {
         String query = "select * from appointment where patientid=" + id;
         List<Appointment> list = jdbcTemplate.query(query, new AppointmentRowMapper());
         return list;
+    }
+
+    public List<Appointment> findByDocAndDate(Doctor doctor, Date date) {
+        String query = "select * from appointment where docid=" + doctor.getID() + " and " +
+                "appointment_date='" + date + "'";
+        return jdbcTemplate.query(query, new AppointmentRowMapper());
     }
 
     public List<Transaction> getprice(Integer patientID) {
