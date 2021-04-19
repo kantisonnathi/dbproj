@@ -1,21 +1,13 @@
 package com.dbproj.hms.repository;
 
-import com.dbproj.hms.SpringSecurity.SecurityController;
 import com.dbproj.hms.model.Appointment;
 import com.dbproj.hms.model.Doctor;
-import com.dbproj.hms.model.Patient;
 import com.dbproj.hms.model.Transaction;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.PreparedStatementCallback;
-import org.springframework.jdbc.core.PreparedStatementSetter;
-import org.springframework.jdbc.core.support.JdbcDaoSupport;
 import org.springframework.stereotype.Component;
 
 import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
 
